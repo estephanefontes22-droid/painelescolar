@@ -1,87 +1,100 @@
-<style>
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: 'Poppins', sans-serif;
     background: url('fundo.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
 .overlay {
-    backdrop-filter: blur(4px);
-    background: rgba(255,255,255,0.50);
+    background: rgba(255,255,255,0.75);
     min-height: 100vh;
-    padding-bottom: 80px;
 }
 
 header {
-    background: linear-gradient(90deg, #1e3c72, #2a5298);
-    color: white;
-    padding: 25px;
+    text-align: center;
+    padding: 30px;
     font-size: 38px;
     font-weight: 700;
-    text-align: center;
-    letter-spacing: 2px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    color: #1e3c72;
 }
 
-/* Layout principal */
 .layout {
     display: flex;
-    gap: 40px;
-    padding: 50px;
+    padding: 30px;
+    gap: 30px;
 }
 
-/* Lado esquerdo */
-.sidebar {
-    width: 260px;
+/* LADO ESQUERDO */
+.side-panel {
+    width: 280px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
 }
 
-.mini-box {
-    background: rgba(255,255,255,0.80);
+/* CENTRO */
+.main-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* CARDS */
+.card {
+    background: white;
+    border-radius: 20px;
     padding: 25px;
-    border-radius: 25px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.pequeno {
     text-align: center;
 }
 
-.mini-box h3 {
-    margin-bottom: 10px;
-    color: #1e3c72;
-    font-weight: 600;
+.grande {
+    padding: 35px;
 }
 
 .hora {
-    font-size: 40px;
-    font-weight: bold;
-    color: #2a5298;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 10px 0;
 }
 
-/* Área principal */
-.main {
-    flex: 1;
+/* ANIVERSÁRIOS */
+.aniversarios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.aviso {
-    background: rgba(255,255,255,0.85);
-    padding: 60px;
-    border-radius: 35px;
-    font-size: 28px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+.pessoa {
+    width: 120px;
+    text-align: center;
 }
 
-/* Rodapé */
+.pessoa img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.pessoa span {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
 footer {
-    background: #1e3c72;
-    color: white;
     text-align: center;
     padding: 15px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    margin-top: 30px;
+    font-size: 14px;
 }
-</style>
