@@ -140,25 +140,34 @@ footer {
         width: 100px;
     }
     
-    #cardapio {
+ .cardapio-bloco {
     margin-top: 10px;
-    list-style: none; /* remove bolinhas */
-    font-size: 14px;
-    color: #333;
 }
 
-#cardapio li {
+.cardapio-bloco h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e3c72;
     margin-bottom: 5px;
-    padding-left: 8px;
-    position: relative;
 }
 
-#cardapio li::before {
-    content: "•";
+.cardapio-bloco ul {
+    list-style: none; /* remove bolinhas padrão */
+    padding-left: 15px;
+}
+
+.cardapio-bloco ul li {
+    position: relative;
+    margin-bottom: 4px;
+}
+
+.cardapio-bloco ul li::before {
+    content: "•"; /* bolinha personalizada */
     color: #1e3c72;
     position: absolute;
-    left: 0;
+    left: -10px;
 }
+    
 }
 </style>
 </head>
@@ -193,7 +202,7 @@ footer {
         <h4>☀️ Manhã</h4>
         <ul>
             <li>Arroz sírio com ovo e suco.</li>
-            <li>arroz, macarrão espaguete, ovo, sal.</li>
+            <li>Arroz, macarrão espaguete, ovo e sal.</li>
             <li>Polpa de fruta e açucar.</li>
         </ul>
     </div>
@@ -202,7 +211,7 @@ footer {
         <h4>🌇 Tarde</h4>
         <ul>
             <li>Arroz sírio com ovo e suco.</li>
-            <li>arroz, macarrão espaguete</li>
+            <li>Arroz, macarrão espaguete ovo e sal.</li>
             <li>Polpa de fruta e açucar.</li>
         </ul>
     </div>
