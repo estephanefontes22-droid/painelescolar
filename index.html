@@ -5,30 +5,32 @@
 <title>Painel Escolar</title>
 <meta http-equiv="refresh" content="60">
 
+<!-- Fonte mais bonita -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: url('fundo.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
 .overlay {
-    background: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.88);
     min-height: 100vh;
     padding-bottom: 80px;
 }
 
 header {
-    background: #1e3c72;
     background: linear-gradient(90deg, #1e3c72, #2a5298);
     color: white;
     padding: 25px;
-    font-size: 40px;
-    font-weight: bold;
+    font-size: 42px;
+    font-weight: 700;
     text-align: center;
     letter-spacing: 2px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .container {
@@ -77,6 +79,13 @@ footer {
 </head>
 
 <body>
+
+<div class="overlay">
+
+<header>
+PAINEL ESCOLAR
+</header>
+
 <div class="container">
 
     <div class="box">
@@ -100,11 +109,12 @@ footer {
     </div>
 
 </div>
+
 <footer>
 Escola Municipal • 2026
 </footer>
 
-</div>
+</div> <!-- FECHA overlay -->
 
 <script>
 function atualizarRelogio() {
@@ -116,7 +126,8 @@ function atualizarRelogio() {
 }
 setInterval(atualizarRelogio, 1000);
 atualizarRelogio();
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=Manacapuru&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7")
+
+fetch("https://api.openweathermap.org/data/2.5/weather?q=Manacapuru&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7")
 .then(response => response.json())
 .then(data => {
     const temp = Math.round(data.main.temp);
