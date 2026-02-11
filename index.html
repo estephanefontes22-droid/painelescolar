@@ -110,7 +110,7 @@ function atualizarRelogio() {
 }
 setInterval(atualizarRelogio, 1000);
 atualizarRelogio();
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=MANACAPURU&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7")
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=Manacapuru&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7")
 .then(response => response.json())
 .then(data => {
     const temp = Math.round(data.main.temp);
