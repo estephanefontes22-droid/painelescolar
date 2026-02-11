@@ -4,13 +4,146 @@
 <meta charset="UTF-8">
 <title>Painel Escolar</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
 
+<link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('fundo.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.overlay {
+    min-height: 100vh;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 30px;
+    font-size: 38px;
+    font-weight: 700;
+    color: #1e3c72;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+
+.layout {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* LADO ESQUERDO */
+.side-panel {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* CENTRO */
+.main-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* CARDS */
+.card {
+    background: rgba(255,255,255,0.85);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.pequeno {
+    text-align: center;
+}
+
+.grande {
+    padding: 35px;
+}
+
+.hora {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+/* ANIVERSÁRIOS */
+.aniversarios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.pessoa {
+    width: 120px;
+    text-align: center;
+}
+
+.pessoa img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+.pessoa span {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    font-size: 14px;
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+    .layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .side-panel {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 10px;
+    }
+
+    .pessoa {
+        width: 100px;
+    }
+}
+</style>
 </head>
 
 <body>
-
 <div class="overlay">
 
 <header>
@@ -49,16 +182,16 @@
             <div class="aniversarios">
 
                 <div class="pessoa">
-                    <img src="foto1.jpg">
+                    <img src="foto1.jpg" alt="Maria Silva">
                     <span>Maria Silva</span>
                 </div>
 
                 <div class="pessoa">
-                    <img src="foto2.jpg">
+                    <img src="foto2.jpg" alt="João Souza">
                     <span>João Souza</span>
                 </div>
 
-                <!-- Adicione mais pessoas aqui -->
+                <!-- Adicione mais aniversariantes aqui -->
 
             </div>
         </div>
@@ -74,24 +207,28 @@ Escola Municipal • 2026
 </div>
 
 <script>
+// Relógio
 function atualizarRelogio() {
     const agora = new Date();
-    document.getElementById("hora").innerHTML =
-        agora.toLocaleTimeString("pt-BR");
-    document.getElementById("data").innerHTML =
-        agora.toLocaleDateString("pt-BR");
+    document.getElementById("hora").innerHTML = agora.toLocaleTimeString("pt-BR");
+    document.getElementById("data").innerHTML = agora.toLocaleDateString("pt-BR");
 }
 setInterval(atualizarRelogio, 1000);
 atualizarRelogio();
 
-fetch("https://api.openweathermap.org/data/2.5/weather?q=Manacapuru&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7")
-.then(response => response.json())
-.then(data => {
-    const temp = Math.round(data.main.temp);
-    const descricao = data.weather[0].description;
-    document.getElementById("clima").innerHTML =
-        temp + "°C - " + descricao;
-});
+// Clima
+function atualizarClima() {
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=Manacapuru&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7")
+    .then(response => response.json())
+    .then(data => {
+        const temp = Math.round(data.main.temp);
+        const descricao = data.weather[0].description;
+        document.getElementById("clima").innerHTML = temp + "°C - " + descricao;
+    })
+    .catch(err => console.error("Erro ao buscar clima:", err));
+}
+atualizarClima();
+setInterval(atualizarClima, 600000); // Atualiza a cada 10 min
 </script>
 
 </body>
