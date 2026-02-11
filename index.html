@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <title>Painel Escolar</title>
 <meta http-equiv="refresh" content="60">
+
 <style>
-<body> {
-    <div class="overlay">
+body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: url('fundo.jpg') no-repeat center center fixed;
@@ -14,18 +14,20 @@
     color: white;
     text-align: center;
 }
-    .overlay {
-    background: rgba(0, 0, 0, 0.5);
+
+.overlay {
+    background: rgba(0, 0, 0, 0.6);
     min-height: 100vh;
     padding: 40px;
 }
-    
+
 header {
     background: rgba(0,0,0,0.4);
     padding: 30px;
     font-size: 45px;
     font-weight: bold;
     letter-spacing: 2px;
+    border-radius: 10px;
 }
 
 .container {
@@ -61,6 +63,7 @@ footer {
 </head>
 
 <body>
+<div class="overlay">
 
 <header>
 PAINEL ESCOLAR
@@ -80,6 +83,7 @@ PAINEL ESCOLAR
 
 <div class="box">
 📢 Avisos
+<br><br>
 Reunião pedagógica sexta-feira às 14h.
 </div>
 
@@ -88,6 +92,8 @@ Reunião pedagógica sexta-feira às 14h.
 <footer>
 Escola Municipal • 2026
 </footer>
+
+</div>
 
 <script>
 function atualizarRelogio() {
@@ -101,6 +107,5 @@ setInterval(atualizarRelogio, 1000);
 atualizarRelogio();
 </script>
 
-</div>   
 </body>
 </html>
