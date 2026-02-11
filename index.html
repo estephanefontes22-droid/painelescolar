@@ -72,6 +72,11 @@ PAINEL ESCOLAR
 <div class="container">
 
 <div class="box">
+🌤 Clima Hoje
+<div id="clima"></div>
+</div>
+    
+<div class="box">
 📅 Data de Hoje
 <div id="data"></div>
 </div>
@@ -105,6 +110,14 @@ function atualizarRelogio() {
 }
 setInterval(atualizarRelogio, 1000);
 atualizarRelogio();
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=MANACAPURU&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7")
+.then(response => response.json())
+.then(data => {
+    const temp = Math.round(data.main.temp);
+    const descricao = data.weather[0].description;
+    document.getElementById("clima").innerHTML =
+        temp + "°C - " + descricao;
+});
 </script>
 
 </body>
