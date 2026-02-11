@@ -3,40 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <title>Painel Escolar</title>
+<meta http-equiv="refresh" content="60">
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     color: white;
     text-align: center;
 }
 
 header {
-    background-color: rgba(0,0,0,0.4);
-    padding: 20px;
-    font-size: 40px;
+    background: rgba(0,0,0,0.4);
+    padding: 30px;
+    font-size: 45px;
     font-weight: bold;
+    letter-spacing: 2px;
 }
 
-.section {
-    margin-top: 40px;
-    font-size: 28px;
+.container {
+    margin-top: 60px;
 }
 
-.card {
+.box {
+    display: inline-block;
     background: rgba(255,255,255,0.1);
-    margin: 20px auto;
-    padding: 20px;
-    width: 70%;
+    padding: 40px;
+    margin: 20px;
     border-radius: 15px;
+    width: 300px;
+    font-size: 22px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.hora {
+    font-size: 60px;
+    margin-top: 30px;
+    font-weight: bold;
 }
 
 footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.4);
     padding: 10px;
     font-size: 18px;
 }
@@ -46,26 +56,43 @@ footer {
 <body>
 
 <header>
-EMEF Ezequiel Ruiz II
+PAINEL ESCOLAR
 </header>
 
-<div class="section">
-<div class="card">
-📢 Avisos Importantes
+<div class="container">
+
+<div class="box">
+📅 Data de Hoje
+<div id="data"></div>
 </div>
 
-<div class="card">
-📅 Eventos da Semana
+<div class="box">
+🕒 Horário Atual
+<div class="hora" id="hora"></div>
 </div>
 
-<div class="card">
-🎉 Aniversariantes do Dia
+<div class="box">
+📢 Avisos
+Reunião pedagógica sexta-feira às 14h.
 </div>
+
 </div>
 
 <footer>
-Bem-vindos ao nosso Painel Digital Escolar
+Escola Municipal • 2026
 </footer>
+
+<script>
+function atualizarRelogio() {
+    const agora = new Date();
+    document.getElementById("hora").innerHTML =
+        agora.toLocaleTimeString("pt-BR");
+    document.getElementById("data").innerHTML =
+        agora.toLocaleDateString("pt-BR");
+}
+setInterval(atualizarRelogio, 1000);
+atualizarRelogio();
+</script>
 
 </body>
 </html>
