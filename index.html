@@ -139,6 +139,26 @@ footer {
     .pessoa {
         width: 100px;
     }
+    
+    #cardapio {
+    margin-top: 10px;
+    list-style: none; /* remove bolinhas */
+    font-size: 14px;
+    color: #333;
+}
+
+#cardapio li {
+    margin-bottom: 5px;
+    padding-left: 8px;
+    position: relative;
+}
+
+#cardapio li::before {
+    content: "•";
+    color: #1e3c72;
+    position: absolute;
+    left: 0;
+}
 }
 </style>
 </head>
