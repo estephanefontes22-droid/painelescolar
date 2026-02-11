@@ -17,7 +17,8 @@ body {
 }
 
 .overlay {
-    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(4px);
+    background: rgba(255,255,255,0.50);
     min-height: 100vh;
     padding-bottom: 80px;
 }
@@ -26,47 +27,64 @@ header {
     background: linear-gradient(90deg, #1e3c72, #2a5298);
     color: white;
     padding: 25px;
-    font-size: 42px;
+    font-size: 38px;
     font-weight: 700;
     text-align: center;
     letter-spacing: 2px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    font-family: 'Poppins', sans-serif;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
 }
 
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+/* Layout principal */
+.layout {
+    display: flex;
+    gap: 40px;
     padding: 50px;
-    max-width: 1200px;
-    margin: auto;
 }
 
-.box {
-    background: white;
-    padding: 35px;
-    border-radius: 20px;
+/* Lado esquerdo */
+.sidebar {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.mini-box {
+    background: rgba(255,255,255,0.80);
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    transition: 0.3s;
 }
 
-.box:hover {
-    transform: scale(1.03);
-}
-
-.box h2 {
-    margin-bottom: 20px;
+.mini-box h3 {
+    margin-bottom: 10px;
     color: #1e3c72;
+    font-weight: 600;
 }
 
 .hora {
-    font-size: 55px;
+    font-size: 40px;
     font-weight: bold;
     color: #2a5298;
 }
 
+/* Área principal */
+.main {
+    flex: 1;
+}
+
+.aviso {
+    background: rgba(255,255,255,0.85);
+    padding: 60px;
+    border-radius: 35px;
+    font-size: 28px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+}
+
+/* Rodapé */
 footer {
     background: #1e3c72;
     color: white;
@@ -80,33 +98,33 @@ footer {
 </head>
 
 <body>
-
 <div class="overlay">
 
 <header>
 PAINEL ESCOLAR
 </header>
 
-<div class="container">
+<div class="layout">
 
-    <div class="box">
-        <h2>📅 Data de Hoje</h2>
-        <div id="data"></div>
+    <!-- LADO ESQUERDO -->
+    <div class="sidebar">
+        <div class="mini-box">
+            <h3>🕒 Hora</h3>
+            <div class="hora" id="hora"></div>
+        </div>
+
+        <div class="mini-box">
+            <h3>🌤 Clima</h3>
+            <div id="clima">Carregando...</div>
+        </div>
     </div>
 
-    <div class="box">
-        <h2>🕒 Horário Atual</h2>
-        <div class="hora" id="hora"></div>
-    </div>
-
-    <div class="box">
-        <h2>🌤 Clima Hoje</h2>
-        <div id="clima">Carregando...</div>
-    </div>
-
-    <div class="box">
-        <h2>📢 Avisos</h2>
-        Reunião de Pais dia 13/02 - Sexta-feira às 8h30.
+    <!-- ÁREA PRINCIPAL -->
+    <div class="main">
+        <div class="aviso">
+            <h2>📢 Avisos</h2>
+            Reunião de Pais dia 13/02 - Sexta-feira às 8h30.
+        </div>
     </div>
 
 </div>
@@ -115,7 +133,7 @@ PAINEL ESCOLAR
 Escola Municipal • 2026
 </footer>
 
-</div> <!-- FECHA overlay -->
+</div>
 
 <script>
 function atualizarRelogio() {
