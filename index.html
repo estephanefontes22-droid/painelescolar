@@ -140,34 +140,33 @@ footer {
         width: 100px;
     }
     
- .cardapio-bloco {
-    margin-top: 10px;
-}
+    .cardapio-bloco {
+        margin-top: 10px;
+    }
 
-.cardapio-bloco h4 {
-    font-size: 16px;
-    font-weight: 600;
-    color: #1e3c72;
-    margin-bottom: 5px;
-}
+    .cardapio-bloco h4 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1e3c72;
+        margin-bottom: 5px;
+    }
 
-.cardapio-bloco ul {
-    list-style: none; /* remove bolinhas padrão */
-    padding-left: 15px;
-}
+    .cardapio-bloco ul {
+        list-style: none;
+        padding-left: 15px;
+    }
 
-.cardapio-bloco ul li {
-    position: relative;
-    margin-bottom: 4px;
-}
+    .cardapio-bloco ul li {
+        position: relative;
+        margin-bottom: 4px;
+    }
 
-.cardapio-bloco ul li::before {
-    content: "•"; /* bolinha personalizada */
-    color: #1e3c72;
-    position: absolute;
-    left: -10px;
-}
-    
+    .cardapio-bloco ul li::before {
+        content: "•";
+        color: #1e3c72;
+        position: absolute;
+        left: -10px;
+    }
 }
 </style>
 </head>
@@ -195,31 +194,31 @@ footer {
             <div id="clima">Carregando...</div>
         </div>
         
-<div class="card pequeno">
-    <h3>🍽 Cardápio do Dia</h3>
-
-    <div class="cardapio-bloco">
-        <h4>☀️ Manhã</h4>
-        <ul>
-            <li>Arroz sírio com ovo e suco.</li>
-            <li>Arroz, macarrão espaguete, ovo e sal.</li>
-            <li>Polpa de fruta e açucar.</li>
-        </ul>
-    </div>
-
-    <div class="cardapio-bloco">
-        <h4>🌇 Tarde</h4>
-        <ul>
-            <li>Arroz sírio com ovo e suco.</li>
-            <li>Arroz, macarrão espaguete ovo e sal.</li>
-            <li>Polpa de fruta e açucar.</li>
-        </ul>
-    </div>
-</div>
         <div class="card pequeno">
-    <h3>💡 Curiosidade / Dica do Dia</h3>
-    <p id="curiosidade">Carregando...</p>
-</div>
+            <h3>🍽 Cardápio do Dia</h3>
+            <div class="cardapio-bloco">
+                <h4>☀️ Manhã</h4>
+                <ul>
+                    <li>Arroz sírio com ovo e suco.</li>
+                    <li>Arroz, macarrão espaguete, ovo e sal.</li>
+                    <li>Polpa de fruta e açucar.</li>
+                </ul>
+            </div>
+
+            <div class="cardapio-bloco">
+                <h4>🌇 Tarde</h4>
+                <ul>
+                    <li>Arroz sírio com ovo e suco.</li>
+                    <li>Arroz, macarrão espaguete, ovo e sal.</li>
+                    <li>Polpa de fruta e açucar.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card pequeno">
+            <h3>💡 Curiosidade / Dica do Dia</h3>
+            <p id="curiosidade">Carregando...</p>
+        </div>
         
     </div>
 
@@ -233,41 +232,31 @@ footer {
 
         <div class="card grande">
             <h2>🎉 Aniversariantes do Mês</h2>
-
             <div class="aniversarios">
-
                 <div class="pessoa">
                     <img src="foto1.jpg" alt="Arijane Santos">
                     <span>Arijane Santos</span>
                 </div>
-
                 <div class="pessoa">
                     <img src="foto2.jpg" alt="Oldeney Douglas">
                     <span>Oldeney Douglas</span>
                 </div>
-
                 <div class="pessoa">
                     <img src="foto3.jpg" alt="Odair Pedrosa">
                     <span>Odair Pedrosa</span>
                 </div>
-
                 <div class="pessoa">
                     <img src="foto4.jpg" alt="Kezia Bastos">
                     <span>Kezia Bastos</span>
                 </div>
-
                 <div class="pessoa">
                     <img src="foto5.jpg" alt="Valdeni Santos">
                     <span>Valdeni Santos</span>
                 </div>
-
                 <div class="pessoa">
                     <img src="foto6.jpg" alt="Maia Morais">
                     <span>Maia Morais</span>
                 </div>
-                
-                <!-- Adicione mais aniversariantes aqui -->
-
             </div>
         </div>
 
@@ -304,6 +293,34 @@ function atualizarClima() {
 }
 atualizarClima();
 setInterval(atualizarClima, 600000); // Atualiza a cada 10 min
+
+// Curiosidades
+const curiosidades = [
+    { pergunta: "Você sabe quem é o secretário de educação?", resposta: "Adanor Porto Filho" },
+    { pergunta: "Você sabe quem é a prefeita de Manacapuru?", resposta: "Valciléia Maciel Flores" },
+    { pergunta: "Você sabe quem é o vice-prefeito de Manacapuru?", resposta: "Franz Melendez" }
+];
+
+let indice = 0;
+const curiosidadeEl = document.getElementById("curiosidade");
+
+function mostrarCuriosidade() {
+    const atual = curiosidades[indice];
+
+    // Mostra a pergunta primeiro
+    curiosidadeEl.innerText = atual.pergunta;
+
+    // Depois de 3 segundos, mostra pergunta + resposta
+    setTimeout(() => {
+    curiosidadeEl.innerHTML = `${atual.pergunta}<br>${atual.resposta}`;
+}, 3000);
+
+    // Próxima curiosidade depois de 8 segundos
+    indice = (indice + 1) % curiosidades.length;
+    setTimeout(mostrarCuriosidade, 8000);
+}
+
+mostrarCuriosidade();
 </script>
 
 </body>
