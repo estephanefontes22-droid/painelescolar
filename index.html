@@ -296,59 +296,10 @@ function atualizarClima() {
 atualizarClima();
 setInterval(atualizarClima, 600000);
 
-// Funcionários
-const aniversariantesFunc = [
-    { nome: "Arijane Santos", foto: "foto1.jpg" },
-    { nome: "Oldeney Douglas", foto: "foto2.jpg" },
-    { nome: "Odair Pedrosa", foto: "foto3.jpg" },
-    { nome: "Kezia Bastos", foto: "foto4.jpg" },
-    { nome: "Valdeni Santos", foto: "foto5.jpg" },
-    { nome: "Maia Morais", foto: "foto6.jpg"},
-    { nome: "Mickaela Rocha", foto: "foto7.jpg" }
-];
-
-let indiceFunc = 0;
-function trocarAniversarianteFunc() {
-    const slideshow = document.getElementById("slideshow-funcionarios");
-    slideshow.classList.add("fade");
-
-    setTimeout(() => {
-        const atual = aniversariantesFunc[indiceFunc];
-        document.getElementById("fotoAniversarianteFunc").src = atual.foto;
-        document.getElementById("nomeAniversarianteFunc").innerText = atual.nome;
-        gerarBaloes(slideshow);
-        slideshow.classList.remove("fade");
-        indiceFunc = (indiceFunc + 1) % aniversariantesFunc.length;
-    }, 500);
-}
-
-// Alunos
-const aniversariantesAlunos = [
-    { nome: "Aluno 1", foto: "aluno1.jpeg" },
-    { nome: "Aluno 2", foto: "aluno2.jpeg" },
-    { nome: "Aluno 3", foto: "aluno3.jpeg" },
-    { nome: "Aluno 4", foto: "aluno4.jpeg" }
-];
-
-let indiceAluno = 0;
-function trocarAniversarianteAluno() {
-    const slideshow = document.getElementById("slideshow-alunos");
-    slideshow.classList.add("fade");
-
-    setTimeout(() => {
-        const atual = aniversariantesAlunos[indiceAluno];
-        document.getElementById("fotoAniversarianteAluno").src = atual.foto;
-        document.getElementById("nomeAniversarianteAluno").innerText = atual.nome;
-        gerarBaloes(slideshow);
-        slideshow.classList.remove("fade");
-        indiceAluno = (indiceAluno + 1) % aniversariantesAlunos.length;
-    }, 500);
-}
-
 // Função genérica para gerar balões
 function gerarBaloes(slideshow) {
     const container = slideshow.querySelector(".baloes");
-    container.innerHTML = "";
+    container.innerHTML = ""; // limpa balões antigos
     for (let i = 0; i < 8; i++) {
         const balao = document.createElement("div");
         balao.classList.add("balao");
@@ -359,13 +310,60 @@ function gerarBaloes(slideshow) {
     }
 }
 
-// Intervalos
-setInterval(trocarAniversarianteFunc, 5000);
-setInterval(trocarAniversarianteAluno, 5000);
+// Funcionários
+const aniversariantesFunc = [
+    { nome:"Arijane Santos", foto:"foto1.jpg" },
+    { nome:"Oldeney Douglas", foto:"foto2.jpg" },
+    { nome:"Odair Pedrosa", foto:"foto3.jpg" },
+    { nome:"Kezia Bastos", foto:"foto4.jpg" },
+    { nome:"Valdeni Santos", foto:"foto5.jpg" },
+    { nome:"Maia Morais", foto:"foto6.jpg" },
+    { nome:"Mickaela Rocha", foto:"foto7.jpg" }
+];
+let indiceFunc = 0;
+function trocarAniversarianteFunc() {
+    const slideshow = document.getElementById("slideshow-funcionarios");
+    slideshow.classList.add("fade");
+    setTimeout(()=>{
+        const atual = aniversariantesFunc[indiceFunc];
+        const imgElem = document.getElementById("fotoAniversarianteFunc");
+        imgElem.src = atual.foto;
+        imgElem.onerror = () => { imgElem.src = "avatar.jpg"; } // fallback
+        document.getElementById("nomeAniversarianteFunc").innerText = atual.nome;
+        gerarBaloes(slideshow); // balões funcionando
+        slideshow.classList.remove("fade");
+        indiceFunc = (indiceFunc + 1) % aniversariantesFunc.length;
+    },500);
+}
 
-// Inicialização
+// Alunos
+const aniversariantesAlunos = [
+    { nome:"Aluno 1", foto:"aluno1.jpeg" },
+    { nome:"Aluno 2", foto:"aluno2.jpeg" },
+    { nome:"Aluno 3", foto:"aluno3.jpeg" },
+    { nome:"Aluno 4", foto:"aluno4.jpeg" }
+];
+let indiceAluno = 0;
+function trocarAniversarianteAluno() {
+    const slideshow = document.getElementById("slideshow-alunos");
+    slideshow.classList.add("fade");
+    setTimeout(()=>{
+        const atual = aniversariantesAlunos[indiceAluno];
+        const imgElem = document.getElementById("fotoAniversarianteAluno");
+        imgElem.src = atual.foto;
+        imgElem.onerror = () => { imgElem.src = "avatar.jpg"; } // fallback
+        document.getElementById("nomeAniversarianteAluno").innerText = atual.nome;
+        gerarBaloes(slideshow); // agora os balões também aparecem nos alunos
+        slideshow.classList.remove("fade");
+        indiceAluno = (indiceAluno + 1) % aniversariantesAlunos.length;
+    },500);
+}
+
+// Inicializa slideshows e intervalos
 trocarAniversarianteFunc();
 trocarAniversarianteAluno();
+setInterval(trocarAniversarianteFunc, 5000);
+setInterval(trocarAniversarianteAluno, 5000);
 </script>
 
 </body>
