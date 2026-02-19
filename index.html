@@ -402,6 +402,19 @@ function trocarAniversariante() {
 
 setInterval(trocarAniversariante, 5000);
 trocarAniversariante();
+    function gerarBaloes() {
+    const container = document.querySelector(".baloes");
+    container.innerHTML = "";
+
+    for (let i = 0; i < 10; i++) {
+        const balao = document.createElement("div");
+        balao.classList.add("balao");
+        balao.innerText = "🎈";
+        balao.style.left = Math.random() * 100 + "%";
+        balao.style.animationDuration = (3 + Math.random() * 3) + "s";
+        container.appendChild(balao);
+    }
+}
 </script>
 
 </body>
