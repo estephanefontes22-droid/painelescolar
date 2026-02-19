@@ -106,7 +106,7 @@ header {
 
 .grande {
     padding: 20px;
-    max-width: 700px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -121,18 +121,20 @@ header {
     position: relative;
     text-align: center;
     overflow: hidden;
-    padding: 25px;
+    padding: 15px;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .slideshow img {
     width: 150px;
     height: 150px;
     object-fit: cover;
-    border-radius: 15px;
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
+    object-position: center;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto;
 }
-
 .slideshow.fade img {
     opacity: 0;
 }
