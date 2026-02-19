@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+[09:12, 19/02/2026] Ester: <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
@@ -33,6 +33,42 @@ header {
     font-size: 38px;
     font-weight: 700;
     color: #1e3c72;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3…
+[09:14, 19/02/2026] Ester: <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Painel Escolar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('fundo.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.overlay {
+    min-height: 100vh;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 30px;
+    font-size: 38px;
+    font-weight: 700;
+    color: #1e3c72;
     text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
 }
 
@@ -42,7 +78,6 @@ header {
     flex-wrap: wrap;
 }
 
-/* LADO ESQUERDO */
 .side-panel {
     width: 280px;
     display: flex;
@@ -50,7 +85,6 @@ header {
     gap: 20px;
 }
 
-/* CENTRO */
 .main-panel {
     flex: 1;
     display: flex;
@@ -60,16 +94,10 @@ header {
 
 /* CARDS */
 .card {
-    background: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.9);
     border-radius: 20px;
     padding: 25px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
 }
 
 .pequeno {
@@ -86,88 +114,8 @@ header {
     margin: 10px 0;
 }
 
-/* ANIVERSÁRIOS */
-.aniversarios {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.pessoa {
-    width: 120px;
-    text-align: center;
-}
-
-.pessoa img {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 15px;
-    border: 2px solid rgba(255,255,255,0.5);
-}
-
-.pessoa span {
-    display: block;
-    margin-top: 8px;
-    font-size: 14px;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 15px;
-    margin-top: 30px;
-    font-size: 14px;
-    color: #333;
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
-}
-
-/* RESPONSIVO */
-@media (max-width: 900px) {
-    .layout {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .side-panel {
-        width: 100%;
-        flex-direction: row;
-        overflow-x: auto;
-        gap: 10px;
-    }
-
-    .pessoa {
-        width: 100px;
-    }
-    
-    .cardapio-bloco {
-        margin-top: 10px;
-    }
-
-    .cardapio-bloco h4 {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1e3c72;
-        margin-bottom: 5px;
-    }
-
-    .cardapio-bloco ul {
-        list-style: none;
-        padding-left: 15px;
-    }
-
-    .cardapio-bloco ul li {
-        position: relative;
-        margin-bottom: 4px;
-    }
-
-    .cardapio-bloco ul li::before {
-        content: "•";
-        color: #1e3c72;
-        position: absolute;
-        left: -10px;
-    }
-    .slideshow {
+/* SLIDESHOW */
+.slideshow {
     position: relative;
     text-align: center;
     overflow: hidden;
@@ -179,7 +127,12 @@ footer {
     height: 220px;
     object-fit: cover;
     border-radius: 20px;
-    transition: 0.5s;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.slideshow.fade img {
+    opacity: 0;
 }
 
 .slideshow h3 {
@@ -208,8 +161,32 @@ footer {
     20% { opacity: 1; }
     100% { transform: translateY(-150%); opacity: 0; }
 }
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .side-panel {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .slideshow img {
+        width: 160px;
+        height: 160px;
+    }
 }
-    
+
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
 </style>
 </head>
 
@@ -222,7 +199,6 @@ footer {
 
 <div class="layout">
 
-    <!-- LADO ESQUERDO -->
     <div class="side-panel">
 
         <div class="card pequeno">
@@ -235,89 +211,30 @@ footer {
             <h3>🌤 Clima</h3>
             <div id="clima">Carregando...</div>
         </div>
-        
-        <div class="card pequeno">
-            <h3>🍽 Cardápio do Dia</h3>
-            <div class="cardapio-bloco">
-                <h4>☀️ Manhã</h4>
-                <ul>
-                    <li>Mingau de Arroz.</li>
-                </ul>
-            </div>
 
-            <div class="cardapio-bloco">
-                <h4>🌇 Tarde</h4>
-                <ul>
-                    <li>Mingau de Arroz.</li>
-                    
-                </ul>
-            </div>
-        </div>
-
-        
     </div>
 
-    <!-- CENTRO -->
     <div class="main-panel">
 
         <div class="card grande">
             <h2>📢 Avisos</h2>
-            <p>Informamos que nos dias 16, 17 e 18 de fevereiro (segunda, terça e quarta-feira) não haverá aula em função do Carnaval.</p>
+            <p>Informamos que nos dias 16, 17 e 18 de fevereiro não haverá aula em função do Carnaval.</p>
         </div>
 
-            <div class="card pequeno">
-            <h3>💡 Curiosidade / Dica do Dia</h3>
-            <p id="curiosidade">Carregando...</p>
+        <div class="card grande">
+            <h2>🎉 Aniversariantes do Momento</h2>
+
+            <div class="slideshow" id="slideshow">
+                <img id="fotoAniversariante" src="">
+                <h3 id="nomeAniversariante"></h3>
+                <div class="baloes"></div>
+            </div>
+
         </div>
-        
-     <div class="card grande">
-    <h2>🎉 Aniversariantes do Momento</h2>
 
-    <div class="slideshow">
-        <img id="fotoAniversariante" src="foto1.jpg">
-        <h3 id="Arijane">Arijane Santos</h3>
-
-        <div class="baloes"></div>
     </div>
-           <div class="slideshow">
-        <img id="fotoAniversariante" src="foto2.jpg">
-        <h3 id="Oldeney">Oldeney Douglas</h3>
 
-        <div class="baloes"></div>
-    </div>
-           <div class="slideshow">
-        <img id="fotoAniversariante" src="foto3.jpg">
-        <h3 id="Odair">Odair Pedrosa</h3>
-
-        <div class="baloes"></div>
-    </div>
-           <div class="slideshow">
-        <img id="fotoAniversariante" src="foto4.jpg">
-        <h3 id="Kezia">Kezia Bastos</h3>
-
-        <div class="baloes"></div>
-    </div>
-           <div class="slideshow">
-        <img id="fotoAniversariante" src="foto5.jpg">
-        <h3 id="Valdeni">Valdeni Santos</h3>
-
-        <div class="baloes"></div>
-    </div>
-           <div class="slideshow">
-        <img id="fotoAniversariante" src="foto6.jpg">
-        <h3 id="Maia">Maia Morais</h3>
-
-        <div class="baloes"></div>
-    </div>
-           <div class="slideshow">
-        <img id="fotoAniversariante" src="foto7.jpg">
-        <h3 id="Mickaela ">Mickaela Rocha</h3>
-
-        <div class="baloes"></div>
-    </div>
-         
 </div>
-        
 
 <footer>
 Escola Municipal • 2026
@@ -326,7 +243,8 @@ Escola Municipal • 2026
 </div>
 
 <script>
-// Relógio
+
+/* RELÓGIO */
 function atualizarRelogio() {
     const agora = new Date();
     document.getElementById("hora").innerHTML = agora.toLocaleTimeString("pt-BR");
@@ -335,49 +253,20 @@ function atualizarRelogio() {
 setInterval(atualizarRelogio, 1000);
 atualizarRelogio();
 
-// Clima
+/* CLIMA */
 function atualizarClima() {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=Manacapuru&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7")
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
-        const temp = Math.round(data.main.temp);
-        const descricao = data.weather[0].description;
-        document.getElementById("clima").innerHTML = temp + "°C - " + descricao;
-    })
-    .catch(err => console.error("Erro ao buscar clima:", err));
+        document.getElementById("clima").innerHTML =
+            Math.round(data.main.temp) + "°C - " + data.weather[0].description;
+    });
 }
 atualizarClima();
-setInterval(atualizarClima, 600000); // Atualiza a cada 10 min
+setInterval(atualizarClima, 600000);
 
-// Curiosidades
-const curiosidades = [
-    { pergunta: "Você sabe quem é o secretário de educação?", resposta: "Adanor Porto Filho" },
-    { pergunta: "Você sabe quem é a prefeita de Manacapuru?", resposta: "Valciléia Flores Maciel" },
-    { pergunta: "Você sabe quem é o vice-prefeito de Manacapuru?", resposta: "Franz Melendez" }
-];
-
-let indice = 0;
-const curiosidadeEl = document.getElementById("curiosidade");
-
-function mostrarCuriosidade() {
-    const atual = curiosidades[indice];
-
-    // Mostra a pergunta primeiro
-    curiosidadeEl.innerText = atual.pergunta;
-
-    // Depois de 3 segundos, mostra pergunta + resposta
-    setTimeout(() => {
-    curiosidadeEl.innerHTML = `${atual.pergunta}<br>${atual.resposta}`;
-}, 3000);
-
-    // Próxima curiosidade depois de 8 segundos
-    indice = (indice + 1) % curiosidades.length;
-    setTimeout(mostrarCuriosidade, 8000);
-}
-
-mostrarCuriosidade();
-    
-    const aniversariantes = [
+/* ANIVERSARIANTES */
+const aniversariantes = [
     { nome: "Arijane Santos", foto: "foto1.jpg" },
     { nome: "Oldeney Douglas", foto: "foto2.jpg" },
     { nome: "Odair Pedrosa", foto: "foto3.jpg" },
@@ -387,26 +276,32 @@ mostrarCuriosidade();
     { nome: "Mickaela Rocha", foto: "foto7.jpg" }
 ];
 
-let indiceAniversariante = 0;
+let indice = 0;
+const slideshow = document.getElementById("slideshow");
 
 function trocarAniversariante() {
-    const atual = aniversariantes[indiceAniversariante];
+    slideshow.classList.add("fade");
 
-    document.getElementById("fotoAniversariante").src = atual.foto;
-    document.getElementById("nomeAniversariante").innerText = atual.nome;
+    setTimeout(() => {
+        const atual = aniversariantes[indice];
 
-    gerarBaloes();
+        document.getElementById("fotoAniversariante").src = atual.foto;
+        document.getElementById("nomeAniversariante").innerText = atual.nome;
 
-    indiceAniversariante = (indiceAniversariante + 1) % aniversariantes.length;
+        gerarBaloes();
+
+        slideshow.classList.remove("fade");
+
+        indice = (indice + 1) % aniversariantes.length;
+
+    }, 500);
 }
 
-setInterval(trocarAniversariante, 5000);
-trocarAniversariante();
-    function gerarBaloes() {
+function gerarBaloes() {
     const container = document.querySelector(".baloes");
     container.innerHTML = "";
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 8; i++) {
         const balao = document.createElement("div");
         balao.classList.add("balao");
         balao.innerText = "🎈";
@@ -415,6 +310,10 @@ trocarAniversariante();
         container.appendChild(balao);
     }
 }
+
+setInterval(trocarAniversariante, 5000);
+trocarAniversariante();
+
 </script>
 
 </body>
