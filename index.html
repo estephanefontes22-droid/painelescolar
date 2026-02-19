@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Painel Escolar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
 /* RESET BÁSICO */
 * {
@@ -69,7 +78,13 @@ header {
 }
 
 .card.grande {
-    max-width: 220px; /* ajusta ao slideshow */
+    max-width: 100%; /* os cards grandes ocupam todo o espaço disponível */
+    padding: 15px;
+}
+
+/* CARD ANIVERSARIANTE */
+.card-aniversariante {
+    max-width: 220px;
     padding: 15px;
     margin: 0 auto;
 }
@@ -81,9 +96,9 @@ header {
     margin: 10px 0;
 }
 
-/* SLIDESHOW */
-.slideshow {
-    width: 200px; /* tamanho fixo do container */
+/* SLIDESHOW ANIVERSARIANTES */
+.card-aniversariante .slideshow {
+    width: 200px;
     max-width: 200px;
     text-align: center;
     overflow: hidden;
@@ -92,9 +107,9 @@ header {
     position: relative;
 }
 
-.slideshow img {
-    width: 100%; /* ocupa todo o slideshow */
-    height: 200px; /* mantém proporção */
+.card-aniversariante .slideshow img {
+    width: 100%;
+    height: 200px;
     object-fit: cover;
     object-position: center;
     border-radius: 20px;
@@ -103,11 +118,11 @@ header {
     transition: opacity 0.5s ease-in-out;
 }
 
-.slideshow.fade img {
+.card-aniversariante .slideshow.fade img {
     opacity: 0;
 }
 
-.slideshow h3 {
+.card-aniversariante .slideshow h3 {
     margin-top: 10px;
     font-size: 18px;
     font-weight: 600;
@@ -149,17 +164,17 @@ header {
         padding-bottom: 10px;
     }
 
-    .slideshow {
+    .card-aniversariante {
+        max-width: 180px;
+    }
+
+    .card-aniversariante .slideshow {
         width: 160px;
         max-width: 160px;
     }
 
-    .slideshow img {
+    .card-aniversariante .slideshow img {
         height: 160px;
-    }
-
-    .card.grande {
-        max-width: 180px;
     }
 }
 
@@ -171,3 +186,140 @@ footer {
     font-size: 14px;
 }
 </style>
+</head>
+
+<body>
+<div class="overlay">
+
+<header>
+    PAINEL DE NOTÍCIAS 2026 - EMEF EZEQUIEL RUIZ
+</header>
+
+<div class="layout">
+
+    <!-- PAINEL LATERAL -->
+    <div class="side-panel">
+        <div class="card pequeno">
+            <h3>🕒 Horário</h3>
+            <div id="hora" class="hora"></div>
+            <div id="data"></div>
+        </div>
+
+        <div class="card pequeno">
+            <h3>🌤 Clima</h3>
+            <div id="clima">Carregando...</div>
+        </div>
+    </div>
+
+    <!-- PAINEL PRINCIPAL -->
+    <div class="main-panel">
+
+        <div class="card grande">
+            <h2>📢 Avisos</h2>
+            <p>Informamos que nos dias 16, 17 e 18 de fevereiro não haverá aula em função do Carnaval.</p>
+        </div>
+
+        <div class="card grande">
+            <h2>🍽 Cardápio</h2>
+            <p>Segunda: Arroz, feijão, carne e salada</p>
+        </div>
+
+        <div class="card grande">
+            <h2>💡 Curiosidades</h2>
+            <p>Curiosidade do dia: O corpo humano tem cerca de 60% de água.</p>
+        </div>
+
+        <!-- CARD ANIVERSARIANTE -->
+        <div class="card card-aniversariante">
+            <h2>🎉 Aniversariantes do Momento</h2>
+            <div class="slideshow" id="slideshow">
+                <img id="fotoAniversariante" src="">
+                <h3 id="nomeAniversariante"></h3>
+                <div class="baloes"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+Escola Municipal • 2026
+</footer>
+
+</div>
+
+<script>
+/* RELÓGIO */
+function atualizarRelogio() {
+    const agora = new Date();
+    document.getElementById("hora").innerHTML = agora.toLocaleTimeString("pt-BR");
+    document.getElementById("data").innerHTML = agora.toLocaleDateString("pt-BR");
+}
+setInterval(atualizarRelogio, 1000);
+atualizarRelogio();
+
+/* CLIMA */
+function atualizarClima() {
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=Manacapuru&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7")
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("clima").innerHTML =
+            Math.round(data.main.temp) + "°C - " + data.weather[0].description;
+    });
+}
+atualizarClima();
+setInterval(atualizarClima, 600000);
+
+/* ANIVERSARIANTES */
+const aniversariantes = [
+    { nome: "Arijane Santos", foto: "foto1.jpg" },
+    { nome: "Oldeney Douglas", foto: "foto2.jpg" },
+    { nome: "Odair Pedrosa", foto: "foto3.jpg" },
+    { nome: "Kezia Bastos", foto: "foto4.jpg" },
+    { nome: "Valdeni Santos", foto: "foto5.jpg" },
+    { nome: "Maia Morais", foto: "foto6.jpg" },
+    { nome: "Mickaela Rocha", foto: "foto7.jpg" }
+];
+
+let indice = 0;
+const slideshow = document.getElementById("slideshow");
+
+function trocarAniversariante() {
+    slideshow.classList.add("fade");
+
+    setTimeout(() => {
+        const atual = aniversariantes[indice];
+
+        document.getElementById("fotoAniversariante").src = atual.foto;
+        document.getElementById("nomeAniversariante").innerText = atual.nome;
+
+        gerarBaloes();
+
+        slideshow.classList.remove("fade");
+
+        indice = (indice + 1) % aniversariantes.length;
+
+    }, 500);
+}
+
+function gerarBaloes() {
+    const container = document.querySelector(".baloes");
+    container.innerHTML = "";
+
+    for (let i = 0; i < 8; i++) {
+        const balao = document.createElement("div");
+        balao.classList.add("balao");
+        balao.innerText = "🎈";
+        balao.style.left = Math.random() * 100 + "%";
+        balao.style.animationDuration = (3 + Math.random() * 3) + "s";
+        container.appendChild(balao);
+    }
+}
+
+setInterval(trocarAniversariante, 5000);
+trocarAniversariante();
+</script>
+
+</body>
+</html>
