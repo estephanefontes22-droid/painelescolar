@@ -86,7 +86,9 @@ header {
     padding: 15px;
 }
 
-.card-aniversariante, .card-aniversariante-alunos {
+.card-aniversariante, 
+.card-aniversariante-alunos,
+.card-aniversariante-turno   {
     max-width: 220px;
     padding: 15px;
     text-align: center;
@@ -110,7 +112,8 @@ header {
 
 /* SLIDESHOW ANIVERSARIANTES */
 .card-aniversariante .slideshow,
-.card-aniversariante-alunos .slideshow    {
+.card-aniversariante-alunos .slideshow,
+.card-aniversariante-turno .slideshow {
     width: 200px;
     max-width: 200px;
     text-align: center;
@@ -257,11 +260,11 @@ footer {
        </div>
 
         <!-- CARD ANIVERSARIANTE -->
-      <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+     <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
 
-    <!-- Aniversariantes Funcionários -->
+    <!-- Funcionários -->
     <div class="card card-aniversariante">
-        <h2>🎉Aniversariantes Funcionários</h2>
+        <h2>🎉 Funcionários</h2>
         <div class="slideshow" id="slideshow-funcionarios">
             <img id="fotoAniversarianteFunc" src="">
             <h3 id="nomeAniversarianteFunc"></h3>
@@ -269,16 +272,27 @@ footer {
         </div>
     </div>
 
-    <!-- Aniversariantes Alunos -->
-    <div class="card card-aniversariante-alunos">
-        <h2>🎈Aniversariantes Alunos</h2>
-        <div class="slideshow" id="slideshow-alunos">
-            <img id="fotoAniversarianteAluno" src="">
-            <h3 id="nomeAniversarianteAluno"></h3>
+    <!-- Matutino -->
+    <div class="card card-aniversariante-turno">
+        <h2>🌅 Matutino</h2>
+        <div class="slideshow" id="slideshow-matutino">
+            <img id="fotoAniversarianteMatutino" src="">
+            <h3 id="nomeAniversarianteMatutino"></h3>
             <div class="baloes"></div>
         </div>
     </div>
 
+    <!-- Vespertino -->
+    <div class="card card-aniversariante-turno">
+        <h2>🌇 Vespertino</h2>
+        <div class="slideshow" id="slideshow-vespertino">
+            <img id="fotoAniversarianteVespertino" src="">
+            <h3 id="nomeAniversarianteVespertino"></h3>
+            <div class="baloes"></div>
+        </div>
+    </div>
+
+</div>
 <script>
 /* RELÓGIO */
 function atualizarRelogio() {
@@ -341,9 +355,39 @@ function trocarAniversarianteFunc() {
     },500);
 }
 
-// Alunos
-const aniversariantesAlunos = [
-    { nome:"Aluno 1", foto:"aluno1.jpeg" },
+const aniversariantesMatutino = [
+    { nome:"Aluno 12", foto:"aluno12.jpeg" },
+    { nome:"Aluno 13", foto:"aluno13.jpeg" },
+    { nome:"Aluno 14", foto:"aluno14.jpeg" },
+    { nome:"Aluno 15", foto:"aluno15.jpeg" },
+    { nome:"Aluno 16", foto:"aluno16.jpeg" },
+    { nome:"Aluno 17", foto:"aluno17.jpeg" },
+    { nome:"Aluno 18", foto:"aluno18.jpeg" },
+    { nome:"Aluno 19", foto:"aluno19.jpeg" },
+    { nome:"Aluno 20", foto:"aluno20.jpeg" },
+    { nome:"Aluno 21", foto:"aluno21.jpeg" },
+    { nome:"Aluno 22", foto:"aluno22.jpeg" }
+];
+    
+let indiceMatutino = 0;
+
+function trocarAniversarianteMatutino(){
+    const slideshow = document.getElementById("slideshow-matutino");
+    slideshow.classList.add("fade");
+    setTimeout(()=>{
+        const atual = aniversariantesMatutino[indiceMatutino];
+        const imgElem = document.getElementById("fotoAniversarianteMatutino");
+        imgElem.src = atual.foto;
+        imgElem.onerror = ()=>{ imgElem.src="avatar.jpg"; };
+        document.getElementById("nomeAniversarianteMatutino").innerText = atual.nome;
+        gerarBaloes(slideshow);
+        slideshow.classList.remove("fade");
+        indiceMatutino = (indiceMatutino + 1) % aniversariantesMatutino.length;
+    },500);
+}    
+    
+const aniversariantesVespertino = [
+  { nome:"Aluno 1", foto:"aluno1.jpeg" },
     { nome:"Aluno 2", foto:"aluno2.jpeg" },
     { nome:"Aluno 3", foto:"aluno3.jpeg" },
     { nome:"Aluno 4", foto:"aluno4.jpeg" },
@@ -355,27 +399,31 @@ const aniversariantesAlunos = [
     { nome:"Aluno 10", foto:"aluno10.jpeg" },
     { nome:"Aluno 11", foto:"aluno11.jpeg" }
 ];
-let indiceAluno = 0;
-function trocarAniversarianteAluno() {
-    const slideshow = document.getElementById("slideshow-alunos");
+let indiceVespertino = 0;
+
+function trocarAniversarianteVespertino(){
+    const slideshow = document.getElementById("slideshow-vespertino");
     slideshow.classList.add("fade");
     setTimeout(()=>{
-        const atual = aniversariantesAlunos[indiceAluno];
-        const imgElem = document.getElementById("fotoAniversarianteAluno");
+        const atual = aniversariantesVespertino[indiceVespertino];
+        const imgElem = document.getElementById("fotoAniversarianteVespertino");
         imgElem.src = atual.foto;
-        imgElem.onerror = () => { imgElem.src = "avatar.jpg"; } // fallback
-        document.getElementById("nomeAniversarianteAluno").innerText = atual.nome;
-        gerarBaloes(slideshow); // agora os balões também aparecem nos alunos
+        imgElem.onerror = ()=>{ imgElem.src="avatar.jpg"; };
+        document.getElementById("nomeAniversarianteVespertino").innerText = atual.nome;
+        gerarBaloes(slideshow);
         slideshow.classList.remove("fade");
-        indiceAluno = (indiceAluno + 1) % aniversariantesAlunos.length;
+        indiceVespertino = (indiceVespertino + 1) % aniversariantesVespertino.length;
     },500);
 }
 
 // Inicializa slideshows e intervalos
 trocarAniversarianteFunc();
-trocarAniversarianteAluno();
+trocarAniversarianteMatutino();
+trocarAniversarianteVespertino();
+    
 setInterval(trocarAniversarianteFunc, 5000);
-setInterval(trocarAniversarianteAluno, 5000);
+setInterval(trocarAniversarianteMatutino, 5000);
+setInterval(trocarAniversarianteVespertino, 5000);
 </script>
 
 </body>
