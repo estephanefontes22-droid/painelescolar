@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+/* RESET BÁSICO */
 * {
     margin: 0;
     padding: 0;
@@ -18,22 +19,13 @@ body {
     font-family: 'Poppins', sans-serif;
     background: url('fundo.jpg') no-repeat center center fixed;
     background-size: cover;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    transform: scale(0.9);
+    transform-origin: top center;
 }
 
-/* LAYOUT */
+/* OVERLAY */
 .overlay {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.layout {
-    display: flex;
-    gap: 20px;
-    flex: 1;
+    min-height: 100vh;
     padding: 10px;
 }
 
@@ -41,39 +33,34 @@ body {
 header {
     text-align:center;
     padding:20px;
-    font-size:clamp(20px, 2.5vw, 32px);
+    font-size:28px;
     font-weight:700;
     color:#0d2a5c;
-    background: rgba(255,255,255,0.9);
-    border-radius:15px;
-    max-width:900px;
-    margin:20px auto;
-    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    background:white;          /* fundo branco */
+    border-radius:15px;        /* cantos arredondados */
+    max-width:900px;           /* não ficar gigante demais */
+    margin:20px auto;          /* centraliza */
+    box-shadow:0 8px 20px rgba(0,0,0,0.15); /* destaque elegante */
 }
 
-/* CARDS */
-.card {
-    background: rgba(255,255,255,0.85);
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.3);
-    transition: all 0.3s ease;
+/* LAYOUT PRINCIPAL */
+.layout {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.card:hover {
-    transform: scale(1.02);
-}
-
-/* PAINÉIS */
+/* PAINEL LATERAL */
 .side-panel {
     width: 280px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
+/* PAINEL PRINCIPAL */
 .main-panel {
     flex: 1;
     display: flex;
@@ -81,38 +68,82 @@ header {
     gap: 15px;
 }
 
+/* CARDS */
+.card {
+    background: rgba(255,255,255,0.9);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* PEQUENO E GRANDE */
+.card.pequeno {
+    text-align: center;
+}
+
+.card.grande {
+    max-width: 100%; /* os cards grandes ocupam todo o espaço disponível */
+    padding: 15px;
+}
+
+.card-aniversariante, 
+.card-aniversariante-alunos,
+.card-aniversariante-turno   {
+    max-width: 220px;
+    padding: 15px;
+    text-align: center;
+}
+
+.card-aniversariante .slideshow img,
+.card-aniversariante-alunos .slideshow img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: opacity 0.5s ease-in-out;
+}
+
 /* RELÓGIO */
 .hora {
     font-size: 32px;
     font-weight: 700;
+    margin: 10px 0;
 }
 
-/* CLIMA */
-#clima img {
-    width: 50px;
-}
-
-/* ANIVERSARIANTES */
-.slideshow {
+/* SLIDESHOW ANIVERSARIANTES */
+.card-aniversariante .slideshow,
+.card-aniversariante-alunos .slideshow,
+.card-aniversariante-turno .slideshow {
+    width: 200px;
+    max-width: 200px;
     text-align: center;
+    overflow: hidden;
+    padding: 15px;
+    margin: 0 auto;
+    position: relative;
 }
 
-.slideshow img {
+.card-aniversariante .slideshow img,
+.card-aniversariante-alunos .slideshow img,
+.card-aniversariante-turno .slideshow img{
     width: 100%;
     height: 140px;
     object-fit: cover;
-    border-radius: 15px;
+    object-position: center;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto;
+    transition: opacity 0.5s ease-in-out;
 }
 
-.slideshow h3 {
-    font-size: 16px;
-    margin-top: 8px;
-    color: #0d2a5c;
+.card-aniversariante .slideshow.fade img {
+    opacity: 0;
 }
 
-.slideshow span {
-    font-size: 13px;
-    color: #555;
+.card-aniversariante .slideshow h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 /* BALÕES */
@@ -120,12 +151,15 @@ header {
     position: absolute;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
     pointer-events: none;
 }
 
 .balao {
     position: absolute;
-    animation: subir linear infinite;
+    font-size: 20px;
+    animation: subir 4s linear infinite;
 }
 
 @keyframes subir {
@@ -133,6 +167,49 @@ header {
     20% { opacity: 1; }
     100% { transform: translateY(-150%); opacity: 0; }
 }
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .side-panel {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 15px;
+        padding-bottom: 10px;
+    }
+
+    .card-aniversariante {
+        max-width: 180px;
+    }
+
+    .card-aniversariante .slideshow {
+        width: 160px;
+        max-width: 160px;
+    }
+
+    .card-aniversariante .slideshow img {
+        height: 160px;
+    }
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    font-size: 14px;
+}
+    
+.card-aniversariante h2,
+.card-aniversariante-alunos h2 {
+    font-size: 18px;   /* diminui o tamanho */
+    margin-bottom: 10px;
+}
+    
 </style>
 </head>
 
@@ -140,137 +217,225 @@ header {
 <div class="overlay">
 
 <header>
-PAINEL DE NOTÍCIAS 2026 - EMEF EZEQUIEL RUIZ
+    PAINEL DE NOTÍCIAS 2026 - EMEF EZEQUIEL RUIZ
 </header>
 
 <div class="layout">
 
-<div class="side-panel">
+    <!-- PAINEL LATERAL -->
+    <div class="side-panel">
+        <div class="card pequeno">
+            <h3>🕒 Horário</h3>
+            <div id="hora" class="hora"></div>
+            <div id="data"></div>
+        </div>
 
-<div class="card">
-<h3>🕒 Horário</h3>
-<div id="hora" class="hora"></div>
-<div id="data"></div>
-</div>
+        <div class="card pequeno">
+            <h3>⛈️ Clima</h3>
+            <div id="clima">Carregando...</div>
+        </div>
+        
+            <div class="card grande">
+                <h3>DATAS COMEMORATIVAS</h3>
+                <p><b>08/03:</b> Dia Internacional da Mulher.</p>
+                <p><b>14/03:</b> Dia Nacional da Poesia / Dia da Matemática.</p>
+                <p><b>15/03:</b> Dia da Escola. </p>
+                <p><b>21/03:</b> Dia Internacional da Síndrome de Down.</p>
+                <p><b>21/03:</b> Dia Internacional contra a Discriminação Racial.</p>
+                <p><b>22/03:</b> Dia Mundial da Água.</p>
+                <p><b>31/03:</b> Dia da Saúde e Nutrição.</p>
+        </div>
+    </div>
 
-<div class="card">
-<h3>⛈️ Clima</h3>
-<div id="clima">Carregando...</div>
-</div>
+    <!-- PAINEL PRINCIPAL -->
+    <div class="main-panel">
+
+        <div class="card grande">
+            <h2>📢 Avisos</h2>
+            <p><b>As palavras da semana são: Fé e Gratidão.</b></p>
+            <p>Com essas duas palavras mágicas nossos dias se tornam  mais incríveis e cheios de felicidade.Tenham uma boa semana. </p>
+        </div>
+
+       <div class="card grande">
+    <h2>💡 Curiosidades</h2>
+    <p> <b>Gigante das Águas:</b> O Rio Amazonas é o maior em volume de água e o segundo mais extenso do mundo (6.992 km).</p>
+    <p> <b>Vida Subterrânea:</b> Cientistas identificaram um sistema de cavernas e até um "rio" subterrâneo de água salgada, conhecido como "Rio Hamza", correndo a cerca de 4.000 metros abaixo da bacia.</p>
+    <p> <b>O Rio Amazonas</b> nasce na Cordilheira dos Andes, no Peru, a mais de 5.000 metros de altitude, especificamente na região do Nevado Mismi, próximo a Arequipa.</p>
+       </div>
+
+        <!-- CARD ANIVERSARIANTE -->
+     <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+
+    <!-- Funcionários -->
+    <div class="card card-aniversariante">
+        <h2>🎉 Funcionários</h2>
+        <div class="slideshow" id="slideshow-funcionarios">
+            <img id="fotoAniversarianteFunc" src="">
+            <h3 id="nomeAniversarianteFunc"></h3>
+            <div class="baloes"></div>
+        </div>
+    </div>
+
+    <!-- Matutino -->
+    <div class="card card-aniversariante-turno">
+        <h2>🌅 Matutino</h2>
+        <div class="slideshow" id="slideshow-matutino">
+            <img id="fotoAniversarianteMatutino" src="">
+            <h3 id="nomeAniversarianteMatutino"></h3>
+            <div class="baloes"></div>
+        </div>
+    </div>
+
+    <!-- Vespertino -->
+    <div class="card card-aniversariante-turno">
+        <h2>🌇 Vespertino</h2>
+        <div class="slideshow" id="slideshow-vespertino">
+            <img id="fotoAniversarianteVespertino" src="">
+            <h3 id="nomeAniversarianteVespertino"></h3>
+            <div class="baloes"></div>
+        </div>
+    </div>
 
 </div>
-
-<div class="main-panel">
-
-<div class="card">
-<h2>📢 Avisos</h2>
-<p><b>Fé e Gratidão</b></p>
-</div>
-
-<div style="display:flex; gap:20px; justify-content:center;">
-
-<div class="card">
-<h2>🎉 Funcionários</h2>
-<div class="slideshow" id="slideshow-func">
-<img id="imgFunc">
-<h3 id="nomeFunc"></h3>
-<div class="baloes"></div>
-</div>
-</div>
-
-<div class="card">
-<h2>🌅 Matutino</h2>
-<div class="slideshow" id="slideshow-mat">
-<img id="imgMat">
-<h3 id="nomeMat"></h3>
-<div class="baloes"></div>
-</div>
-</div>
-
-<div class="card">
-<h2>🌇 Vespertino</h2>
-<div class="slideshow" id="slideshow-ves">
-<img id="imgVes">
-<h3 id="nomeVes"></h3>
-<div class="baloes"></div>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
 <script>
-
 /* RELÓGIO */
-setInterval(()=>{
-const agora = new Date();
-hora.innerHTML = agora.toLocaleTimeString("pt-BR");
-data.innerHTML = agora.toLocaleDateString("pt-BR");
-},1000);
+function atualizarRelogio() {
+    const agora = new Date();
+    document.getElementById("hora").innerHTML = agora.toLocaleTimeString("pt-BR");
+    document.getElementById("data").innerHTML = agora.toLocaleDateString("pt-BR");
+}
+setInterval(atualizarRelogio, 1000);
+atualizarRelogio();
 
 /* CLIMA */
-function atualizarClima(){
-fetch("https://api.openweathermap.org/data/2.5/weather?q=Manacapuru&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7")
-.then(r=>r.json())
-.then(d=>{
-clima.innerHTML=`
-<img src="https://openweathermap.org/img/wn/${d.weather[0].icon}@2x.png">
-<div><b>${Math.round(d.main.temp)}°C</b></div>
-<div>${d.weather[0].description}</div>`;
-})
-.catch(()=>clima.innerHTML="Sem conexão");
+function atualizarClima() {
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=Manacapuru&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7")
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("clima").innerHTML =
+            Math.round(data.main.temp) + "°C - " + data.weather[0].description;
+    });
 }
 atualizarClima();
+setInterval(atualizarClima, 600000);
 
-/* BALÕES */
-function gerarBaloes(container){
-const area = container.querySelector(".baloes");
-area.innerHTML="";
-for(let i=0;i<6;i++){
-let b=document.createElement("div");
-b.className="balao";
-b.innerText="🎈";
-b.style.left=Math.random()*100+"%";
-b.style.animationDuration=(4+Math.random()*4)+"s";
-b.style.fontSize=(18+Math.random()*10)+"px";
-area.appendChild(b);
-}
-}
-
-/* SLIDES */
-function slideshow(lista,imgId,nomeId,containerId){
-let i=0;
-setInterval(()=>{
-let item=lista[i];
-document.getElementById(imgId).src=item.foto;
-document.getElementById(nomeId).innerHTML=
-`${item.nome}<br><span>🎂 ${item.data}</span>`;
-gerarBaloes(document.getElementById(containerId));
-i=(i+1)%lista.length;
-},4000);
+// Função genérica para gerar balões
+function gerarBaloes(slideshow) {
+    const container = slideshow.querySelector(".baloes");
+    container.innerHTML = ""; // limpa balões antigos
+    for (let i = 0; i < 8; i++) {
+        const balao = document.createElement("div");
+        balao.classList.add("balao");
+        balao.innerText = "🎈";
+        balao.style.left = Math.random() * 100 + "%";
+        balao.style.animationDuration = (3 + Math.random() * 3) + "s";
+        container.appendChild(balao);
+    }
 }
 
-/* DADOS */
-const func=[
-{nome:"Cézar Silva",data:"17/03",foto:"foto1.jpeg"},
-{nome:"Rosana Thalia",data:"21/03",foto:"foto2.jpeg"}
+// Funcionários
+const aniversariantesFunc = [
+    { nome:"Cézar Silva - 17/03", foto:"foto1.jpeg" },
+    { nome:"Rosana Thalia - 21/03", foto:"foto2.jpeg" },
+    { nome:"Geraldo Ademir - 30/03", foto:"foto3.jpeg" },
+    { nome:"Heloisa Raquel - 30/03", foto:"foto4.jpeg" },
+    { nome:"Roseane Bastos - 31/03", foto:"foto5.jpeg" },
+    { nome:"Raiane Barbosa - 13/03", foto:"foto6.jpeg" }
+
 ];
+let indiceFunc = 0;
+function trocarAniversarianteFunc() {
+    const slideshow = document.getElementById("slideshow-funcionarios");
+    slideshow.classList.add("fade");
+    setTimeout(()=>{
+        const atual = aniversariantesFunc[indiceFunc];
+        const imgElem = document.getElementById("fotoAniversarianteFunc");
+        imgElem.src = atual.foto;
+        imgElem.onerror = () => { imgElem.src = "avatar.jpg"; } // fallback
+        document.getElementById("nomeAniversarianteFunc").innerText = atual.nome;
+        gerarBaloes(slideshow); // balões funcionando
+        slideshow.classList.remove("fade");
+        indiceFunc = (indiceFunc + 1) % aniversariantesFunc.length;
+    },500);
+}
 
-const mat=[
-{nome:"Mary Hellen",data:"28/03",foto:"aluno1.jpeg"}
+const aniversariantesMatutino = [
+    { nome:"Mary Hellen - 28/03", foto:"aluno12.jpeg" },
+    { nome:"Maria Heloísa - 18/03", foto:"aluno13.jpeg" },
+    { nome:"Maria Rita - 01/03", foto:"aluno14.jpeg" },
+    { nome:"Rogério Martins - 28/03", foto:"aluno15.jpeg" },
+    { nome:"Rosa Maria - 28/03", foto:"aluno16.jpeg" },
+    { nome:"Elizel dos Santos - 09/03", foto:"aluno17.jpeg" },
+    { nome:"Ana Clara - 18/03", foto:"aluno18.jpeg" },
+    { nome:"Ezequiel Bentes - 18/03", foto:"aluno19.jpeg" },
+    { nome:"Lorrana Vitória - 15/03", foto:"aluno20.jpeg" },
+    { nome:"Adriel Emílio - 24/03", foto:"aluno21.jpeg" },
+    { nome:"Kaline Reis - 22/03", foto:"aluno22.jpeg" },
+    { nome:"Alana Pinheiro - 07/03", foto:"aluno23.jpeg" },
+    { nome:"Emilli Caroline - 27/03", foto:"aluno24.jpeg" },
+    { nome:"Johnatan Carvarlho - 18/03", foto:"aluno25.jpeg" },
+    { nome:"Keyte Monique - 11/03", foto:"aluno26.jpeg" },
+    { nome:"Renata Roberta  - 18/03", foto:"aluno27.jpeg" },
+    { nome:"Sophia Aguiar - 01/03", foto:"aluno28.jpeg" },
+    { nome:"Ketelen Beatriz - 20/03", foto:"aluno29.jpeg" },
+    { nome:"Analicy da Silva - 21/03", foto:"aluno30.jpeg" }
 ];
+    
+let indiceMatutino = 0;
 
-const ves=[
-{nome:"Arthur Pinheiro",data:"04/03",foto:"aluno2.jpeg"}
+function trocarAniversarianteMatutino(){
+    const slideshow = document.getElementById("slideshow-matutino");
+    slideshow.classList.add("fade");
+    setTimeout(()=>{
+        const atual = aniversariantesMatutino[indiceMatutino];
+        const imgElem = document.getElementById("fotoAniversarianteMatutino");
+        imgElem.src = atual.foto;
+        imgElem.onerror = ()=>{ imgElem.src="avatar.jpg"; };
+        document.getElementById("nomeAniversarianteMatutino").innerText = atual.nome;
+        gerarBaloes(slideshow);
+        slideshow.classList.remove("fade");
+        indiceMatutino = (indiceMatutino + 1) % aniversariantesMatutino.length;
+    },500);
+}    
+    
+const aniversariantesVespertino = [
+  { nome:"Arthur Pinheiro - 04/03", foto:"aluno1.jpeg" },
+    { nome:"Beatriz Gomes - 09/03", foto:"aluno2.jpeg" },
+    { nome:"Ariela Rodrigues - 20/03", foto:"aluno3.jpeg" },
+    { nome:"Rarissa Manuela - 26/03", foto:"aluno4.jpeg" },
+    { nome:"Gael Santos - 09/03", foto:"aluno5.jpeg" },
+    { nome:"João Lucas - 25/03", foto:"aluno6.jpeg" },
+    { nome:"Bryan Josué - 17/03", foto:"aluno7.jpeg" },
+    { nome:"Renan de Araújo - 27/03", foto:"aluno8.jpeg" },
+    { nome:"Lara Emelly - 24/03", foto:"aluno9.jpeg" },
+    { nome:"Leonardo Gabriel - 10/03", foto:"aluno10.jpeg" }
+   
 ];
+let indiceVespertino = 0;
 
-/* INICIAR */
-slideshow(func,"imgFunc","nomeFunc","slideshow-func");
-slideshow(mat,"imgMat","nomeMat","slideshow-mat");
-slideshow(ves,"imgVes","nomeVes","slideshow-ves");
+function trocarAniversarianteVespertino(){
+    const slideshow = document.getElementById("slideshow-vespertino");
+    slideshow.classList.add("fade");
+    setTimeout(()=>{
+        const atual = aniversariantesVespertino[indiceVespertino];
+        const imgElem = document.getElementById("fotoAniversarianteVespertino");
+        imgElem.src = atual.foto;
+        imgElem.onerror = ()=>{ imgElem.src="avatar.jpg"; };
+        document.getElementById("nomeAniversarianteVespertino").innerText = atual.nome;
+        gerarBaloes(slideshow);
+        slideshow.classList.remove("fade");
+        indiceVespertino = (indiceVespertino + 1) % aniversariantesVespertino.length;
+    },500);
+}
 
+// Inicializa slideshows e intervalos
+trocarAniversarianteFunc();
+trocarAniversarianteMatutino();
+trocarAniversarianteVespertino();
+    
+setInterval(trocarAniversarianteFunc, 5000);
+setInterval(trocarAniversarianteMatutino, 5000);
+setInterval(trocarAniversarianteVespertino, 5000);
 </script>
 
 </body>
