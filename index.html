@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-<style>
+
+    <style>
     /* RESET */
 * {
     margin: 0;
@@ -18,14 +19,14 @@ body {
     font-family: 'Poppins', sans-serif;
     background: url('fundo.jpg') no-repeat center center fixed;
     background-size: cover;
-    transform: scale(0.9);
+    transform: scale(0.95);
     transform-origin: top center;
 }
 
 /* OVERLAY */
 .overlay {
     min-height: 100vh;
-    padding: 10px;
+    padding: 15px;
 }
 
 /* HEADER */
@@ -38,6 +39,7 @@ header {
 
     background: rgba(255,255,255,0.25);
     backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
 
     border-radius:15px;
     max-width:900px;
@@ -70,13 +72,14 @@ header {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
-/* CARDS */
+/* CARDS (LIQUID GLASS) */
 .card {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 
     border-radius: 20px;
     padding: 20px;
@@ -86,6 +89,12 @@ header {
     box-shadow: 
         0 10px 30px rgba(0,0,0,0.2),
         inset 0 0 15px rgba(255,255,255,0.25);
+
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
 }
 
 /* TAMANHOS */
@@ -93,25 +102,26 @@ header {
     text-align: center;
 }
 
-/* ===== ANIVERSARIANTES (PADRÃO FIXO) ===== */
+/* ===== ANIVERSARIANTES ===== */
 
 .card-aniversariante, 
 .card-aniversariante-turno {
     width: 220px;
-    height: 300px; /* 🔥 ALTURA FIXA IGUAL PRA TODOS */
-
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
 }
 
-/* SLIDESHOW */
+/* SLIDESHOW (CORRIGIDO) */
 .slideshow {
     width: 100%;
+    height: 140px; /* 🔥 FIXA A ALTURA */
+
+    position: relative;
+
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 /* IMAGEM */
@@ -123,27 +133,22 @@ header {
     border-radius: 15px;
 
     position: absolute;
+    top: 0;
+    left: 0;
+
     opacity: 0;
     transition: opacity 0.4s ease;
 }
 
 .slideshow img.ativo {
     opacity: 1;
-    position: relative;
 }
 
-/* CONTAINER IMAGEM */
-.slideshow {
-    position: relative;
-    height: 140px;
-}
-
-/* TEXTO */
+/* TEXTO (NOME + DATA) */
 .card-aniversariante h3,
 .card-aniversariante-turno h3 {
     width: 100%;
-
-    margin-top: 10px;
+    margin-top: 15px;
 
     background: rgba(0,0,0,0.6);
     padding: 10px;
@@ -205,6 +210,7 @@ header {
         width: 100%;
         flex-direction: row;
         overflow-x: auto;
+        gap: 15px;
     }
 }
 </style>
@@ -270,9 +276,9 @@ header {
         <div class="slideshow" id="slideshow-funcionarios">
             <img class="img1 ativo" src="">
             <img class="img2" src="">
-            <h3 id="nomeAniversarianteFunc"></h3>
             <div class="baloes"></div>
         </div>
+         <h3 id="nomeAniversarianteFunc"></h3>
     </div>
 
     <!-- Matutino -->
@@ -281,9 +287,9 @@ header {
         <div class="slideshow" id="slideshow-matutino">
             <img class="img1 ativo" src="">
             <img class="img2" src="">
-            <h3 id="nomeAniversarianteMatutino"></h3>
             <div class="baloes"></div>
         </div>
+        <h3 id="nomeAniversarianteMatutino"></h3>
     </div>
 
     <!-- Vespertino -->
@@ -292,9 +298,9 @@ header {
         <div class="slideshow" id="slideshow-vespertino">
             <img class="img1 ativo" src="">
             <img class="img2" src="">
-            <h3 id="nomeAniversarianteVespertino"></h3>
             <div class="baloes"></div>
         </div>
+        <h3 id="nomeAniversarianteVespertino"></h3>
     </div>
 
 </div>
