@@ -129,23 +129,19 @@ header {
     font-weight: 700;
     color: #0d2a5c;
 
-    background: rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.25);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
     border-radius: 12px;
-    padding: 5px 10px;
+    padding: 5px 12px;
 
-    box-shadow: 
-        inset 0 0 8px rgba(255,255,255,0.4),
-        0 4px 10px rgba(0,0,0,0.1);
-}
-/* SLIDESHOW */
-.slideshow {
-    width: 100%;
-    height: 140px;
-    position: relative;
-}
+    /* 🔥 REMOVIDO */
+    border: none;
 
+    /* SOMBRA SUAVE (sem borda dura) */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
 /* IMAGEM */
 .slideshow img {
     width: 100%;
