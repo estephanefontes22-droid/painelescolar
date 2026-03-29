@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
 <style>
+
 /* RESET BÁSICO */
 * {
     margin: 0;
@@ -29,18 +29,25 @@ body {
     padding: 10px;
 }
 
-/* HEADER */
+/* HEADER - AGORA EM VIDRO */
 header {
     text-align:center;
     padding:20px;
     font-size:28px;
     font-weight:700;
     color:#0d2a5c;
-    background:white;          /* fundo branco */
-    border-radius:15px;        /* cantos arredondados */
-    max-width:900px;           /* não ficar gigante demais */
-    margin:20px auto;          /* centraliza */
-    box-shadow:0 8px 20px rgba(0,0,0,0.15); /* destaque elegante */
+
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-radius:15px;
+    max-width:900px;
+    margin:20px auto;
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
 }
 
 /* LAYOUT PRINCIPAL */
@@ -68,12 +75,27 @@ header {
     gap: 15px;
 }
 
-/* CARDS */
+/* CARDS - EFEITO LIQUID GLASS */
 .card {
-    background: rgba(255,255,255,0.9);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
     border-radius: 20px;
     padding: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    box-shadow: 
+        0 10px 30px rgba(0,0,0,0.15),
+        inset 0 0 10px rgba(255,255,255,0.2);
+
+    transition: all 0.3s ease;
+}
+
+/* HOVER BONITO */
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
 }
 
 /* PEQUENO E GRANDE */
@@ -82,18 +104,20 @@ header {
 }
 
 .card.grande {
-    max-width: 100%; /* os cards grandes ocupam todo o espaço disponível */
+    max-width: 100%;
     padding: 15px;
 }
 
+/* CARDS ANIVERSARIANTES */
 .card-aniversariante, 
 .card-aniversariante-alunos,
-.card-aniversariante-turno   {
+.card-aniversariante-turno {
     max-width: 220px;
     padding: 15px;
     text-align: center;
 }
 
+/* IMAGENS */
 .card-aniversariante .slideshow img,
 .card-aniversariante-alunos .slideshow img {
     width: 100%;
@@ -110,7 +134,7 @@ header {
     margin: 10px 0;
 }
 
-/* SLIDESHOW ANIVERSARIANTES */
+/* SLIDESHOW */
 .card-aniversariante .slideshow,
 .card-aniversariante-alunos .slideshow,
 .card-aniversariante-turno .slideshow {
@@ -140,10 +164,35 @@ header {
     opacity: 0;
 }
 
-.card-aniversariante .slideshow h3 {
-    margin-top: 10px;
-    font-size: 18px;
-    font-weight: 600;
+/* TEXTO ANIVERSARIANTES (MELHORADO) */
+.card-aniversariante h3,
+.card-aniversariante-turno h3,
+.card-aniversariante-alunos h3 {
+    margin-top: 12px;
+
+    color: #fff;
+
+    background: rgba(0,0,0,0.4);
+    padding: 8px;
+    border-radius: 12px;
+
+    backdrop-filter: blur(5px);
+
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* NOME E DATA SEPARADOS */
+.nome {
+    font-size: 16px;
+    font-weight: 700;
+    display: block;
+}
+
+.data {
+    font-size: 12px;
+    opacity: 0.9;
+    font-weight: 500;
+    color: #ffd166; /* dourado leve bonito */
 }
 
 /* BALÕES */
@@ -203,14 +252,16 @@ footer {
     margin-top: 30px;
     font-size: 14px;
 }
-    
+
+/* TÍTULOS */
 .card-aniversariante h2,
 .card-aniversariante-alunos h2 {
-    font-size: 18px;   /* diminui o tamanho */
+    font-size: 18px;
     margin-bottom: 10px;
 }
-    
+
 </style>
+
 </head>
 
 <body>
@@ -352,7 +403,9 @@ function trocarAniversarianteFunc() {
         const imgElem = document.getElementById("fotoAniversarianteFunc");
         imgElem.src = atual.foto;
         imgElem.onerror = () => { imgElem.src = "avatar.jpg"; } // fallback
-        document.getElementById("nomeAniversarianteFunc").innerText = atual.nome;
+        const [nome, data] = atual.nome.split(" - ");
+document.getElementById("nomeAniversarianteFunc").innerHTML =
+`<span class="nome">${nome}</span><span class="data">${data}</span>`;
         gerarBaloes(slideshow); // balões funcionando
         slideshow.classList.remove("fade");
         indiceFunc = (indiceFunc + 1) % aniversariantesFunc.length;
@@ -391,7 +444,9 @@ function trocarAniversarianteMatutino(){
         const imgElem = document.getElementById("fotoAniversarianteMatutino");
         imgElem.src = atual.foto;
         imgElem.onerror = ()=>{ imgElem.src="avatar.jpg"; };
-        document.getElementById("nomeAniversarianteMatutino").innerText = atual.nome;
+        const [nome, data] = atual.nome.split(" - ");
+document.getElementById("nomeAniversarianteMatutino").innerHTML =
+`<span class="nome">${nome}</span><span class="data">${data}</span>`;
         gerarBaloes(slideshow);
         slideshow.classList.remove("fade");
         indiceMatutino = (indiceMatutino + 1) % aniversariantesMatutino.length;
@@ -421,7 +476,9 @@ function trocarAniversarianteVespertino(){
         const imgElem = document.getElementById("fotoAniversarianteVespertino");
         imgElem.src = atual.foto;
         imgElem.onerror = ()=>{ imgElem.src="avatar.jpg"; };
-        document.getElementById("nomeAniversarianteVespertino").innerText = atual.nome;
+        const [nome, data] = atual.nome.split(" - ");
+document.getElementById("nomeAniversarianteVespertino").innerHTML =
+`<span class="nome">${nome}</span><span class="data">${data}</span>`;
         gerarBaloes(slideshow);
         slideshow.classList.remove("fade");
         indiceVespertino = (indiceVespertino + 1) % aniversariantesVespertino.length;
