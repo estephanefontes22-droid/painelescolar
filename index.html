@@ -36,11 +36,18 @@ header {
     font-size:28px;
     font-weight:700;
     color:#0d2a5c;
-    background:white;
+
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
     border-radius:15px;
     max-width:900px;
     margin:20px auto;
-    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
 }
 
 /* LAYOUT */
@@ -225,7 +232,7 @@ header {
 
     .slideshow {
         width: 160px;
-        height: 180px;
+        min-height: 200px;
     }
 
     .slideshow img {
