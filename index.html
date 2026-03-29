@@ -70,13 +70,22 @@ header {
 
 /* CARDS */
 .card {
-    background: rgba(255,255,255,0.9);
+    background: rgba(255, 255, 255, 0.2); /* mais transparente */
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
     border-radius: 20px;
     padding: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    box-shadow: 
+        0 10px 30px rgba(0,0,0,0.15),
+        inset 0 0 10px rgba(255,255,255,0.2);
+
     transition: transform 0.3s ease;
 }
-
 /* TAMANHOS */
 .card.pequeno {
     text-align: center;
@@ -147,10 +156,12 @@ header {
 .card-aniversariante h3,
 .card-aniversariante-turno h3,
 .card-aniversariante-alunos h3 {
+    position: relative;
+    z-index: 3; /* ESSENCIAL */
+
     margin-top: 145px;
 
     color: #fff;
-
     background: rgba(0,0,0,0.4);
     padding: 6px;
     border-radius: 10px;
