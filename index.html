@@ -29,25 +29,18 @@ body {
     padding: 10px;
 }
 
-/* HEADER - VIDRO */
+/* HEADER */
 header {
     text-align:center;
     padding:20px;
     font-size:28px;
     font-weight:700;
     color:#0d2a5c;
-
-    background: rgba(255,255,255,0.25);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
+    background:white;
     border-radius:15px;
     max-width:900px;
     margin:20px auto;
-
-    border: 1px solid rgba(255,255,255,0.3);
-
-    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
 }
 
 /* LAYOUT */
@@ -75,27 +68,13 @@ header {
     gap: 15px;
 }
 
-/* CARDS - LIQUID GLASS */
+/* CARDS */
 .card {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-
+    background: rgba(255,255,255,0.9);
     border-radius: 20px;
     padding: 25px;
-
-    border: 1px solid rgba(255,255,255,0.3);
-
-    box-shadow: 
-        0 10px 30px rgba(0,0,0,0.15),
-        inset 0 0 10px rgba(255,255,255,0.2);
-
-    transition: all 0.3s ease;
-}
-
-/* HOVER SUAVE */
-.card:hover {
-    transform: translateY(-5px) scale(1.015);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
 }
 
 /* TAMANHOS */
@@ -108,7 +87,7 @@ header {
     padding: 15px;
 }
 
-/* CARDS ANIVERSARIANTES */
+/* ANIVERSARIANTES */
 .card-aniversariante, 
 .card-aniversariante-alunos,
 .card-aniversariante-turno {
@@ -129,15 +108,14 @@ header {
 .card-aniversariante-alunos .slideshow,
 .card-aniversariante-turno .slideshow {
     width: 200px;
-    max-width: 200px;
+    height: 180px; /* CORREÇÃO DO BUG */
     text-align: center;
     overflow: hidden;
-    padding: 15px;
     margin: 0 auto;
     position: relative;
 }
 
-/* ===== SISTEMA PROFISSIONAL DE IMAGEM ===== */
+/* ===== SISTEMA SEM DELAY ===== */
 
 /* IMAGENS SOBREPOSTAS */
 .slideshow img {
@@ -155,38 +133,35 @@ header {
     opacity: 0;
     transform: scale(1.05);
 
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-/* IMAGEM ATIVA */
+/* IMAGEM VISÍVEL */
 .slideshow img.ativo {
     opacity: 1;
     transform: scale(1);
     z-index: 2;
 }
 
-/* TEXTO ANIVERSARIANTES */
+/* TEXTO */
 .card-aniversariante h3,
 .card-aniversariante-turno h3,
 .card-aniversariante-alunos h3 {
-    margin-top: 12px;
+    margin-top: 145px;
 
     color: #fff;
 
     background: rgba(0,0,0,0.4);
-    padding: 8px;
-    border-radius: 12px;
+    padding: 6px;
+    border-radius: 10px;
 
-    backdrop-filter: blur(5px);
+    font-size: 14px;
 
     text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-
-    border: 1px solid rgba(255,255,255,0.3);
 }
 
 /* NOME */
 .nome {
-    font-size: 16px;
     font-weight: 700;
     display: block;
 }
@@ -194,8 +169,6 @@ header {
 /* DATA */
 .data {
     font-size: 12px;
-    opacity: 0.9;
-    font-weight: 500;
     color: #ffd166;
 }
 
@@ -239,9 +212,9 @@ header {
         max-width: 180px;
     }
 
-    .card-aniversariante .slideshow {
+    .slideshow {
         width: 160px;
-        max-width: 160px;
+        height: 180px;
     }
 
     .slideshow img {
@@ -452,16 +425,26 @@ function criarSlideshow(idSlide, idNome, lista){
         const proxima = imgs[ativo === 0 ? 1 : 0];
         const atualImg = imgs[ativo];
 
-        proxima.src = atual.foto;
+      proxima.src = atual.foto;
+        proxima.onerror = () => {
+    proxima.src = "avatar.jpg";
+};
 
-        proxima.onload = () => {
-            proxima.classList.add("ativo");
-            atualImg.classList.remove("ativo");
+proxima.onload = null; // limpa evento antigo
 
-            ativo = ativo === 0 ? 1 : 0;
-            indice = (indice + 1) % lista.length;
-        };
+if (proxima.complete) {
+    atualizar();
+} else {
+    proxima.onload = atualizar;
+}
 
+function atualizar(){
+    proxima.classList.add("ativo");
+    atualImg.classList.remove("ativo");
+
+    ativo = ativo === 0 ? 1 : 0;
+    indice = (indice + 1) % lista.length;
+}
         /* NOME + DATA */
         const [nome, data] = atual.nome.split(" - ");
         document.getElementById(idNome).innerHTML =
