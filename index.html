@@ -209,7 +209,17 @@ footer {
     font-size: 18px;   /* diminui o tamanho */
     margin-bottom: 10px;
 }
-    
+.infrequencia {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 220px; /* controla a altura */
+}
+
+.infrequencia img {
+    height: 120px; /* imagem mais baixa */
+    object-fit: contain;
+}    
 </style>
 </head>
 
@@ -250,7 +260,7 @@ footer {
         </div>
     </div>
 
-  <div class="card grande">
+  <div class="card grande infrequencia">
     <h2>📊 INFREQUÊNCIA</h2>
     
     <p><b>Confira abaixo a tabela de infrequência dos alunos:</b></p>
