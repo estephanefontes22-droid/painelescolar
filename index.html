@@ -209,17 +209,31 @@ footer {
     font-size: 18px;   /* diminui o tamanho */
     margin-bottom: 10px;
 }
+ /* INFREQUÊNCIA AJUSTADA BONITA */
 .infrequencia {
+    padding: 10px 20px;
+}
+
+.infrequencia-conteudo {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 220px; /* controla a altura */
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.infrequencia .texto h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.infrequencia .texto p {
+    font-size: 14px;
 }
 
 .infrequencia img {
-    height: 120px; /* imagem mais baixa */
-    object-fit: contain;
-}    
+    height: 80px;
+    border-radius: 10px;
+} 
 </style>
 </head>
 
@@ -260,14 +274,16 @@ footer {
         </div>
     </div>
 
-  <div class="card grande infrequencia">
-    <h2>📊 INFREQUÊNCIA</h2>
-    
-    <p><b>Confira abaixo a tabela de infrequência dos alunos:</b></p>
-    
-    <img src="tabela_infrequencia.jpg" alt="Tabela de Infrequência" style="width:100%; border-radius:15px; margin-top:10px;">
-</div>
+ <div class="card infrequencia">
+    <div class="infrequencia-conteudo">
+        <div class="texto">
+            <h2>📊 INFREQUÊNCIA</h2>
+            <p>Confira a tabela de infrequência dos alunos</p>
+        </div>
 
+        <img src="tabela_infrequencia.jpg" alt="Tabela">
+    </div>
+</div>
         <!-- CARD ANIVERSARIANTE -->
      <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
 
