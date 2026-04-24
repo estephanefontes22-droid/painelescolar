@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+
 /* RESET BÁSICO */
 * {
     margin: 0;
@@ -15,17 +16,24 @@
     box-sizing: border-box;
 }
 
+/* OCUPAR TELA TODA */
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background: url('fundo.jpg') no-repeat center center fixed;
     background-size: cover;
-    transform: scale(0.9);
-    transform-origin: top center;
+    overflow: hidden;
 }
 
 /* OVERLAY */
 .overlay {
-    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     padding: 10px;
 }
 
@@ -36,11 +44,10 @@ header {
     font-size:28px;
     font-weight:700;
     color:#0d2a5c;
-    background:white;          /* fundo branco */
-    border-radius:15px;        /* cantos arredondados */
-    max-width:900px;           /* não ficar gigante demais */
-    margin:20px auto;          /* centraliza */
-    box-shadow:0 8px 20px rgba(0,0,0,0.15); /* destaque elegante */
+    background:white;
+    border-radius:15px;
+    width: 100%;
+    margin:10px 0;
 }
 
 /* LAYOUT PRINCIPAL */
@@ -48,8 +55,9 @@ header {
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
+    flex: 1;
 }
 
 /* PAINEL LATERAL */
@@ -82,25 +90,16 @@ header {
 }
 
 .card.grande {
-    max-width: 100%; /* os cards grandes ocupam todo o espaço disponível */
+    max-width: 100%;
     padding: 15px;
 }
 
 .card-aniversariante, 
 .card-aniversariante-alunos,
-.card-aniversariante-turno   {
+.card-aniversariante-turno {
     max-width: 220px;
     padding: 15px;
     text-align: center;
-}
-
-.card-aniversariante .slideshow img,
-.card-aniversariante-alunos .slideshow img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 20px;
-    transition: opacity 0.5s ease-in-out;
 }
 
 /* RELÓGIO */
@@ -110,12 +109,11 @@ header {
     margin: 10px 0;
 }
 
-/* SLIDESHOW ANIVERSARIANTES */
+/* SLIDESHOW */
 .card-aniversariante .slideshow,
 .card-aniversariante-alunos .slideshow,
 .card-aniversariante-turno .slideshow {
     width: 200px;
-    max-width: 200px;
     text-align: center;
     overflow: hidden;
     padding: 15px;
@@ -125,25 +123,11 @@ header {
 
 .card-aniversariante .slideshow img,
 .card-aniversariante-alunos .slideshow img,
-.card-aniversariante-turno .slideshow img{
+.card-aniversariante-turno .slideshow img {
     width: 100%;
     height: 140px;
     object-fit: cover;
-    object-position: center;
     border-radius: 20px;
-    display: block;
-    margin: 0 auto;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.card-aniversariante .slideshow.fade img {
-    opacity: 0;
-}
-
-.card-aniversariante .slideshow h3 {
-    margin-top: 10px;
-    font-size: 18px;
-    font-weight: 600;
 }
 
 /* BALÕES */
@@ -179,47 +163,22 @@ header {
         flex-direction: row;
         overflow-x: auto;
         gap: 15px;
-        padding-bottom: 10px;
-    }
-
-    .card-aniversariante {
-        max-width: 180px;
-    }
-
-    .card-aniversariante .slideshow {
-        width: 160px;
-        max-width: 160px;
-    }
-
-    .card-aniversariante .slideshow img {
-        height: 160px;
     }
 }
 
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 15px;
-    margin-top: 30px;
-    font-size: 14px;
-}
-    
-.card-aniversariante h2,
-.card-aniversariante-alunos h2 {
-    font-size: 18px;   /* diminui o tamanho */
-    margin-bottom: 10px;
-}
+/* IMAGEM INFRÊQUENCIA */
 .infrequencia {
-    padding: 0; /* remove bordas internas */
-    overflow: hidden; /* evita sobras */
+    padding: 0;
+    overflow: hidden;
 }
 
 .infrequencia img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* PREENCHE TODO O CARD */
+    object-fit: cover;
     border-radius: 20px;
 }
+
 </style>
 </head>
 
