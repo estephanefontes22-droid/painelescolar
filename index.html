@@ -94,7 +94,7 @@ header {
     font-weight: 700;
 }
 
-/* TABELA (MENOR E MAIS EQUILIBRADA) */
+/* TABELA */
 .infrequencia {
     flex: 0.85;
     display: flex;
@@ -125,11 +125,25 @@ header {
     position: relative;
 }
 
+/* 🔥 MELHORIA AQUI */
 .slideshow img {
     width: 100%;
     height: 140px;
     object-fit: cover;
     border-radius: 12px;
+
+    opacity: 1;
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+/* EFEITO DE FADE */
+.fade-out {
+    opacity: 0;
+}
+
+/* EFEITO LEVE DE ZOOM (fica mais profissional) */
+.zoom {
+    transform: scale(1.05);
 }
 
 .card-aniversariante h2,
@@ -267,6 +281,7 @@ header {
 
 </div>
 <script>
+
 /* RELÓGIO */
 function atualizarRelogio() {
     const agora = new Date();
@@ -288,44 +303,71 @@ function atualizarClima() {
 atualizarClima();
 setInterval(atualizarClima, 600000);
 
-// Função genérica para gerar balões
+/* BALÕES */
 function gerarBaloes(slideshow) {
     const container = slideshow.querySelector(".baloes");
-    container.innerHTML = ""; // limpa balões antigos
-    for (let i = 0; i < 8; i++) {
+    container.innerHTML = "";
+    for (let i = 0; i < 6; i++) {
         const balao = document.createElement("div");
         balao.classList.add("balao");
         balao.innerText = "🎈";
         balao.style.left = Math.random() * 100 + "%";
-        balao.style.animationDuration = (3 + Math.random() * 3) + "s";
+        balao.style.animationDuration = (3 + Math.random() * 2) + "s";
         container.appendChild(balao);
     }
 }
 
+/* FUNÇÃO GENÉRICA SUAVE */
+function iniciarSlideshow(lista, imgId, nomeId, slideshowId) {
+
+    let index = 0;
+
+    const img = document.getElementById(imgId);
+    const nome = document.getElementById(nomeId);
+    const slideshow = document.getElementById(slideshowId);
+
+    function trocar() {
+
+        // fade out
+        img.classList.add("fade-out");
+
+        setTimeout(() => {
+
+            const atual = lista[index];
+
+            img.src = atual.foto;
+            img.onerror = () => { img.src = "avatar.jpg"; };
+
+            nome.innerText = atual.nome;
+
+            gerarBaloes(slideshow);
+
+            // remove fade e aplica zoom leve
+            img.classList.remove("fade-out");
+            img.classList.add("zoom");
+
+            setTimeout(() => {
+                img.classList.remove("zoom");
+            }, 2000);
+
+            index = (index + 1) % lista.length;
+
+        }, 400); // mais rápido = mais fluido
+    }
+
+    trocar();
+    setInterval(trocar, 4000); // tempo ideal
+}
+
+/* DADOS */
+
 // Funcionários
 const aniversariantesFunc = [
     { nome:"Raquel Santos - 17/04", foto:"foto1.jpeg" }
- 
-
 ];
-let indiceFunc = 0;
-function trocarAniversarianteFunc() {
-    const slideshow = document.getElementById("slideshow-funcionarios");
-    slideshow.classList.add("fade");
-    setTimeout(()=>{
-        const atual = aniversariantesFunc[indiceFunc];
-        const imgElem = document.getElementById("fotoAniversarianteFunc");
-        imgElem.src = atual.foto;
-        imgElem.onerror = () => { imgElem.src = "avatar.jpg"; } // fallback
-        document.getElementById("nomeAniversarianteFunc").innerText = atual.nome;
-        gerarBaloes(slideshow); // balões funcionando
-        slideshow.classList.remove("fade");
-        indiceFunc = (indiceFunc + 1) % aniversariantesFunc.length;
-    },500);
-}
 
+// Matutino
 const aniversariantesMatutino = [
-    
     { nome:"Luiz Gabriel - 28/04", foto:"aluno13.jpeg" },
     { nome:"Paloma Joseana - 09/04", foto:"aluno14.jpeg" },
     { nome:"Rhanna Edneia - 16/04", foto:"aluno15.jpeg" },
@@ -342,24 +384,8 @@ const aniversariantesMatutino = [
     { nome:"Samara Lima Mesquita - 01/04", foto:"aluno29.jpeg" },
     { nome:"Ruthe Helen Ferreira Pinheiro - 29/04", foto:"aluno30.jpeg" }
 ];
-    
-let indiceMatutino = 0;
 
-function trocarAniversarianteMatutino(){
-    const slideshow = document.getElementById("slideshow-matutino");
-    slideshow.classList.add("fade");
-    setTimeout(()=>{
-        const atual = aniversariantesMatutino[indiceMatutino];
-        const imgElem = document.getElementById("fotoAniversarianteMatutino");
-        imgElem.src = atual.foto;
-        imgElem.onerror = ()=>{ imgElem.src="avatar.jpg"; };
-        document.getElementById("nomeAniversarianteMatutino").innerText = atual.nome;
-        gerarBaloes(slideshow);
-        slideshow.classList.remove("fade");
-        indiceMatutino = (indiceMatutino + 1) % aniversariantesMatutino.length;
-    },500);
-}    
-    
+// Vespertino
 const aniversariantesVespertino = [
     { nome:"Isabella dos Santos - 20/04", foto:"aluno3.jpeg" },
     { nome:"João Otavio - 10/04", foto:"aluno4.jpeg" },
@@ -367,33 +393,13 @@ const aniversariantesVespertino = [
     { nome:"Mayana Victoria - 17/04", foto:"aluno8.jpeg" },
     { nome:"Luandson Nascimento - 27/04", foto:"aluno9.jpeg" },
     { nome:"Naylane Souza - 05/05", foto:"aluno10.jpeg" }
-   
 ];
-let indiceVespertino = 0;
 
-function trocarAniversarianteVespertino(){
-    const slideshow = document.getElementById("slideshow-vespertino");
-    slideshow.classList.add("fade");
-    setTimeout(()=>{
-        const atual = aniversariantesVespertino[indiceVespertino];
-        const imgElem = document.getElementById("fotoAniversarianteVespertino");
-        imgElem.src = atual.foto;
-        imgElem.onerror = ()=>{ imgElem.src="avatar.jpg"; };
-        document.getElementById("nomeAniversarianteVespertino").innerText = atual.nome;
-        gerarBaloes(slideshow);
-        slideshow.classList.remove("fade");
-        indiceVespertino = (indiceVespertino + 1) % aniversariantesVespertino.length;
-    },500);
-}
+/* INICIAR TUDO */
+iniciarSlideshow(aniversariantesFunc, "fotoAniversarianteFunc", "nomeAniversarianteFunc", "slideshow-funcionarios");
+iniciarSlideshow(aniversariantesMatutino, "fotoAniversarianteMatutino", "nomeAniversarianteMatutino", "slideshow-matutino");
+iniciarSlideshow(aniversariantesVespertino, "fotoAniversarianteVespertino", "nomeAniversarianteVespertino", "slideshow-vespertino");
 
-// Inicializa slideshows e intervalos
-trocarAniversarianteFunc();
-trocarAniversarianteMatutino();
-trocarAniversarianteVespertino();
-    
-setInterval(trocarAniversarianteFunc, 5000);
-setInterval(trocarAniversarianteMatutino, 5000);
-setInterval(trocarAniversarianteVespertino, 5000);
 </script>
 
 </body>
