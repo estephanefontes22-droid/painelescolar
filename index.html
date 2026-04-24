@@ -126,7 +126,6 @@ header {
     position: relative;
 }
 
-/* ANIMAÇÃO SUAVE */
 .slideshow img {
     width: 100%;
     height: 140px;
@@ -134,15 +133,7 @@ header {
     border-radius: 12px;
 
     opacity: 1;
-    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-}
-
-.fade-out {
-    opacity: 0;
-}
-
-.zoom {
-    transform: scale(1.05);
+    transition: opacity 0.5s linear; /* mais leve */
 }
 
 .card-aniversariante h2,
@@ -171,8 +162,6 @@ header {
 }
 
 </style>
-</head>
-
 </head>
 
 <body>
@@ -277,7 +266,6 @@ function atualizarClima() {
 atualizarClima();
 setInterval(atualizarClima, 600000);
 
-/* FUNÇÃO SLIDESHOW (SEM BALÕES) */
 function iniciarSlideshow(lista, imgId, nomeId) {
 
     let index = 0;
@@ -285,33 +273,27 @@ function iniciarSlideshow(lista, imgId, nomeId) {
     const img = document.getElementById(imgId);
     const nome = document.getElementById(nomeId);
 
-    function trocar() {
+    // pré-carrega imagens (MUITO IMPORTANTE)
+    lista.forEach(item => {
+        const preload = new Image();
+        preload.src = item.foto;
+    });
 
-        img.classList.add("fade-out");
+ function trocar() {
 
-        setTimeout(() => {
+    const atual = lista[index];
 
-            const atual = lista[index];
+    nome.innerText = atual.nome;
 
-            img.src = atual.foto;
-            img.onerror = () => { img.src = "avatar.jpg"; };
+    // fade out
+    img.style.opacity = 0;
 
-            nome.innerText = atual.nome;
+    setTimeout(() => {
+        img.src = atual.foto;
+        img.style.opacity = 1; // volta direto (sem depender de onload)
+    }, 200);
 
-            img.classList.remove("fade-out");
-            img.classList.add("zoom");
-
-            setTimeout(() => {
-                img.classList.remove("zoom");
-            }, 2000);
-
-            index = (index + 1) % lista.length;
-
-        }, 400);
-    }
-
-    trocar();
-    setInterval(trocar, 5000);
+    index = (index + 1) % lista.length;
 }
 
 /* DADOS */
