@@ -156,28 +156,6 @@ header {
     font-size: 13px;
 }
 
-/* BALÕES */
-.baloes {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-}
-
-.balao {
-    position: absolute;
-    font-size: 16px;
-    animation: subir 4s linear infinite;
-}
-
-@keyframes subir {
-    0% { transform: translateY(100%); opacity: 0; }
-    20% { opacity: 1; }
-    100% { transform: translateY(-150%); opacity: 0; }
-}
-
 /* RESPONSIVO */
 @media (max-width: 900px) {
     .layout {
@@ -252,7 +230,6 @@ header {
             <div class="slideshow" id="slideshow-funcionarios">
                 <img id="fotoAniversarianteFunc" src="">
                 <h3 id="nomeAniversarianteFunc"></h3>
-                <div class="baloes"></div>
             </div>
         </div>
 
@@ -262,7 +239,6 @@ header {
             <div class="slideshow" id="slideshow-matutino">
                 <img id="fotoAniversarianteMatutino" src="">
                 <h3 id="nomeAniversarianteMatutino"></h3>
-                <div class="baloes"></div>
             </div>
         </div>
 
@@ -272,7 +248,6 @@ header {
             <div class="slideshow" id="slideshow-vespertino">
                 <img id="fotoAniversarianteVespertino" src="">
                 <h3 id="nomeAniversarianteVespertino"></h3>
-                <div class="baloes"></div>
             </div>
         </div>
 
@@ -301,20 +276,6 @@ function atualizarClima() {
 }
 atualizarClima();
 setInterval(atualizarClima, 600000);
-
-/* BALÕES */
-function gerarBaloes(slideshow) {
-    const container = slideshow.querySelector(".baloes");
-    container.innerHTML = "";
-    for (let i = 0; i < 6; i++) {
-        const balao = document.createElement("div");
-        balao.classList.add("balao");
-        balao.innerText = "🎈";
-        balao.style.left = Math.random() * 100 + "%";
-        balao.style.animationDuration = (3 + Math.random() * 2) + "s";
-        container.appendChild(balao);
-    }
-}
 
 /* FUNÇÃO GENÉRICA SUAVE */
 function iniciarSlideshow(lista, imgId, nomeId, slideshowId) {
