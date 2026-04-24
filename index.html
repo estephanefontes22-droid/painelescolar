@@ -266,6 +266,7 @@ function atualizarClima() {
 atualizarClima();
 setInterval(atualizarClima, 600000);
 
+/* SLIDESHOW SUAVE */
 function iniciarSlideshow(lista, imgId, nomeId) {
 
     let index = 0;
@@ -273,27 +274,42 @@ function iniciarSlideshow(lista, imgId, nomeId) {
     const img = document.getElementById(imgId);
     const nome = document.getElementById(nomeId);
 
-    // pré-carrega imagens (MUITO IMPORTANTE)
+    // pré-carrega imagens
     lista.forEach(item => {
         const preload = new Image();
         preload.src = item.foto;
     });
 
- function trocar() {
+    function trocar() {
 
-    const atual = lista[index];
+        const atual = lista[index];
 
-    nome.innerText = atual.nome;
+        nome.innerText = atual.nome;
 
-    // fade out
-    img.style.opacity = 0;
+        img.style.opacity = 0;
 
-    setTimeout(() => {
-        img.src = atual.foto;
-        img.style.opacity = 1; // volta direto (sem depender de onload)
-    }, 200);
+        setTimeout(() => {
+            img.src = atual.foto;
 
-    index = (index + 1) % lista.length;
+            // fallback caso a imagem dê erro
+            img.onerror = () => {
+                img.src = "avatar.jpg";
+            };
+
+            img.style.opacity = 1;
+        }, 200);
+
+        index = (index + 1) % lista.length;
+    }
+
+    trocar();
+
+    function loop() {
+        trocar();
+        setTimeout(loop, 5000);
+    }
+
+    setTimeout(loop, 5000);
 }
 
 /* DADOS */
@@ -338,6 +354,5 @@ iniciarSlideshow(aniversariantesMatutino, "fotoAniversarianteMatutino", "nomeAni
 iniciarSlideshow(aniversariantesVespertino, "fotoAniversarianteVespertino", "nomeAniversarianteVespertino");
 
 </script>
-
 </body>
 </html>
