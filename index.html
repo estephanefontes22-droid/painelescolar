@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
 <style>
 
 /* RESET */
@@ -37,7 +36,7 @@ body {
     padding: 8px;
 }
 
-/* HEADER (menor pra caber tudo) */
+/* HEADER */
 header {
     text-align:center;
     padding:10px;
@@ -50,20 +49,28 @@ header {
     margin-bottom: 10px;
 }
 
-/* LAYOUT */
+/* LAYOUT PRINCIPAL (3 COLUNAS) */
 .layout {
     display: flex;
-    gap: 15px;
+    gap: 12px;
     width: 100%;
     flex: 1;
 }
 
-/* LATERAL */
+/* LATERAL ESQUERDA */
 .side-panel {
-    width: 240px;
+    width: 220px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+}
+
+/* LATERAL DIREITA (NOVO) */
+.right-panel {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* PRINCIPAL */
@@ -71,66 +78,69 @@ header {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
 
 /* CARDS */
 .card {
     background: rgba(255,255,255,0.9);
     border-radius: 15px;
-    padding: 12px;
+    padding: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 /* RELÓGIO */
 .hora {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 700;
 }
 
-/* TABELA (AJUSTADA PRA CABER NA TV) */
+/* TABELA (AJUSTADA PRA CABER SEM CORTAR) */
 .infrequencia {
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
 }
 
 .infrequencia img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* NÃO CORTA */
-    border-radius: 15px;
+    object-fit: contain;
+    border-radius: 10px;
 }
 
 /* ANIVERSARIANTES */
 .card-aniversariante,
 .card-aniversariante-turno {
-    max-width: 180px;
-    padding: 10px;
+    width: 100%;
+    padding: 8px;
     text-align: center;
 }
 
 .slideshow {
-    width: 150px;
+    width: 100%;
+    max-width: 140px;
     margin: 0 auto;
     position: relative;
 }
 
 .slideshow img {
     width: 100%;
-    height: 110px;
+    height: 100px;
     object-fit: cover;
-    border-radius: 15px;
+    border-radius: 12px;
 }
 
 .card-aniversariante h2,
 .card-aniversariante-turno h2 {
-    font-size: 14px;
+    font-size: 13px;
     margin-bottom: 5px;
 }
 
 .card-aniversariante h3,
 .card-aniversariante-turno h3 {
-    font-size: 12px;
+    font-size: 11px;
 }
 
 /* BALÕES */
@@ -145,7 +155,7 @@ header {
 
 .balao {
     position: absolute;
-    font-size: 16px;
+    font-size: 14px;
     animation: subir 4s linear infinite;
 }
 
@@ -160,9 +170,18 @@ header {
     .layout {
         flex-direction: column;
     }
+
+    .side-panel,
+    .right-panel {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+    }
 }
 
 </style>
+</head>
+
 </head>
 
 <body>
@@ -174,7 +193,7 @@ header {
 
 <div class="layout">
 
-    <!-- PAINEL LATERAL -->
+    <!-- PAINEL LATERAL ESQUERDO -->
     <div class="side-panel">
         <div class="card pequeno">
             <h3>🕒 Horário</h3>
@@ -187,57 +206,63 @@ header {
             <div id="clima">Carregando...</div>
         </div>
         
-            <div class="card grande">
-                <h3>DATAS COMEMORATIVAS</h3>
-                <p><b>02/04:</b> Dia da Conscientização do Autismo.</p>
-                <p><b>03/04:</b> Sexta-feira Santa.</p>
-                <p><b>05/04:</b> Domingo de Páscoa. </p>
-                <p><b>07/04:</b> Dia Mundial da Saúde.</p>
-                <p><b>13/04:</b> Dia do Hino Nacional Brasileiro.</p>
-                <p><b>18/04:</b> Dia Nacional do Livro Infantil/ Dia do Amigo.</p>
-                <p><b>19/04:</b> Dia dos Povos Indígenas.</p>
-                <p><b>21/04:</b> Tiradentes.</p>
-                <p><b>22/04:</b> Descobrimento do Brasil / Dia da Terra.</p>
-                <p><b>23/04:</b> Dia Mundial da Água.</p>
+        <div class="card grande">
+            <h3>DATAS COMEMORATIVAS</h3>
+            <p><b>02/04:</b> Dia da Conscientização do Autismo.</p>
+            <p><b>03/04:</b> Sexta-feira Santa.</p>
+            <p><b>05/04:</b> Domingo de Páscoa. </p>
+            <p><b>07/04:</b> Dia Mundial da Saúde.</p>
+            <p><b>13/04:</b> Dia do Hino Nacional Brasileiro.</p>
+            <p><b>18/04:</b> Dia Nacional do Livro Infantil/ Dia do Amigo.</p>
+            <p><b>19/04:</b> Dia dos Povos Indígenas.</p>
+            <p><b>21/04:</b> Tiradentes.</p>
+            <p><b>22/04:</b> Descobrimento do Brasil / Dia da Terra.</p>
+            <p><b>23/04:</b> Dia Mundial da Água.</p>
         </div>
     </div>
 
-<div class="main-panel">
+    <!-- PAINEL PRINCIPAL -->
+    <div class="main-panel">
 
-    <div class="card infrequencia">
-        <img src="tabela_infrequencia.png" alt="Tabela de Infrequência">
-    </div>
-        <!-- CARD ANIVERSARIANTE -->
-     <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-
-    <!-- Funcionários -->
-    <div class="card card-aniversariante">
-        <h2>🎉 Funcionários</h2>
-        <div class="slideshow" id="slideshow-funcionarios">
-            <img id="fotoAniversarianteFunc" src="">
-            <h3 id="nomeAniversarianteFunc"></h3>
-            <div class="baloes"></div>
+        <div class="card infrequencia">
+            <img src="tabela_infrequencia.png" alt="Tabela de Infrequência">
         </div>
+
     </div>
 
-    <!-- Matutino -->
-    <div class="card card-aniversariante-turno">
-        <h2>🌅 Matutino</h2>
-        <div class="slideshow" id="slideshow-matutino">
-            <img id="fotoAniversarianteMatutino" src="">
-            <h3 id="nomeAniversarianteMatutino"></h3>
-            <div class="baloes"></div>
-        </div>
-    </div>
+    <!-- NOVA LATERAL DIREITA -->
+    <div class="right-panel">
 
-    <!-- Vespertino -->
-    <div class="card card-aniversariante-turno">
-        <h2>🌇 Vespertino</h2>
-        <div class="slideshow" id="slideshow-vespertino">
-            <img id="fotoAniversarianteVespertino" src="">
-            <h3 id="nomeAniversarianteVespertino"></h3>
-            <div class="baloes"></div>
+        <!-- Funcionários -->
+        <div class="card card-aniversariante">
+            <h2>🎉 Funcionários</h2>
+            <div class="slideshow" id="slideshow-funcionarios">
+                <img id="fotoAniversarianteFunc" src="">
+                <h3 id="nomeAniversarianteFunc"></h3>
+                <div class="baloes"></div>
+            </div>
         </div>
+
+        <!-- Matutino -->
+        <div class="card card-aniversariante-turno">
+            <h2>🌅 Matutino</h2>
+            <div class="slideshow" id="slideshow-matutino">
+                <img id="fotoAniversarianteMatutino" src="">
+                <h3 id="nomeAniversarianteMatutino"></h3>
+                <div class="baloes"></div>
+            </div>
+        </div>
+
+        <!-- Vespertino -->
+        <div class="card card-aniversariante-turno">
+            <h2>🌇 Vespertino</h2>
+            <div class="slideshow" id="slideshow-vespertino">
+                <img id="fotoAniversarianteVespertino" src="">
+                <h3 id="nomeAniversarianteVespertino"></h3>
+                <div class="baloes"></div>
+            </div>
+        </div>
+
     </div>
 
 </div>
