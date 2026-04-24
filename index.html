@@ -277,18 +277,16 @@ function atualizarClima() {
 atualizarClima();
 setInterval(atualizarClima, 600000);
 
-/* FUNÇÃO GENÉRICA SUAVE */
-function iniciarSlideshow(lista, imgId, nomeId, slideshowId) {
+/* FUNÇÃO SLIDESHOW (SEM BALÕES) */
+function iniciarSlideshow(lista, imgId, nomeId) {
 
     let index = 0;
 
     const img = document.getElementById(imgId);
     const nome = document.getElementById(nomeId);
-    const slideshow = document.getElementById(slideshowId);
 
     function trocar() {
 
-        // fade out
         img.classList.add("fade-out");
 
         setTimeout(() => {
@@ -300,9 +298,6 @@ function iniciarSlideshow(lista, imgId, nomeId, slideshowId) {
 
             nome.innerText = atual.nome;
 
-            gerarBaloes(slideshow);
-
-            // remove fade e aplica zoom leve
             img.classList.remove("fade-out");
             img.classList.add("zoom");
 
@@ -312,11 +307,11 @@ function iniciarSlideshow(lista, imgId, nomeId, slideshowId) {
 
             index = (index + 1) % lista.length;
 
-        }, 400); // mais rápido = mais fluido
+        }, 400);
     }
 
     trocar();
-    setInterval(trocar, 4000); // tempo ideal
+    setInterval(trocar, 5000);
 }
 
 /* DADOS */
@@ -355,10 +350,10 @@ const aniversariantesVespertino = [
     { nome:"Naylane Souza - 05/05", foto:"aluno10.jpeg" }
 ];
 
-/* INICIAR TUDO */
-iniciarSlideshow(aniversariantesFunc, "fotoAniversarianteFunc", "nomeAniversarianteFunc", "slideshow-funcionarios");
-iniciarSlideshow(aniversariantesMatutino, "fotoAniversarianteMatutino", "nomeAniversarianteMatutino", "slideshow-matutino");
-iniciarSlideshow(aniversariantesVespertino, "fotoAniversarianteVespertino", "nomeAniversarianteVespertino", "slideshow-vespertino");
+/* INICIAR */
+iniciarSlideshow(aniversariantesFunc, "fotoAniversarianteFunc", "nomeAniversarianteFunc");
+iniciarSlideshow(aniversariantesMatutino, "fotoAniversarianteMatutino", "nomeAniversarianteMatutino");
+iniciarSlideshow(aniversariantesVespertino, "fotoAniversarianteVespertino", "nomeAniversarianteVespertino");
 
 </script>
 
