@@ -49,7 +49,7 @@ header {
     margin-bottom: 10px;
 }
 
-/* LAYOUT PRINCIPAL (3 COLUNAS) */
+/* LAYOUT PRINCIPAL */
 .layout {
     display: flex;
     gap: 12px;
@@ -59,18 +59,18 @@ header {
 
 /* LATERAL ESQUERDA */
 .side-panel {
-    width: 220px;
+    width: 270px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
-/* LATERAL DIREITA (NOVO) */
+/* LATERAL DIREITA */
 .right-panel {
-    width: 220px;
+    width: 270px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 /* PRINCIPAL */
@@ -84,19 +84,19 @@ header {
 .card {
     background: rgba(255,255,255,0.9);
     border-radius: 15px;
-    padding: 10px;
+    padding: 14px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 /* RELÓGIO */
 .hora {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
 }
 
-/* TABELA (AJUSTADA PRA CABER SEM CORTAR) */
+/* TABELA (MENOR E MAIS EQUILIBRADA) */
 .infrequencia {
-    flex: 1;
+    flex: 0.85;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,8 +104,8 @@ header {
 }
 
 .infrequencia img {
-    width: 100%;
-    height: 100%;
+    width: 95%;
+    height: 95%;
     object-fit: contain;
     border-radius: 10px;
 }
@@ -114,33 +114,33 @@ header {
 .card-aniversariante,
 .card-aniversariante-turno {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     text-align: center;
 }
 
 .slideshow {
     width: 100%;
-    max-width: 140px;
+    max-width: 180px;
     margin: 0 auto;
     position: relative;
 }
 
 .slideshow img {
     width: 100%;
-    height: 100px;
+    height: 140px;
     object-fit: cover;
     border-radius: 12px;
 }
 
 .card-aniversariante h2,
 .card-aniversariante-turno h2 {
-    font-size: 13px;
+    font-size: 15px;
     margin-bottom: 5px;
 }
 
 .card-aniversariante h3,
 .card-aniversariante-turno h3 {
-    font-size: 11px;
+    font-size: 13px;
 }
 
 /* BALÕES */
@@ -155,7 +155,7 @@ header {
 
 .balao {
     position: absolute;
-    font-size: 14px;
+    font-size: 16px;
     animation: subir 4s linear infinite;
 }
 
