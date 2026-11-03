@@ -1,371 +1,442 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Painel Escolar</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0a3674">
+<title>Painel Escolar | EMEF Ezequiel Ruiz II</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* =========================================================
-   PAINEL ESCOLAR — LAYOUT AJUSTADO PARA TV E COMPUTADORES
-   Mantém a tabela central inteira, sem cortar nem esticar.
-   ========================================================= */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { width: 100%; height: 100%; }
-body {
-  font-family: 'Poppins', Arial, sans-serif;
-  background: url('fundo.jpg') no-repeat center center fixed;
-  background-size: cover;
-  overflow: hidden;
-  color: #172c47;
-}
-.overlay {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;
-  min-height: 0;
-  padding: 6px;
-  gap: 6px;
-  overflow: hidden;
-}
-header {
-  flex: 0 0 auto;
-  width: 100%;
-  padding: 6px 10px;
-  text-align: center;
-  font-size: clamp(12px, 1.07vw, 21px);
-  font-weight: 700;
-  line-height: 1.25;
-  color: #0d2a5c;
-  background: rgba(255, 255, 255, .96);
-  border-radius: 8px;
-}
-.layout {
-  flex: 1 1 auto;
-  display: grid;
-  grid-template-columns: clamp(155px, 15vw, 245px) minmax(0, 1fr) clamp(155px, 14vw, 235px);
-  grid-template-rows: minmax(0, 1fr);
-  gap: 8px;
-  width: 100%;
-  min-width: 0;
-  min-height: 0;
-  overflow: hidden;
-}
-.side-panel, .right-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  width: 100%;
-  min-width: 0;
-  min-height: 0;
-  overflow: hidden;
-}
-.main-panel {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-  overflow: hidden;
-}
-.card {
-  background: rgba(255,255,255,.94);
-  border-radius: 10px;
-  padding: 8px;
-  box-shadow: 0 3px 12px rgba(0,0,0,.12);
-}
-.side-panel .pequeno { flex: 0 0 auto; }
-.side-panel .pequeno h3,
-.side-panel .grande h3 {
-  font-size: clamp(10px, .97vw, 14px);
-  line-height: 1.28;
-}
-.side-panel .pequeno { font-size: clamp(10px, .87vw, 13px); }
-.hora { font-size: clamp(17px, 1.8vw, 27px); line-height: 1.25; font-weight: 700; }
-.side-panel .grande {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  font-size: clamp(10px, .81vw, 12.5px);
-  line-height: 1.3;
-  scrollbar-width: thin;
-}
-.side-panel .grande p { margin-top: 5px; }
-/* A tabela tem prioridade: ocupa toda a área livre sem perder proporção. */
-.infrequencia {
-  flex: 1 1 auto;
-  width: 100%;
-  height: 100%;
-  min-width: 0;
-  min-height: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.infrequencia img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  object-position: center center;
-  border-radius: 9px;
-}
-/* Três cartões de aniversariantes com alturas iguais. */
-.right-panel > .card {
-  flex: 1 1 0;
-  min-height: 0;
-  width: 100%;
-  padding: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  text-align: center;
-  overflow: hidden;
-}
-.card-aniversariante h2,
-.card-aniversariante-turno h2 {
-  flex: 0 0 auto;
-  font-size: clamp(11px, 1vw, 15px);
-  line-height: 1.25;
-  margin-bottom: 4px;
-}
-.slideshow {
-  flex: 1 1 auto;
-  min-height: 0;
-  width: 100%;
-  max-width: 210px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-}
-.slideshow img {
-  display: block;
-  width: auto;
-  max-width: 100%;
-  height: clamp(54px, 12vh, 125px);
-  max-height: 75%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: 9px;
-  opacity: 1;
-  transition: opacity .5s linear;
-}
-.card-aniversariante h3,
-.card-aniversariante-turno h3 {
-  width: 100%;
-  font-size: clamp(10px, .91vw, 13px);
-  line-height: 1.25;
-  overflow-wrap: anywhere;
-}
-/* TVs com pouca altura de área útil (barra do navegador visível). */
-@media (min-width: 901px) and (max-height: 630px) {
-  .overlay { gap: 4px; padding: 4px; }
-  header { padding: 3px 8px; }
-  .layout { gap: 5px; }
-  .side-panel, .right-panel { gap: 5px; }
-  .side-panel .grande { font-size: 10px; line-height: 1.2; }
-  .side-panel .grande p { margin-top: 2px; }
-  .slideshow img { height: 9vh; }
-}
-/* Celulares e telas estreitas: ordem vertical, com rolagem normal. */
-@media (max-width: 900px) {
-  body { overflow: auto; }
-  .overlay { height: auto; min-height: 100vh; overflow: visible; }
-  .layout { display: flex; flex-direction: column; overflow: visible; }
-  .main-panel { order: -1; overflow: visible; }
-  .infrequencia { height: auto; min-height: 0; }
-  .infrequencia img { width: 100%; height: auto; max-height: none; }
-  .side-panel, .right-panel { overflow: visible; }
-  .side-panel .grande { overflow: visible; }
-  .right-panel { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .right-panel > .card { min-height: 180px; }
-  .slideshow img { height: 86px; }
-}
-@media (max-width: 600px) {
-  .right-panel { grid-template-columns: 1fr; }
-  .right-panel > .card { min-height: 155px; }
-}
+    :root {
+        --azul: #123e76;
+        --azul-escuro: #0a2e61;
+        --texto: #20334c;
+        --borda: #dbe6f2;
+        --branco: rgba(255,255,255,.97);
+    }
 
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; }
+    body {
+        font-family: 'Poppins', Arial, sans-serif;
+        color: var(--texto);
+        background: #e7f0f7 url('fundo.jpg') no-repeat center center fixed;
+        background-size: cover;
+        overflow: hidden;
+    }
+
+    .overlay {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        padding: clamp(5px, .65vw, 12px);
+        gap: clamp(5px, .55vw, 10px);
+        overflow: hidden;
+    }
+
+    header {
+        flex: 0 0 auto;
+        text-align: center;
+        padding: clamp(7px, .65vw, 12px) 14px;
+        border-radius: 10px;
+        background: var(--branco);
+        box-shadow: 0 3px 13px rgba(19,46,92,.09);
+        border: 1px solid var(--borda);
+        color: var(--azul-escuro);
+        font-weight: 700;
+        letter-spacing: .035em;
+        font-size: clamp(13px, 1.12vw, 21px);
+        line-height: 1.3;
+    }
+
+    .layout {
+        flex: 1 1 auto;
+        min-width: 0;
+        min-height: 0;
+        width: 100%;
+        display: grid;
+        grid-template-columns: clamp(175px, 15vw, 285px) minmax(0, 1fr) clamp(180px, 15vw, 285px);
+        gap: clamp(6px, .6vw, 12px);
+        overflow: hidden;
+    }
+
+    .side-panel, .right-panel, .main-panel { min-width: 0; min-height: 0; }
+    .side-panel {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(6px, .6vw, 10px);
+    }
+    .right-panel {
+        display: grid;
+        grid-template-rows: repeat(3, minmax(0, 1fr));
+        gap: clamp(6px, .6vw, 10px);
+    }
+    .main-panel { display: flex; flex-direction: column; }
+
+    .card {
+        min-width: 0;
+        min-height: 0;
+        border: 1px solid var(--borda);
+        border-radius: 12px;
+        background: var(--branco);
+        box-shadow: 0 3px 14px rgba(18,54,105,.11);
+    }
+    .side-panel .card { padding: clamp(9px, .85vw, 16px); }
+    .pequeno { flex: 0 0 auto; }
+    .pequeno h3, .grande h3 {
+        margin: 0 0 7px;
+        font-size: clamp(11px, .93vw, 16px);
+        line-height: 1.4;
+        font-weight: 700;
+        color: var(--azul);
+    }
+    .hora {
+        font-weight: 700;
+        font-size: clamp(21px, 2vw, 34px);
+        color: var(--azul-escuro);
+        line-height: 1.25;
+        font-variant-numeric: tabular-nums;
+    }
+    #data { font-size: clamp(10px, .79vw, 13px); margin-top: 3px; color: #51647c; }
+    #clima { font-size: clamp(11px, .84vw, 14px); line-height: 1.5; }
+
+    .grande {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: #b8cade transparent;
+    }
+    .grande h3 { position: sticky; top: -2px; background: #fdfefe; padding-bottom: 7px; border-bottom: 1px solid var(--borda); }
+    .grande p {
+        font-size: clamp(10px, .78vw, 13px);
+        line-height: 1.42;
+        margin: 0 0 9px;
+        overflow-wrap: break-word;
+    }
+    .grande b { color: var(--azul-escuro); }
+
+    /* Imagem central: preserva a proporção e mantém todos os dados da tabela visíveis. */
+    .infrequencia {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: clamp(4px, .5vw, 9px);
+        overflow: hidden;
+    }
+    .infrequencia img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    /* O card é dividido em título + foto flexível + nome/data.
+       Assim, a foto cresce com a TV, sem deixar um vazio acima dela. */
+    .card-aniversariante,
+    .card-aniversariante-turno {
+        display: flex;
+        flex-direction: column;
+        padding: clamp(6px, .58vw, 11px);
+        overflow: hidden;
+    }
+    .right-panel h2 {
+        flex: 0 0 auto;
+        margin: 0 0 clamp(4px, .4vw, 7px);
+        padding-bottom: clamp(4px, .38vw, 7px);
+        border-bottom: 1px solid var(--borda);
+        text-align: center;
+        color: var(--azul);
+        font-size: clamp(11px, .92vw, 16px);
+        font-weight: 700;
+        line-height: 1.2;
+    }
+    .slideshow {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        gap: clamp(4px, .4vw, 8px);
+        flex: 1 1 auto;
+        min-width: 0;
+        min-height: 0;
+    }
+    .foto-moldura {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 0;
+        min-height: 0;
+        border-radius: 9px;
+        background: linear-gradient(160deg, #e8f2fc, #d8e7f8);
+        overflow: hidden;
+    }
+    .foto-moldura img {
+        position: relative;
+        z-index: 1;
+        display: block;
+        height: 100%;
+        width: 100%;
+        max-width: 230px;
+        object-fit: cover;
+        object-position: center 30%;
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity .35s ease;
+    }
+    .foto-moldura img.visivel { opacity: 1; }
+    .foto-moldura .sem-foto {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        padding: 8px;
+        color: #66809f;
+        font-size: clamp(10px, .76vw, 13px);
+        text-align: center;
+    }
+    .foto-moldura .sem-foto svg { width: clamp(22px, 2.2vw, 38px); height: auto; }
+    .foto-moldura.tem-foto .sem-foto { display: none; }
+    .dados-aniversariante { flex: 0 0 auto; text-align: center; }
+    .dados-aniversariante h3 {
+        margin: 0;
+        color: var(--texto);
+        font-size: clamp(10px, .84vw, 14px);
+        font-weight: 600;
+        line-height: 1.23;
+        overflow-wrap: break-word;
+    }
+    .dados-aniversariante .data-aniversario {
+        display: block;
+        margin-top: 3px;
+        color: #3967a1;
+        font-size: clamp(10px, .76vw, 12px);
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    /* Navegador com barra de endereços visível ou TV de menor altura. */
+    @media (min-width: 901px) and (max-height: 660px) {
+        .overlay { padding: 4px; gap: 4px; }
+        header { padding: 4px 8px; }
+        .layout { gap: 5px; }
+        .side-panel, .right-panel { gap: 5px; }
+        .side-panel .card { padding: 6px; }
+        .grande p { margin-bottom: 5px; line-height: 1.3; }
+        .card-aniversariante, .card-aniversariante-turno { padding: 5px; }
+        .right-panel h2 { padding-bottom: 3px; margin-bottom: 3px; }
+        .slideshow { gap: 3px; }
+        .dados-aniversariante .data-aniversario { margin-top: 1px; }
+    }
+
+    /* Computadores pequenos e tablets: conteúdo central vem primeiro. */
+    @media (max-width: 900px) {
+        html, body { height: auto; min-height: 100%; }
+        body { overflow: auto; }
+        .overlay { height: auto; min-height: 100vh; overflow: visible; }
+        .layout { display: flex; flex-direction: column; overflow: visible; }
+        .main-panel { order: -1; }
+        .infrequencia { height: auto; min-height: 0; }
+        .infrequencia img { width: 100%; height: auto; max-height: none; }
+        .side-panel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .side-panel .grande { grid-column: 1 / -1; overflow: visible; }
+        .right-panel { grid-template-rows: auto; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .right-panel .card { min-height: 245px; }
+        .foto-moldura { min-height: 135px; }
+    }
+    @media (max-width: 600px) {
+        .side-panel { grid-template-columns: 1fr; }
+        .side-panel .grande { grid-column: auto; }
+        .right-panel { grid-template-columns: 1fr; }
+        .right-panel .card { min-height: 265px; }
+        .foto-moldura { min-height: 170px; }
+    }
 </style>
 </head>
-
 <body>
 <div class="overlay">
+    <header>PAINEL DE NOTÍCIAS 2026 — EMEF EZEQUIEL RUIZ II</header>
 
-<header>
-    PAINEL DE NOTÍCIAS 2026 - EMEF EZEQUIEL RUIZ
-</header>
+    <div class="layout">
+        <aside class="side-panel" aria-label="Informações da escola">
+            <section class="card pequeno" aria-label="Horário e data">
+                <h3>🕒 Horário</h3>
+                <div id="hora" class="hora">--:--:--</div>
+                <div id="data">--/--/----</div>
+            </section>
+            <section class="card pequeno" aria-label="Clima em Manacapuru">
+                <h3>⛅ Clima</h3>
+                <div id="clima">Consultando clima...</div>
+            </section>
+            <section class="card grande" aria-label="Datas comemorativas de novembro">
+                <h3>DATAS COMEMORATIVAS – NOVEMBRO</h3>
+                <p><b>05/11:</b> Dia Nacional da Cultura e da Ciência e Dia Nacional da Língua Portuguesa.</p>
+                <p><b>12/11:</b> Dia do Diretor Escolar — valorização da gestão escolar.</p>
+                <p><b>13/11:</b> Dia Mundial da Gentileza — incentivo ao respeito e à boa convivência.</p>
+                <p><b>14/11:</b> Dia Nacional da Alfabetização — valorização da leitura e da escrita.</p>
+                <p><b>15/11:</b> Proclamação da República — feriado nacional.</p>
+                <p><b>16/11:</b> Dia Internacional da Tolerância — respeito às diferenças.</p>
+                <p><b>19/11:</b> Dia da Bandeira — valorização dos símbolos nacionais.</p>
+                <p><b>20/11:</b> Dia Nacional de Zumbi e da Consciência Negra — combate ao racismo e valorização da diversidade cultural. Feriado nacional.</p>
+                <p><b>25/11:</b> Dia Internacional pela Eliminação da Violência contra as Mulheres — conscientização e respeito.</p>
+            </section>
+        </aside>
 
-<div class="layout">
-
-    <!-- PAINEL LATERAL ESQUERDO -->
-    <div class="side-panel">
-        <div class="card pequeno">
-            <h3>🕒 Horário</h3>
-            <div id="hora" class="hora"></div>
-            <div id="data"></div>
-        </div>
-
-        <div class="card pequeno">
-            <h3>⛈️ Clima</h3>
-            <div id="clima">Carregando...</div>
-        </div>
-        
-        <div class="card grande">
-          
-<h3>DATAS COMEMORATIVAS – NOVEMBRO</h3>
-
-<p><b>05/11:</b> Dia Nacional da Cultura e da Ciência e Dia Nacional da Língua Portuguesa.</p>
-
-<p><b>12/11:</b> Dia do Diretor Escolar — valorização da gestão escolar.</p>
-
-<p><b>13/11:</b> Dia Mundial da Gentileza — incentivo ao respeito e à boa convivência.</p>
-
-<p><b>14/11:</b> Dia Nacional da Alfabetização — valorização da leitura e da escrita.</p>
-
-<p><b>15/11:</b> Proclamação da República — feriado nacional.</p>
-
-<p><b>16/11:</b> Dia Internacional da Tolerância — respeito às diferenças.</p>
-
-<p><b>19/11:</b> Dia da Bandeira — valorização dos símbolos nacionais.</p>
-
-<p><b>20/11:</b> Dia Nacional de Zumbi e da Consciência Negra — combate ao racismo e valorização da diversidade cultural. Feriado nacional.</p>
-
-<p><b>25/11:</b> Dia Internacional pela Eliminação da Violência contra as Mulheres — conscientização e respeito.</p>     
-        </div>
-    </div>
-
-    <!-- PAINEL PRINCIPAL -->
-    <div class="main-panel">
-
-        <div class="card infrequencia">
-            <img src="IF03.png" alt="Tabela de Infrequência">
-        </div>
-
-    </div>
-
-    <!-- NOVA LATERAL DIREITA -->
-    <div class="right-panel">
-
-        <!-- Funcionários -->
-        <div class="card card-aniversariante">
-            <h2>🎉 Funcionários</h2>
-            <div class="slideshow" id="slideshow-funcionarios">
-                <img id="fotoAniversarianteFunc" src="">
-                <h3 id="nomeAniversarianteFunc"></h3>
+        <main class="main-panel">
+            <div class="card infrequencia">
+                <img src="IF03.png" alt="Quadro de monitoramento da infrequência escolar">
             </div>
-        </div>
+        </main>
 
-        <!-- Matutino -->
-        <div class="card card-aniversariante-turno">
-            <h2>🌅 Matutino</h2>
-            <div class="slideshow" id="slideshow-matutino">
-                <img id="fotoAniversarianteMatutino" src="">
-                <h3 id="nomeAniversarianteMatutino"></h3>
-            </div>
-        </div>
-
-        <!-- Vespertino -->
-        <div class="card card-aniversariante-turno">
-            <h2>🌇 Vespertino</h2>
-            <div class="slideshow" id="slideshow-vespertino">
-                <img id="fotoAniversarianteVespertino" src="">
-                <h3 id="nomeAniversarianteVespertino"></h3>
-            </div>
-        </div>
-
+        <aside class="right-panel" aria-label="Aniversariantes do mês">
+            <section class="card card-aniversariante">
+                <h2>🎉 Funcionários</h2>
+                <div class="slideshow" id="slideshow-funcionarios">
+                    <div class="foto-moldura">
+                        <img id="fotoAniversarianteFunc" alt="Foto do funcionário aniversariante">
+                        <div class="sem-foto" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg><span>Foto não disponível</span></div>
+                    </div>
+                    <div class="dados-aniversariante">
+                        <h3 id="nomeAniversarianteFunc"></h3>
+                        <span class="data-aniversario" id="dataAniversarianteFunc"></span>
+                    </div>
+                </div>
+            </section>
+            <section class="card card-aniversariante-turno">
+                <h2>🌅 Matutino</h2>
+                <div class="slideshow" id="slideshow-matutino">
+                    <div class="foto-moldura">
+                        <img id="fotoAniversarianteMatutino" alt="Foto do aluno aniversariante do matutino">
+                        <div class="sem-foto" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg><span>Foto não disponível</span></div>
+                    </div>
+                    <div class="dados-aniversariante">
+                        <h3 id="nomeAniversarianteMatutino"></h3>
+                        <span class="data-aniversario" id="dataAniversarianteMatutino"></span>
+                    </div>
+                </div>
+            </section>
+            <section class="card card-aniversariante-turno">
+                <h2>🌇 Vespertino</h2>
+                <div class="slideshow" id="slideshow-vespertino">
+                    <div class="foto-moldura">
+                        <img id="fotoAniversarianteVespertino" alt="Foto do aluno aniversariante do vespertino">
+                        <div class="sem-foto" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg><span>Foto não disponível</span></div>
+                    </div>
+                    <div class="dados-aniversariante">
+                        <h3 id="nomeAniversarianteVespertino"></h3>
+                        <span class="data-aniversario" id="dataAniversarianteVespertino"></span>
+                    </div>
+                </div>
+            </section>
+        </aside>
     </div>
-
 </div>
+
 <script>
+    'use strict';
 
-/* RELÓGIO */
-function atualizarRelogio() {
-    const agora = new Date();
-    document.getElementById("hora").innerHTML = agora.toLocaleTimeString("pt-BR");
-    document.getElementById("data").innerHTML = agora.toLocaleDateString("pt-BR");
-}
-setInterval(atualizarRelogio, 1000);
-atualizarRelogio();
+    // Relógio e data: atualização contínua.
+    function atualizarRelogio() {
+        const agora = new Date();
+        document.getElementById('hora').textContent = agora.toLocaleTimeString('pt-BR');
+        document.getElementById('data').textContent = agora.toLocaleDateString('pt-BR');
+    }
+    atualizarRelogio();
+    setInterval(atualizarRelogio, 1000);
 
-/* CLIMA */
-function atualizarClima() {
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=Manacapuru&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7")
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("clima").innerHTML =
-            Math.round(data.main.temp) + "°C - " + data.weather[0].description;
-    });
-}
-atualizarClima();
-setInterval(atualizarClima, 600000);
+    // Clima: preserva a consulta atual, mas trata falhas de rede/API.
+    async function atualizarClima() {
+        const campo = document.getElementById('clima');
+        try {
+            const resposta = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Manacapuru&units=metric&lang=pt_br&appid=dd7b1bcf762323de121e892697b16fb7');
+            if (!resposta.ok) throw new Error('Falha na API do clima: ' + resposta.status);
+            const dados = await resposta.json();
+            if (!dados.main || !dados.weather || !dados.weather[0]) {
+                throw new Error('Dados de clima incompletos');
+            }
+            campo.textContent = Math.round(dados.main.temp) + '°C — ' + dados.weather[0].description;
+        } catch (erro) {
+            campo.textContent = 'Clima indisponível';
+            console.warn('Não foi possível atualizar o clima:', erro);
+        }
+    }
+    atualizarClima();
+    setInterval(atualizarClima, 600000);
 
-/* SLIDESHOW SUAVE */
-function iniciarSlideshow(lista, imgId, nomeId) {
+    // Altera foto, nome e data de cada cartão a cada cinco segundos.
+    // A imagem é pré-carregada antes de aparecer: evita tela branca e piscadas.
+    function iniciarSlideshow(lista, imgId, nomeId, dataId) {
+        const img = document.getElementById(imgId);
+        const nome = document.getElementById(nomeId);
+        const data = document.getElementById(dataId);
+        const moldura = img.closest('.foto-moldura');
 
-    let index = 0;
+        if (!lista || lista.length === 0) {
+            nome.textContent = 'Sem aniversariantes cadastrados';
+            data.textContent = '';
+            return;
+        }
 
-    const img = document.getElementById(imgId);
-    const nome = document.getElementById(nomeId);
+        let indice = 0;
+        let sequencia = 0;
 
-    // pré-carrega imagens
-    lista.forEach(item => {
-        const preload = new Image();
-        preload.src = item.foto;
-    });
+        function exibir(item) {
+            const corte = item.nome.lastIndexOf(' - ');
+            nome.textContent = corte >= 0 ? item.nome.slice(0, corte) : item.nome;
+            data.textContent = corte >= 0 ? item.nome.slice(corte + 3) : '';
+            sequencia += 1;
+            const pedido = sequencia;
 
-    function trocar() {
+            if (!item.foto) {
+                img.classList.remove('visivel');
+                moldura.classList.remove('tem-foto');
+                return;
+            }
 
-        const atual = lista[index];
-
-        nome.innerText = atual.nome;
-
-        img.style.opacity = 0;
-
-        setTimeout(() => {
-            img.src = atual.foto;
-
-            // fallback caso a imagem dê erro
-            img.onerror = () => {
-                img.src = "avatar.jpg";
+            const precarga = new Image();
+            precarga.onload = function () {
+                if (pedido !== sequencia) return;
+                img.classList.remove('visivel');
+                img.src = item.foto;
+                img.alt = 'Foto de ' + nome.textContent;
+                moldura.classList.add('tem-foto');
+                requestAnimationFrame(() => img.classList.add('visivel'));
             };
+            precarga.onerror = function () {
+                if (pedido !== sequencia) return;
+                img.removeAttribute('src');
+                img.classList.remove('visivel');
+                moldura.classList.remove('tem-foto');
+            };
+            precarga.src = item.foto;
+        }
 
-            img.style.opacity = 1;
-        }, 200);
-
-        index = (index + 1) % lista.length;
+        exibir(lista[indice]);
+        setInterval(function () {
+            indice = (indice + 1) % lista.length;
+            exibir(lista[indice]);
+        }, 5000);
     }
 
-    trocar();
-
-    function loop() {
-        trocar();
-        setTimeout(loop, 5000);
-    }
-
-    setTimeout(loop, 5000);
-}
-
-/* DADOS */
-
-// Funcionários
-const aniversariantesFunc = [
+    // DADOS DOS ANIVERSARIANTES — preservados do arquivo enviado.
+    const aniversariantesFunc = [
     { nome:"Xandi - 18/11", foto:"foto100.jpg" },
     { nome:"Alcenir Alves - 25/11", foto:"foto200.jpg" }  
 ];
 
-// Matutino
-const aniversariantesMatutino = [
+    const aniversariantesMatutino = [
     { nome:"Stefhany da Silva Martins - 03/11", foto:"aluno1500.jpg" },
     { nome:"Maria Eduarda - 03/11", foto:"aluno1600.jpg" },
     { nome:"Samuel Martins da Silva - 08/11", foto:"aluno1700.jpg" },
@@ -386,9 +457,8 @@ const aniversariantesMatutino = [
     { nome:"Gabriel Silva dos Santos - 28/11", foto:"aluno3200.jpg" },
     { nome:"Rannata Tanaka - 28/11", foto:"aluno3300.jpg" }
 ];
-// Vespertino
 
-const aniversariantesVespertino = [
+    const aniversariantesVespertino = [
     { nome:"Lucas Guilherme - 02/11", foto:"aluno01.jpg" },
     { nome:"Rarielly Lima - 03/11", foto:"aluno02.jpg" },
     { nome:"Ágatha Nicolly - 06/11", foto:"aluno03.jpg" },
@@ -410,14 +480,9 @@ const aniversariantesVespertino = [
     { nome:"Jadson Kâue - 27/11", foto:"aluno019.jpg" }
 ];
 
-
-];
-
-/* INICIAR */
-iniciarSlideshow(aniversariantesFunc, "fotoAniversarianteFunc", "nomeAniversarianteFunc");
-iniciarSlideshow(aniversariantesMatutino, "fotoAniversarianteMatutino", "nomeAniversarianteMatutino");
-iniciarSlideshow(aniversariantesVespertino, "fotoAniversarianteVespertino", "nomeAniversarianteVespertino");
-
+    iniciarSlideshow(aniversariantesFunc, 'fotoAniversarianteFunc', 'nomeAniversarianteFunc', 'dataAniversarianteFunc');
+    iniciarSlideshow(aniversariantesMatutino, 'fotoAniversarianteMatutino', 'nomeAniversarianteMatutino', 'dataAniversarianteMatutino');
+    iniciarSlideshow(aniversariantesVespertino, 'fotoAniversarianteVespertino', 'nomeAniversarianteVespertino', 'dataAniversarianteVespertino');
 </script>
 </body>
 </html>
