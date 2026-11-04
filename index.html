@@ -10,296 +10,422 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 
-    /* PAINEL 2026 — versão profissional, pensada para TV e computador. */
+    /* PAINEL 2026 — versão visual 2.0, mais elegante e elaborada */
     :root {
         --azul: #0b4b91;
-        --azul-escuro: #072c5a;
-        --azul-medio: #1767ae;
-        --amarelo: #f5bc23;
-        --verde: #43b56a;
+        --azul-escuro: #08284f;
+        --azul-medio: #1669b0;
+        --azul-claro: #dff0ff;
+        --amarelo: #f4be2c;
+        --verde: #46b769;
+        --verde-claro: #dff4e7;
         --texto: #18345c;
-        --borda: rgba(24, 84, 153, .16);
-        --branco: rgba(255,255,255,.97);
-        --sombra: 0 7px 24px rgba(5,45,100,.14);
+        --texto-suave: #607c98;
+        --borda: rgba(22, 79, 146, .14);
+        --branco: rgba(255,255,255,.96);
+        --glass: rgba(255,255,255,.72);
+        --sombra: 0 12px 36px rgba(6, 42, 96, .14);
+        --sombra-forte: 0 18px 46px rgba(7, 40, 86, .18);
     }
-    *, *::before, *::after {box-sizing: border-box;}
+    *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; width: 100%; height: 100%; }
     body {
         font-family: 'Poppins', Arial, sans-serif;
         color: var(--texto);
-        background: #e8f1fb url('fundo.jpg') no-repeat center center fixed;
-        background-size: cover;
+        background:
+            radial-gradient(circle at top left, rgba(108, 192, 255, .18), transparent 26%),
+            radial-gradient(circle at bottom right, rgba(84, 182, 113, .12), transparent 24%),
+            linear-gradient(135deg, rgba(13,67,123,.88), rgba(7,35,74,.88)),
+            url('fundo.jpg') no-repeat center center fixed;
+        background-size: auto, auto, auto, cover;
         overflow: hidden;
     }
     .overlay {
         width: 100%; height: 100vh; height: 100dvh;
         display: flex; flex-direction: column;
-        padding: clamp(6px, .68vw, 12px);
-        gap: clamp(7px, .65vw, 12px);
+        padding: clamp(8px, .72vw, 14px);
+        gap: clamp(8px, .72vw, 14px);
         overflow: hidden;
-        background: linear-gradient(135deg, rgba(222,238,255,.12), rgba(243,249,255,.13));
+        background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+        backdrop-filter: blur(2px);
     }
     header {
         position: relative;
         isolation: isolate;
-        flex: 0 0 auto;
-        text-align: center;
-        padding: clamp(11px, .88vw, 16px) 22px;
-        border: 1px solid rgba(255,255,255,.35);
-        border-radius: 16px;
-        background: linear-gradient(107deg, #06326b 0%, #0d539b 55%, #062a5a 100%);
-        color: #fff;
-        font-size: clamp(14px, 1.16vw, 24px);
-        font-weight: 700;
-        letter-spacing: .04em;
-        line-height: 1.35;
-        text-shadow: 0 1px 3px rgba(0,0,0,.1);
-        box-shadow: 0 5px 20px rgba(3,37,90,.21);
         overflow: hidden;
+        border-radius: 22px;
+        border: 1px solid rgba(255,255,255,.2);
+        background: linear-gradient(112deg, rgba(5,40,88,.96) 0%, rgba(12,86,151,.95) 52%, rgba(5,44,87,.96) 100%);
+        box-shadow: var(--sombra-forte);
+        color: #fff;
+        padding: clamp(14px, 1vw, 20px) clamp(18px, 1.35vw, 30px);
+        flex: 0 0 auto;
     }
-    header::after {
-        content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, var(--verde) 0%, #62c878 27%, var(--amarelo) 50%, #62c878 73%, var(--verde) 100%);
+    .header-bg-shape {
+        position: absolute; border-radius: 999px; opacity: .18; filter: blur(2px); z-index: 0;
+    }
+    .shape-left { width: 180px; height: 180px; background: #58d07c; top: -85px; left: -35px; }
+    .shape-right { width: 230px; height: 230px; background: #f4be2c; right: -70px; top: -115px; }
+    .header-topline, .header-main { position: relative; z-index: 1; }
+    .header-topline {
+        display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    .header-badge {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 6px 12px; border-radius: 999px;
+        background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.18);
+        font-size: clamp(10px, .72vw, 12px); font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+        backdrop-filter: blur(6px);
+    }
+    .header-slogan { font-size: clamp(11px, .75vw, 14px); opacity: .95; font-weight: 500; }
+    .header-main {
+        display: flex; justify-content: space-between; align-items: flex-end; gap: 18px; flex-wrap: wrap;
+    }
+    .header-title-wrap h1 {
+        margin: 2px 0 4px;
+        font-size: clamp(22px, 2.15vw, 40px);
+        line-height: 1.02; letter-spacing: .04em; font-weight: 700;
+    }
+    .header-kicker {
+        font-size: clamp(10px, .72vw, 12px); text-transform: uppercase; letter-spacing: .12em; font-weight: 700;
+        color: #d9eeff;
+    }
+    .header-title-wrap p { margin: 0; font-size: clamp(11px, .8vw, 14px); opacity: .9; }
+    .header-info-chips {
+        display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: flex-end;
+    }
+    .info-chip {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 8px 12px; border-radius: 12px;
+        background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.15);
+        font-size: clamp(10px, .74vw, 13px); font-weight: 600;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.09);
     }
     .layout {
         flex: 1 1 auto;
         min-width: 0; min-height: 0; width: 100%;
         display: grid;
-        grid-template-columns: clamp(230px, 17.2vw, 330px) minmax(0, 1fr) clamp(230px, 17.2vw, 330px);
-        gap: clamp(8px, .66vw, 13px);
+        grid-template-columns: clamp(235px, 17vw, 330px) minmax(0, 1fr) clamp(235px, 17vw, 330px);
+        gap: clamp(10px, .78vw, 15px);
         overflow: hidden;
     }
-    .side-panel, .right-panel, .main-panel {min-width: 0; min-height: 0;}
-    .side-panel {display: flex; flex-direction: column; gap: clamp(8px, .66vw, 12px);}
-    .right-panel {
-        display: grid;
-        grid-template-rows: repeat(3, minmax(0, 1fr));
-        gap: clamp(8px, .66vw, 12px);
-    }
-    .main-panel {display: flex; flex-direction: column;}
+    .side-panel, .right-panel, .main-panel { min-width: 0; min-height: 0; }
+    .side-panel { display: flex; flex-direction: column; gap: clamp(10px, .7vw, 13px); }
+    .right-panel { display: grid; grid-template-rows: repeat(3, minmax(0, 1fr)); gap: clamp(10px, .7vw, 13px); }
+    .main-panel { display: flex; flex-direction: column; }
     .card {
+        position: relative;
         min-width: 0; min-height: 0;
         border: 1px solid var(--borda);
-        border-radius: 16px;
-        background: var(--branco);
+        border-radius: 22px;
+        background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,251,255,.95));
         box-shadow: var(--sombra);
         overflow: hidden;
+        backdrop-filter: blur(7px);
     }
-    /* Barra de título e faixas de destaque em todos os cartões laterais. */
-    .side-panel .card {padding: 0;}
-    .pequeno {flex: 0 0 auto;}
+    .card::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+        background: linear-gradient(90deg, var(--verde), #84d36b, var(--amarelo));
+        opacity: .95;
+    }
+    .side-panel .card, .card-aniversariante, .card-aniversariante-turno { padding: 0; }
+    .pequeno { flex: 0 0 auto; }
     .card-cabecalho, .right-panel h2 {
-        display: flex; align-items: center; gap: 9px;
-        margin: 0; padding: clamp(10px, .75vw, 14px) clamp(11px, .92vw, 17px);
+        display: flex; align-items: center; gap: 10px;
+        margin: 0; padding: clamp(13px, .95vw, 17px) clamp(14px, 1vw, 18px);
         border: 0;
-        background: linear-gradient(100deg, #07366e 0%, #0d559c 80%, #1361a8 100%);
+        background: linear-gradient(95deg, #08366d 0%, #0c599f 68%, #0e6fb7 100%);
         color: #fff;
-        font-size: clamp(12px, .91vw, 17px);
-        font-weight: 700;
-        line-height: 1.22;
-        text-align: left;
-        letter-spacing: .005em;
-        position: relative;
+        font-size: clamp(12px, .93vw, 17px); font-weight: 700; line-height: 1.2;
+        position: relative; letter-spacing: .01em;
+    }
+    .card-cabecalho::before, .right-panel h2::before {
+        content: ''; position: absolute; inset: auto 14px 0 14px; height: 1px;
+        background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.45), rgba(255,255,255,.12));
     }
     .card-cabecalho::after, .right-panel h2::after {
-        content: ''; display: block; width: 24px; height: 3px;
-        border-radius: 5px; background: var(--amarelo);
-        margin-left: auto; flex: 0 0 auto;
+        content: ''; display: block; width: 34px; height: 4px; border-radius: 999px; background: var(--amarelo); margin-left: auto;
+        box-shadow: 0 0 14px rgba(244,190,44,.45);
     }
-    .icone-titulo {font-size: 1.18em; line-height: 1;}
-    .card-corpo {padding: clamp(10px, .95vw, 17px);}
-    /* Relógio */
+    .icone-titulo {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 31px; height: 31px; border-radius: 10px;
+        background: rgba(255,255,255,.16); box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+        font-size: 1.03em; line-height: 1;
+    }
+    .card-corpo { padding: clamp(14px, 1vw, 18px); }
     .hora {
-        color: var(--azul-escuro);
-        font-size: clamp(26px, 2.12vw, 40px);
-        line-height: 1.05;
-        font-weight: 700;
-        font-variant-numeric: tabular-nums;
-        letter-spacing: -.04em;
-        text-align: center;
-        white-space: nowrap;
+        color: var(--azul-escuro); font-size: clamp(30px, 2.4vw, 44px);
+        line-height: 1.02; font-weight: 700; font-variant-numeric: tabular-nums;
+        letter-spacing: -.05em; text-align: center; white-space: nowrap;
+        text-shadow: 0 3px 10px rgba(14,90,164,.08);
     }
     #data {
-        display: flex; align-items: center; justify-content: center;
-        border-radius: 9px;
-        margin: 9px auto 0;
-        padding: 5px 11px;
-        width: fit-content; max-width: 100%;
-        background: #e8f3ff;
-        color: #12549a;
-        font-size: clamp(11px, .84vw, 14px);
-        font-weight: 600;
-        font-variant-numeric: tabular-nums;
-        line-height: 1.45;
+        display: flex; align-items: center; justify-content: center; width: fit-content; max-width: 100%;
+        margin: 11px auto 0; padding: 7px 12px; border-radius: 12px;
+        background: linear-gradient(180deg, #edf6ff, #e4f0ff); border: 1px solid #d2e6fb;
+        color: #12549a; font-size: clamp(11px, .82vw, 14px); font-weight: 700;
+        font-variant-numeric: tabular-nums; line-height: 1.4;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
     }
-    #data::before {content: '▦'; margin-right: 7px; font-size: 17px; line-height: .8; color: #0f67ab;}
-    /* Clima */
-    .clima-localidade {color: #55708e; font-size: clamp(10px, .73vw, 12px); font-weight: 500; margin-bottom: 6px;}
-    .clima-conteudo {display: flex; gap: 10px; align-items: center; min-width: 0;}
-    .clima-icone {font-size: clamp(29px, 2.4vw, 43px); line-height: 1; flex: 0 0 auto; filter: drop-shadow(0 3px 3px rgba(13,62,103,.12));}
-    .clima-detalhes {display: flex; flex-direction: column; min-width: 0;}
-    #temperatura {font-size: clamp(24px, 1.75vw, 34px); line-height: 1.04; font-weight: 700; color: var(--azul-escuro);}
-    #condicao {margin-top: 4px; font-size: clamp(10px, .78vw, 13px); line-height: 1.28; color: #54708e; font-weight: 500; overflow-wrap: anywhere;}
-    /* Datas comemorativas: cada evento ganha uma data clara e uma linha própria. */
-    .grande {flex: 1 1 auto; display: flex; flex-direction: column; overflow: hidden;}
-    .grande .card-cabecalho {flex: 0 0 auto;}
+    #data::before { content: '🗓'; margin-right: 7px; }
+    .clima-localidade { color: var(--texto-suave); font-size: clamp(10px, .74vw, 12px); font-weight: 600; margin-bottom: 8px; }
+    .clima-conteudo { display: flex; gap: 12px; align-items: center; min-width: 0; }
+    .clima-icone {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: clamp(58px, 4.4vw, 78px); height: clamp(58px, 4.4vw, 78px); border-radius: 16px;
+        background: linear-gradient(180deg, #eef7ff, #ddedff); border: 1px solid #d1e5fa;
+        font-size: clamp(28px, 2vw, 39px); line-height: 1; flex: 0 0 auto;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 8px 18px rgba(11,75,145,.08);
+    }
+    .clima-detalhes { display: flex; flex-direction: column; min-width: 0; }
+    #temperatura { font-size: clamp(25px, 1.78vw, 34px); line-height: 1.03; font-weight: 700; color: var(--azul-escuro); }
+    #condicao { margin-top: 4px; font-size: clamp(10px, .78vw, 13px); line-height: 1.3; color: var(--texto-suave); font-weight: 500; overflow-wrap: anywhere; }
+    .grande { flex: 1 1 auto; display: flex; flex-direction: column; overflow: hidden; }
     .agenda-lista {
-        min-height: 0; flex: 1 1 auto;
-        overflow-x: hidden; overflow-y: auto;
-        scrollbar-width: thin; scrollbar-color: #aac5e2 transparent;
-        padding: clamp(7px, .65vw, 12px);
+        min-height: 0; flex: 1 1 auto; overflow-x: hidden; overflow-y: auto;
+        scrollbar-width: thin; scrollbar-color: #aac5e2 transparent; padding: 12px;
+        background: linear-gradient(180deg, rgba(244,249,255,.7), rgba(255,255,255,.45));
     }
     .agenda-item {
-        display: grid; grid-template-columns: clamp(46px, 3.4vw, 60px) minmax(0, 1fr);
-        align-items: center; gap: clamp(7px, .58vw, 11px);
-        margin-bottom: clamp(5px, .5vw, 9px);
-        padding: clamp(7px, .55vw, 10px);
-        border: 1px solid #e4eef9;
-        border-radius: 11px;
-        background: linear-gradient(100deg, #f4f9ff, #fff);
+        display: grid; grid-template-columns: clamp(52px, 3.8vw, 66px) minmax(0, 1fr); align-items: center;
+        gap: clamp(8px, .6vw, 12px); margin-bottom: 8px; padding: 10px;
+        border: 1px solid #e3eef9; border-radius: 14px;
+        background: linear-gradient(120deg, #ffffff, #f6fbff);
+        box-shadow: 0 6px 16px rgba(15,81,149,.05);
     }
-    .agenda-item:last-child {margin-bottom: 0;}
+    .agenda-item:last-child { margin-bottom: 0; }
     .agenda-dia {
-        display: inline-flex; align-items: center; justify-content: center;
-        min-width: 0;
-        border-radius: 8px;
-        padding: 8px 3px;
-        background: linear-gradient(145deg, #0b3b7b, #1164aa);
-        box-shadow: 0 2px 6px rgba(10,70,130,.14);
-        color: white;
-        font-size: clamp(11px, .81vw, 14px);
-        font-weight: 700;
-        font-variant-numeric: tabular-nums;
-        line-height: 1.1;
-        white-space: nowrap;
+        display: inline-flex; align-items: center; justify-content: center; padding: 10px 4px; min-width: 0;
+        border-radius: 11px; background: linear-gradient(145deg, #0b3b7b, #1167af); color: white;
+        box-shadow: 0 7px 16px rgba(10,70,130,.14);
+        font-size: clamp(11px, .82vw, 14px); font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1;
     }
-    .agenda-texto {font-size: clamp(10px, .71vw, 13px); line-height: 1.33; font-weight: 500; overflow-wrap: break-word;}
-    .agenda-item.hoje {border-color: #f5bf47; background: #fff9e9;}
-    .agenda-item.hoje .agenda-dia {background: #df9a0a;}
-    /* Painel central: manter a imagem original, sem alterar a tabela. */
-    .infrequencia {
-        flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
-        width: 100%; height: 100%; padding: clamp(5px, .55vw, 10px); overflow: hidden;
-    }
-    .infrequencia img {
-        display: block; width: 100%; height: 100%;
-        max-width: 100%; max-height: 100%;
-        object-fit: contain; object-position: center;
-    }
-    /* Aniversariantes: imagem à esquerda e dados à direita, sem área ociosa. */
-    .card-aniversariante, .card-aniversariante-turno {
-        display: flex; flex-direction: column; padding: 0; overflow: hidden;
-    }
-    .right-panel h2 {flex: 0 0 auto;}
+    .agenda-texto { font-size: clamp(10px, .72vw, 13px); line-height: 1.35; font-weight: 500; overflow-wrap: break-word; }
+    .agenda-item.hoje { border-color: #f5bf47; background: linear-gradient(120deg, #fff9e8, #fffdf4); }
+    .agenda-item.hoje .agenda-dia { background: linear-gradient(145deg, #d89c15, #efb11d); }
+    .card-aniversariante, .card-aniversariante-turno { display: flex; flex-direction: column; overflow: hidden; }
+    .right-panel h2 { flex: 0 0 auto; }
     .slideshow {
-        flex: 1 1 auto; min-width: 0; min-height: 0;
-        display: grid;
-        grid-template-columns: minmax(78px, 45%) minmax(0, 1fr);
-        grid-template-rows: minmax(0, 1fr);
-        align-items: stretch;
-        gap: clamp(8px, .7vw, 13px);
-        padding: clamp(8px, .7vw, 13px);
+        flex: 1 1 auto; min-width: 0; min-height: 0; display: grid;
+        grid-template-columns: minmax(82px, 44%) minmax(0, 1fr); align-items: stretch;
+        gap: clamp(10px, .72vw, 14px); padding: clamp(12px, .9vw, 16px);
+        background: linear-gradient(180deg, rgba(244,249,255,.75), rgba(255,255,255,.35));
     }
     .foto-moldura {
-        position: relative; min-width: 0; min-height: 0;
-        display: flex; align-items: center; justify-content: center;
-        border-radius: 11px;
-        background: linear-gradient(140deg, #d6eafa, #f0f8ff);
-        border: 1px solid #d5e8f8;
-        overflow: hidden;
+        position: relative; min-width: 0; min-height: 0; display: flex; align-items: center; justify-content: center;
+        border-radius: 16px; background: linear-gradient(145deg, #d8ebfb, #eff8ff); border: 1px solid #d2e6f8; overflow: hidden;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 12px 24px rgba(9,62,120,.07);
     }
-    .foto-moldura img {
-        position: relative; z-index: 1; display: block;
-        width: 100%; height: 100%; max-width: none;
-        object-fit: cover; object-position: center 28%;
-        border-radius: 10px;
-        opacity: 0; transition: opacity .35s ease;
+    .foto-moldura::after {
+        content: ''; position: absolute; inset: auto 0 0 0; height: 30%;
+        background: linear-gradient(180deg, transparent, rgba(6,47,93,.17)); z-index: 0;
     }
-    .foto-moldura img.visivel {opacity: 1;}
-    .foto-moldura .sem-foto {
-        position: absolute; inset: 0; display: flex; flex-direction: column;
-        justify-content: center; align-items: center;
-        padding: 7px; gap: 5px; color: #6784a0;
-        text-align: center; font-size: clamp(9px, .7vw, 12px);
-    }
-    .foto-moldura .sem-foto svg {width: clamp(24px, 2.2vw, 39px); height: auto;}
-    .foto-moldura.tem-foto .sem-foto {display: none;}
-    .dados-aniversariante {
-        min-width: 0; min-height: 0; display: flex; flex-direction: column;
-        align-items: flex-start; justify-content: center;
-        gap: clamp(5px, .5vw, 9px);
-        padding: 0 2px 0 0;
-    }
-    .dados-aniversariante::before {
-        content: 'ANIVERSÁRIO';
-        color: #6b819b;
-        font-size: clamp(8px, .6vw, 11px);
-        font-weight: 700; letter-spacing: .1em;
-    }
-    .dados-aniversariante h3 {
-        margin: 0; color: #0a305f;
-        font-size: clamp(11px, .92vw, 17px); font-weight: 700; line-height: 1.24;
-        overflow-wrap: anywhere;
-    }
-    .dados-aniversariante .data-aniversario {
-        display: inline-flex; align-items: center;
-        margin: 0; padding: 5px 8px;
-        border-radius: 7px; background: #e9f3ff; color: #12549a;
-        font-size: clamp(10px, .76vw, 13px); font-weight: 700;
-        line-height: 1.3; font-variant-numeric: tabular-nums;
-    }
-    .data-aniversario:not(:empty)::before {content: '▦'; margin-right: 6px; font-size: 15px; line-height: 1;}
-    /* Garantir os três cartões equilibrados em televisores com pouca altura. */
+    .foto-moldura img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 28%; border-radius: 15px; opacity: 0; transition: opacity .35s ease; }
+    .foto-moldura img.visivel { opacity: 1; }
+    .foto-moldura .sem-foto { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 7px; gap: 5px; color: #6784a0; text-align: center; font-size: clamp(9px, .7vw, 12px); z-index: 1; }
+    .foto-moldura .sem-foto svg { width: clamp(24px, 2.2vw, 39px); height: auto; }
+    .foto-moldura.tem-foto .sem-foto { display: none; }
+    .dados-aniversariante { min-width: 0; min-height: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: clamp(6px, .55vw, 10px); padding-right: 2px; }
+    .dados-aniversariante::before { content: 'ANIVERSÁRIO'; color: #6b819b; font-size: clamp(8px, .6vw, 11px); font-weight: 700; letter-spacing: .12em; }
+    .dados-aniversariante h3 { margin: 0; color: #0a305f; font-size: clamp(12px, .96vw, 17px); font-weight: 700; line-height: 1.24; overflow-wrap: anywhere; }
+    .dados-aniversariante .data-aniversario { display: inline-flex; align-items: center; margin: 0; padding: 6px 10px; border-radius: 10px; background: linear-gradient(180deg, #ecf5ff, #e1efff); color: #12549a; font-size: clamp(10px, .76vw, 13px); font-weight: 700; line-height: 1.3; font-variant-numeric: tabular-nums; border: 1px solid #d1e4fa; }
+    .data-aniversario:not(:empty)::before { content: '🗓'; margin-right: 6px; }
     @media (min-width: 901px) and (max-height: 720px) {
-        .overlay {padding: 5px; gap: 6px;}
-        header {padding: 8px;}
-        .card-cabecalho, .right-panel h2 {padding: 7px 10px;}
-        .card-corpo {padding: 7px 10px;}
-        .agenda-lista {padding: 6px;}
-        .agenda-item {padding: 5px; margin-bottom: 4px;}
-        .slideshow {padding: 7px; gap: 7px;}
-        .dados-aniversariante {gap: 4px;}
-        #data {margin-top: 4px; padding: 3px 8px;}
+        .overlay { padding: 6px; gap: 7px; }
+        header { padding: 10px 14px; }
+        .header-topline { margin-bottom: 6px; }
+        .card-cabecalho, .right-panel h2 { padding: 9px 11px; }
+        .card-corpo { padding: 10px 12px; }
+        .agenda-lista { padding: 8px; }
+        .agenda-item { padding: 7px; margin-bottom: 5px; }
+        .slideshow { padding: 9px; gap: 8px; }
+        #data { margin-top: 6px; padding: 5px 9px; }
     }
     @media (min-width: 901px) and (max-width: 1199px) {
-        .layout {grid-template-columns: minmax(185px, 21%) minmax(0, 1fr) minmax(185px, 21%);}
-        .slideshow {grid-template-columns: minmax(65px, 43%) minmax(0, 1fr); gap: 6px; padding: 7px;}
-        .dados-aniversariante h3 {font-size: 11px;}
-        .agenda-item {grid-template-columns: 47px minmax(0,1fr);}
+        .layout { grid-template-columns: minmax(190px, 21%) minmax(0, 1fr) minmax(190px, 21%); }
+        .slideshow { grid-template-columns: minmax(68px, 43%) minmax(0, 1fr); gap: 7px; padding: 9px; }
+        .dados-aniversariante h3 { font-size: 11px; }
     }
-    /* Tablets e telas pequenas: painel central primeiro e cartões em grade. */
     @media (max-width: 900px) {
-        html, body {height: auto; min-height: 100%;}
-        body {overflow: auto;}
-        .overlay {height: auto; min-height: 100vh; overflow: visible;}
-        .layout {display: flex; flex-direction: column; overflow: visible;}
-        .main-panel {order: -1;}
-        .infrequencia {height: auto; min-height: 0;}
-        .infrequencia img {width: 100%; height: auto; max-height: none;}
-        .side-panel {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));}
-        .side-panel .grande {grid-column: 1 / -1; min-height: 260px; overflow: hidden;}
-        .grande .agenda-lista {overflow: visible;}
-        .right-panel {grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto;}
-        .right-panel .card {min-height: 210px;}
-        .slideshow {grid-template-columns: 1fr; grid-template-rows: minmax(130px, 1fr) auto;}
-        .dados-aniversariante {align-items: center; text-align: center;}
+        html, body { height: auto; min-height: 100%; }
+        body { overflow: auto; }
+        .overlay { height: auto; min-height: 100vh; overflow: visible; }
+        .layout { display: flex; flex-direction: column; overflow: visible; }
+        .main-panel { order: -1; }
+        .side-panel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .side-panel .grande { grid-column: 1 / -1; min-height: 260px; overflow: hidden; }
+        .grande .agenda-lista { overflow: visible; }
+        .right-panel { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto; }
+        .right-panel .card { min-height: 210px; }
+        .slideshow { grid-template-columns: 1fr; grid-template-rows: minmax(130px, 1fr) auto; }
+        .dados-aniversariante { align-items: center; text-align: center; }
+        .header-main { align-items: flex-start; }
     }
     @media (max-width: 600px) {
-        .side-panel {grid-template-columns: 1fr;}
-        .side-panel .grande {grid-column: auto;}
-        .right-panel {grid-template-columns: 1fr;}
-        .right-panel .card {min-height: 215px;}
-        .slideshow {grid-template-columns: minmax(0, 45%) minmax(0, 1fr); grid-template-rows: minmax(160px,1fr);}
-        .dados-aniversariante {align-items: flex-start; text-align: left;}
-        .dados-aniversariante h3 {font-size: 15px;}
+        .side-panel { grid-template-columns: 1fr; }
+        .side-panel .grande { grid-column: auto; }
+        .right-panel { grid-template-columns: 1fr; }
+        .right-panel .card { min-height: 215px; }
+        .slideshow { grid-template-columns: minmax(0, 45%) minmax(0, 1fr); grid-template-rows: minmax(160px,1fr); }
+        .dados-aniversariante { align-items: flex-start; text-align: left; }
+        .dados-aniversariante h3 { font-size: 15px; }
+        .header-info-chips { justify-content: flex-start; }
     }
+
+/* ================== INFREQUÊNCIA EDITÁVEL ================== */
+.infrequencia {
+  display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start;
+  padding:0; background:linear-gradient(180deg, rgba(250,253,255,.96), rgba(239,247,255,.96)); gap:0; height:100%; min-height:0;
+}
+.infreq-hero {
+  position:relative; overflow:hidden;
+  display:flex; justify-content:space-between; align-items:center; gap:14px;
+  padding:18px 18px 16px; color:white;
+  background:linear-gradient(115deg,#062d63 0%,#0a5aa5 60%,#1176bc 100%);
+  border-bottom:4px solid #53bf70; flex:0 0 auto;
+}
+.infreq-hero::before { content:""; position:absolute; width:220px; height:220px; border-radius:999px; background:rgba(255,255,255,.08); top:-120px; right:-60px; }
+.hero-left, .hero-painel-meta { position:relative; z-index:1; }
+.hero-tag { display:inline-flex; padding:5px 10px; border-radius:999px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.18); font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px; }
+.hero-painel-meta { display:flex; gap:8px; align-items:stretch; flex-wrap:wrap; justify-content:flex-end; }
+.hero-mini-card { min-width:92px; padding:10px 12px; border-radius:14px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.16); backdrop-filter: blur(5px); text-align:center; }
+.hero-mini-card span { display:block; font-size:10px; opacity:.85; text-transform:uppercase; letter-spacing:.06em; }
+.hero-mini-card strong { display:block; font-size:17px; margin-top:3px; }
+.infreq-hero h1 {margin:0; font-size:clamp(16px,1.25vw,24px); line-height:1.12; letter-spacing:.03em;}
+.infreq-hero p {margin:6px 0 0; font-size:clamp(10px,.72vw,13px); opacity:.92; max-width:760px;}
+.infreq-hero .hero-ponto {display:none;}
+.infreq-toolbar {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  column-gap:10px; row-gap:9px; padding:12px 14px 10px;
+  background:linear-gradient(180deg, #ffffff, #f7fbff); border-bottom:1px solid #e0eaf4; flex:0 0 auto;
+}
+.infreq-controles, .infreq-acoes {display:flex; gap:6px; flex-wrap:wrap; align-items:center;}
+.infreq-controles label {color:#58728d; font-size:10px; font-weight:700;}
+.infreq-toolbar select, .infreq-toolbar input, .infreq-toolbar button, .infreq-toolbar .botao-arquivo {
+  height:34px; padding:0 10px; border-radius:10px; border:1px solid #cfdeee;
+  color:#174272; background:linear-gradient(180deg, #f9fcff, #eef6ff); font:600 10px 'Poppins',Arial,sans-serif; box-shadow: 0 4px 10px rgba(16,92,160,.05);
+}
+.infreq-toolbar button, .infreq-toolbar .botao-arquivo {cursor:pointer; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap;}
+.infreq-toolbar button:hover, .infreq-toolbar .botao-arquivo:hover {background:#e4f1ff;}
+.infreq-toolbar .acao-primaria {background:#0c5ba4; border-color:#0c5ba4; color:#fff;}
+.infreq-toolbar .acao-primaria:hover {background:#073f7b;}
+.infreq-toolbar .acao-backup {color:#0d5a38; border-color:#badfc9; background:#f2fbf6;}
+.infreq-resumo {display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; padding:12px 14px 10px; flex:0 0 auto;}
+.infreq-kpi {border:1px solid #dfebf5; border-radius:16px; padding:10px 12px; background:linear-gradient(180deg, #ffffff, #f6fbff); min-width:0; box-shadow: 0 10px 20px rgba(14,76,140,.05);}
+.infreq-kpi .kpi-rotulo {display:block; color:#5d7894; font-weight:600; font-size:clamp(8px,.57vw,11px); line-height:1.2;}
+.infreq-kpi strong {display:block; color:#08386e; font-size:clamp(17px,1.15vw,23px); line-height:1.32; font-weight:700; font-variant-numeric:tabular-nums;}
+.infreq-kpi small {display:block; color:#6a849c; font-size:clamp(8px,.53vw,10px); line-height:1.25;}
+.infreq-tabela-area {flex:1 1 auto; min-height:0; overflow:auto; margin:0 12px; background:#fff; border:1px solid #e1eaf2; border-radius:18px; scrollbar-width:thin; scrollbar-color:#9fb9d4 transparent; box-shadow: inset 0 1px 0 rgba(255,255,255,.95), 0 10px 26px rgba(10,68,130,.06);}
+.infreq-tabela {width:100%; min-width:1020px; border-collapse:separate; border-spacing:0; table-layout:fixed; font-family:'Poppins',Arial,sans-serif; font-size:clamp(9px,.63vw,11px); color:#123456; text-align:center;}
+.infreq-tabela col.col-serie {width:59px;} .infreq-tabela col.col-turma {width:72px;} .infreq-tabela col.col-turno {width:70px;} .infreq-tabela col.col-dia {width:25px;} .infreq-tabela col.col-matriculas {width:64px;}
+.infreq-tabela th,.infreq-tabela td {height:27px; padding:0 2px; border-right:1px solid #c6daec; border-bottom:1px solid #c6daec; overflow:hidden; white-space:nowrap;}
+.infreq-tabela thead th {position:sticky; top:0; z-index:4; background:linear-gradient(180deg, #2e915f, #247b4e); color:#fff; font-weight:700; height:36px;}
+.infreq-tabela .linha-turma td {background:#f9fcff;}
+.infreq-tabela .linha-turma.vespertino td {background:#eff7ff;}
+.infreq-tabela .linha-turma.matutino td {background:#e8f3ff;}
+.infreq-tabela .linha-turma:hover td:not(.status-dia) {background:#f9f6e8;}
+.infreq-tabela .linha-turma td.info-turma {font-weight:700; text-align:left; padding-left:7px; background:#f4f9fe;}
+.infreq-tabela .linha-turma.matutino td.info-turma {background:#d7eafa;}
+.infreq-tabela .linha-turma td.celula-numero {cursor:pointer; font-variant-numeric:tabular-nums; font-weight:600; color:#124b88;}
+.infreq-tabela td.celula-numero:hover {outline:2px inset #0575c5; background:#e8f8ff !important;}
+.infreq-tabela td.celula-numero.futuro {color:#92a6ba;}
+.infreq-tabela .dia-especial, .infreq-tabela .linha-turma td.status-dia {background:#cbe8b9 !important; color:#245d3b;}
+.infreq-tabela .linha-turma td.status-dia {font-weight:700; font-size:9px; cursor:pointer;}
+.infreq-tabela .linha-turma td.status-dia:hover {background:#b1e1a2 !important;}
+.infreq-tabela .dia-hoje {box-shadow:inset 2px 0 #ebb12b,inset -2px 0 #ebb12b;}
+.infreq-tabela thead th.dia-hoje {background:#d4a224; color:#0d3263;}
+.infreq-tabela thead th.cab-dia {cursor:pointer;} .infreq-tabela thead th.cab-dia:hover {background:#16683e;}
+.infreq-tabela .total-matriculas {background:#eaf4fd; font-weight:700; color:#0d4277; cursor:pointer;}
+.infreq-tabela .total-matriculas:hover {background:#d4eaff;}
+.infreq-tabela .linha-total td {background:#ffe9ad; font-weight:700; height:30px;}
+.infreq-tabela .linha-total.matutino td {background:#ffeec5;}
+.infreq-tabela .linha-geral td {background:linear-gradient(180deg,#12457f,#0c3565); color:white; font-weight:700; height:30px;}
+.infreq-tabela .linha-geral td.status-dia {background:#386e72 !important; color:#d3f5df;}
+.infreq-tabela th.sticky1,.infreq-tabela td.sticky1 {position:sticky; left:0; z-index:2;}
+.infreq-tabela th.sticky2,.infreq-tabela td.sticky2 {position:sticky; left:59px; z-index:2;}
+.infreq-tabela th.sticky3,.infreq-tabela td.sticky3 {position:sticky; left:131px; z-index:2; box-shadow:2px 0 4px #00000009;}
+.infreq-tabela thead th.sticky1,.infreq-tabela thead th.sticky2,.infreq-tabela thead th.sticky3 {z-index:6; background:#1d6a43;}
+.infreq-tabela .linha-total td.sticky1,.infreq-tabela .linha-total td.sticky2,.infreq-tabela .linha-total td.sticky3 {background:#ffe8a3;}
+.infreq-tabela .linha-total.matutino td.sticky1,.infreq-tabela .linha-total.matutino td.sticky2,.infreq-tabela .linha-total.matutino td.sticky3 {background:#ffeec5;}
+.infreq-tabela .linha-geral td.sticky1,.infreq-tabela .linha-geral td.sticky2,.infreq-tabela .linha-geral td.sticky3 {background:#113e73;}
+.infreq-rodape {flex:0 0 auto; padding:10px 14px 12px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center; font-size:clamp(9px,.59vw,11px); color:#53718d;}
+.infreq-legenda {display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.infreq-legenda i {display:inline-block; width:10px; height:10px; vertical-align:-1px; border-radius:2px; margin-right:3px;}
+.infreq-salvamento {font-weight:600; color:#507a60;}
+.infreq-dica {color:#597895; font-size:clamp(9px,.61vw,11px); padding:2px 14px 8px; line-height:1.3;}
+.infreq-modal {border:0; border-radius:16px; padding:0; width:min(720px,96vw); max-height:90vh; box-shadow:0 22px 90px #071e3f55; overflow:hidden; color:#15365a;}
+.infreq-modal::backdrop {background:#051e41a6; backdrop-filter:blur(3px);}
+.infreq-modal .modal-barra {background:linear-gradient(95deg,#073773,#1161a7); color:#fff; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; gap:12px;}
+.infreq-modal h2 {margin:0; font-size:18px; line-height:1.2;}
+.infreq-modal .modal-subtitulo {font-size:11px; opacity:.85; margin-top:3px;}
+.infreq-modal .fechar-modal {border:0; border-radius:7px; background:#ffffff25; color:#fff; font-size:22px; line-height:1; padding:3px 9px; cursor:pointer;}
+.infreq-modal .modal-conteudo {padding:16px 18px; max-height:calc(90vh - 130px); overflow-y:auto; background:#f7fbff;}
+.infreq-modal .form-linha {display:flex; flex-wrap:wrap; gap:10px; margin:0 0 14px; align-items:end;}
+.infreq-modal label {display:flex; flex-direction:column; gap:5px; color:#446689; font-size:11px; font-weight:700;}
+.infreq-modal input,.infreq-modal select {border:1px solid #b9cee2; border-radius:8px; background:#fff; height:36px; font:600 13px 'Poppins',Arial,sans-serif; color:#153c68; padding:4px 8px;}
+.infreq-modal .campo-pequeno {width:130px;}
+.infreq-modal .campo-status {flex:1; min-width:180px;}
+.infreq-modal .editor-hint {border:1px solid #dbe9f6; border-radius:9px; padding:9px 11px; background:#eef6ff; color:#466483; font-size:11px; margin-bottom:12px;}
+.infreq-modal .grupo-turno {margin:12px 0 5px; color:#0d528a; font-size:13px; font-weight:700; border-bottom:2px solid #d5e6f5; padding-bottom:4px;}
+.infreq-modal .editor-cab {display:grid; grid-template-columns:minmax(0,1fr) 92px 115px; gap:10px; padding:3px 7px; font-size:10px; color:#6c859c; font-weight:700;}
+.infreq-modal .editor-linha {display:grid; grid-template-columns:minmax(0,1fr) 92px 115px; align-items:center; gap:10px; padding:5px 7px; border-radius:7px; font-size:12px;}
+.infreq-modal .editor-linha:nth-of-type(even){background:#eaf3fc;}
+.infreq-modal .editor-linha strong {font-size:12px; color:#153a63;}
+.infreq-modal .editor-linha .qtd-turma {font-size:11px; color:#6a829c; text-align:center;}
+.infreq-modal .editor-linha input {width:100%; height:32px; text-align:center; font-size:14px; font-variant-numeric:tabular-nums;}
+.infreq-modal .editor-linha input:disabled {background:#e4ecf2; opacity:.6;}
+.infreq-modal .modal-rodape {display:flex; align-items:center; justify-content:space-between; gap:9px; padding:11px 18px; background:white; border-top:1px solid #dce8f4;}
+.infreq-modal button.modal-btn {cursor:pointer; font:700 11px 'Poppins',Arial,sans-serif; padding:10px 14px; border-radius:8px; border:1px solid #bdd0e5; color:#164a78; background:#f4f9ff;}
+.infreq-modal button.modal-btn.primario {background:#0a5599; color:white; border-color:#0a5599;}
+.infreq-modal button.modal-btn.secundario {color:#397452; background:#f1faf4; border-color:#bfdfc9;}
+.infreq-modal .modal-rodape .rodape-direita {display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end;}
+.infreq-modal .editor-totais {display:flex; gap:12px; justify-content:flex-end; padding:10px 7px 3px; color:#1b4d81; font-size:12px; font-weight:700;}
+.infreq-modal .editor-totais strong {color:#0b3a70;}
+.infreq-modal .mensagem-erro {margin-top:10px; font-size:11px; color:#a32828; font-weight:600; min-height:15px;}
+@media (max-width:1250px) and (min-width:901px) {
+ .infreq-hero {padding:9px 11px 8px;} .infreq-toolbar{padding:7px 8px;gap:4px;}
+ .infreq-toolbar button,.infreq-toolbar select,.infreq-toolbar .botao-arquivo {font-size:9px; padding:0 6px; height:27px;}
+ .infreq-resumo{gap:5px;padding:7px 8px;} .infreq-kpi {padding:5px 7px;} .infreq-kpi strong{font-size:17px;}
+ .infreq-rodape{padding:6px 9px;font-size:9px;}
+}
+@media (max-width:900px) {
+ .infrequencia {min-height:570px;height:auto;}
+ .infreq-tabela-area {min-height:400px;flex:none;max-height:62vh;}
+ .infreq-hero .hero-ponto {display:none;}
+}
+@media (max-width:600px) {
+ .infreq-resumo{grid-template-columns:repeat(2,minmax(0,1fr));}
+ .infreq-modal .modal-conteudo {padding:12px 9px;}
+ .infreq-modal .editor-linha {grid-template-columns:minmax(0,1fr) 55px 72px;gap:5px; padding:5px 2px;}
+ .infreq-modal .editor-cab {grid-template-columns:minmax(0,1fr) 55px 72px;gap:5px;}
+ .infreq-modal .editor-linha strong {font-size:10px;}
+}
 
 </style>
 </head>
 <body>
 <div class="overlay">
-    <header>PAINEL DE NOTÍCIAS 2026 — EMEF EZEQUIEL RUIZ II</header>
+    <header>
+        <div class="header-bg-shape shape-left" aria-hidden="true"></div>
+        <div class="header-bg-shape shape-right" aria-hidden="true"></div>
+        <div class="header-topline">
+            <span class="header-badge">EMEF EZEQUIEL RUIZ II</span>
+            <span class="header-slogan">A educação começa em casa, a escola lapida.</span>
+        </div>
+        <div class="header-main">
+            <div class="header-title-wrap">
+                <div class="header-kicker">Painel institucional 2026</div>
+                <h1>PAINEL DE NOTÍCIAS</h1>
+                <p>Monitoramento escolar • comunicados • aniversariantes • infrequência</p>
+            </div>
+            <div class="header-info-chips" aria-label="Informações do painel">
+                <span class="info-chip">✨ Visual 2.0</span>
+                <span class="info-chip">📍 Bela Vista • Manacapuru-AM</span>
+            </div>
+        </div>
+    </header>
 
     <div class="layout">
         <aside class="side-panel" aria-label="Informações da escola">
@@ -340,9 +466,48 @@
         </aside>
 
         <main class="main-panel">
-            <div class="card infrequencia">
-                <img src="IFF4.png" alt="Quadro de monitoramento da infrequência escolar">
-            </div>
+            <section class="card infrequencia" aria-label="Monitoramento digital da infrequência escolar">
+                <div class="infreq-hero">
+                    <div class="hero-left">
+                        <span class="hero-tag">Monitoramento Escolar</span>
+                        <h1>ACOMPANHAMENTO DA INFREQUÊNCIA</h1>
+                        <p>Quadro digital integrado ao painel • lançamentos diretamente na tela • acompanhamento diário por turma</p>
+                    </div>
+                    <div class="hero-painel-meta">
+                        <div class="hero-mini-card"><span>Ano letivo</span><strong id="ano-letivo-indicador">2026</strong></div>
+                        <div class="hero-mini-card"><span>Status</span><strong>Online</strong></div>
+                    </div>
+                </div>
+                <div class="infreq-toolbar">
+                    <div class="infreq-controles">
+                        <label for="mes-selecionado">Mês</label>
+                        <select id="mes-selecionado" aria-label="Mês do monitoramento"></select>
+                        <label for="ano-selecionado">Ano</label>
+                        <input id="ano-selecionado" type="number" min="2020" max="2100" value="2026" style="width:69px" aria-label="Ano do monitoramento">
+                    </div>
+                    <div class="infreq-acoes">
+                        <button type="button" class="acao-primaria" id="btn-registrar">+ Registrar faltas</button>
+                        <button type="button" id="btn-matriculas">Matrículas</button>
+                        <button type="button" class="acao-backup" id="btn-exportar">↓ Backup</button>
+                        <button type="button" id="btn-importar">↑ Restaurar</button>
+                        <input type="file" id="arquivo-importacao" accept=".json,application/json" hidden>
+                    </div>
+                </div>
+                <div class="infreq-resumo" aria-label="Resumo automático da infrequência">
+                    <div class="infreq-kpi"><span class="kpi-rotulo">MATRÍCULAS</span><strong id="kpi-matriculas">—</strong><small>Total das turmas</small></div>
+                    <div class="infreq-kpi"><span class="kpi-rotulo">FALTAS DO ÚLTIMO DIA</span><strong id="kpi-dia">—</strong><small id="kpi-dia-legenda">Sem lançamento</small></div>
+                    <div class="infreq-kpi"><span class="kpi-rotulo">FALTAS ACUMULADAS</span><strong id="kpi-mes">—</strong><small>No mês selecionado</small></div>
+                    <div class="infreq-kpi"><span class="kpi-rotulo">DIAS REGISTRADOS</span><strong id="kpi-registros">—</strong><small id="kpi-registros-legenda">Aguardando dados</small></div>
+                </div>
+                <div class="infreq-dica">Clique em um número ou na data da tabela para lançar ou corrigir as faltas daquele dia.</div>
+                <div class="infreq-tabela-area" role="region" tabindex="0" aria-label="Tabela mensal de infrequência, rolável horizontalmente">
+                    <table class="infreq-tabela" id="tabela-infrequencia"><caption style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">Registros de faltas por turma, dia e turno</caption></table>
+                </div>
+                <div class="infreq-rodape">
+                    <div class="infreq-legenda"><span><i style="background:#dfefff"></i>Aulas</span><span><i style="background:#cbe8b9"></i>Sem aula / feriados</span><span><i style="background:#ffe8a3"></i>Total por turno</span></div>
+                    <span id="status-salvamento" class="infreq-salvamento" role="status">Dados salvos neste navegador</span>
+                </div>
+            </section>
         </main>
 
         <aside class="right-panel" aria-label="Aniversariantes do mês">
@@ -388,6 +553,24 @@
         </aside>
     </div>
 </div>
+
+
+<!-- Edição por dia: os dados só são alterados ao clicar em Salvar. -->
+<dialog class="infreq-modal" id="modal-dia" aria-labelledby="modal-dia-titulo">
+  <div class="modal-barra"><div><h2 id="modal-dia-titulo">Registrar infrequência</h2><div class="modal-subtitulo">Preencha o número de alunos ausentes em cada turma.</div></div><button type="button" class="fechar-modal" data-fechar="modal-dia" aria-label="Fechar">×</button></div>
+  <div class="modal-conteudo">
+     <div class="form-linha"><label>Dia<select id="editor-dia" class="campo-pequeno"></select></label><label class="campo-status">Situação da escola<select id="editor-situacao"><option value="auto">Automática (conforme o calendário)</option><option value="A">Aula normal</option><option value="F">Feriado</option><option value="N">Sem aula</option><option value="P">Ponto facultativo</option><option value="S">Sábado (sem aula)</option><option value="D">Domingo (sem aula)</option></select></label></div>
+     <div class="editor-hint" id="aviso-situacao">Deixe um campo vazio quando a turma ainda não tiver informado. Preencha 0 quando não houver faltas.</div>
+     <div id="editor-lista"></div><div class="editor-totais" id="editor-total"></div><div class="mensagem-erro" id="erro-editor" role="alert"></div>
+  </div>
+  <div class="modal-rodape"><button class="modal-btn secundario" type="button" id="btn-zerar">Preencher vazios com 0</button><div class="rodape-direita"><button class="modal-btn" type="button" data-fechar="modal-dia">Cancelar</button><button class="modal-btn primario" type="button" id="btn-salvar-dia">Salvar dia</button></div></div>
+</dialog>
+<!-- Ajuste das matrículas por turma. -->
+<dialog class="infreq-modal" id="modal-matriculas" aria-labelledby="modal-matriculas-titulo">
+  <div class="modal-barra"><div><h2 id="modal-matriculas-titulo">Matrículas por turma</h2><div class="modal-subtitulo">Quantidade de alunos por turma no mês selecionado.</div></div><button type="button" class="fechar-modal" data-fechar="modal-matriculas" aria-label="Fechar">×</button></div>
+  <div class="modal-conteudo"><div class="editor-hint">Os totais do painel são atualizados automaticamente após salvar. Matrículas não são faltas.</div><div id="matriculas-lista"></div><div class="mensagem-erro" id="erro-matriculas" role="alert"></div></div>
+  <div class="modal-rodape"><span style="font-size:11px;color:#58708a">Salvamento local neste navegador.</span><div class="rodape-direita"><button class="modal-btn" type="button" data-fechar="modal-matriculas">Cancelar</button><button class="modal-btn primario" type="button" id="btn-salvar-matriculas">Salvar matrículas</button></div></div>
+</dialog>
 
 <script>
     'use strict';
@@ -495,7 +678,7 @@
 
     // DADOS DOS ANIVERSARIANTES — preservados do arquivo enviado.
     const aniversariantesFunc = [
-    { nome:"Xandi - 18/11", foto:"xandi.jpg" },
+    { nome:"Xandi - 18/11", foto:"foto100.jpg" },
     { nome:"Alcenir Alves - 25/11", foto:"foto200.jpg" }  
 ];
 
@@ -546,6 +729,370 @@
     iniciarSlideshow(aniversariantesFunc, 'fotoAniversarianteFunc', 'nomeAniversarianteFunc', 'dataAniversarianteFunc');
     iniciarSlideshow(aniversariantesMatutino, 'fotoAniversarianteMatutino', 'nomeAniversarianteMatutino', 'dataAniversarianteMatutino');
     iniciarSlideshow(aniversariantesVespertino, 'fotoAniversarianteVespertino', 'nomeAniversarianteVespertino', 'dataAniversarianteVespertino');
+
+/* ========== CONTROLE DE INFREQUÊNCIA ==========
+ * Sem servidor: cada alteração é gravada no armazenamento deste navegador.
+ * Para mudar de computador, exporte e restaure o arquivo de backup .json.
+ */
+const INFREQ_STORAGE = 'ruiz_infrequencia_2026_v1';
+const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const TURMAS = [
+  {serie:'1º ANO', turma:'A', turno:'Vespertino',mat:24},
+  {serie:'1º ANO', turma:'B', turno:'Vespertino',mat:22},
+  {serie:'2º ANO', turma:'ÚNICA', turno:'Vespertino',mat:25},
+  {serie:'2º ANO', turma:'MULT. ÚNICA', turno:'Vespertino',mat:19},
+  {serie:'3º ANO', turma:'ÚNICA', turno:'Vespertino',mat:30},
+  {serie:'3º ANO', turma:'MULT. ÚNICA', turno:'Vespertino',mat:8},
+  {serie:'4º ANO', turma:'ÚNICA', turno:'Vespertino',mat:25},
+  {serie:'4º ANO', turma:'MULT. ÚNICA', turno:'Vespertino',mat:14},
+  {serie:'5º ANO', turma:'MULT. ÚNICA', turno:'Vespertino',mat:7},
+  {serie:'5º ANO', turma:'ÚNICA', turno:'Matutino',mat:23},
+  {serie:'6º ANO', turma:'A', turno:'Matutino',mat:27},
+  {serie:'6º ANO', turma:'B', turno:'Matutino',mat:24},
+  {serie:'7º ANO', turma:'A', turno:'Matutino',mat:31},
+  {serie:'7º ANO', turma:'B', turno:'Matutino',mat:27},
+  {serie:'8º ANO', turma:'ÚNICA', turno:'Matutino',mat:33},
+  {serie:'9º ANO', turma:'ÚNICA', turno:'Matutino',mat:38}
+];
+const FERIADOS_FIXOS = {
+  '01-01':'Confraternização Universal','04-21':'Tiradentes','05-01':'Dia do Trabalho',
+  '09-07':'Independência do Brasil','10-12':'Nossa Senhora Aparecida',
+  '11-02':'Finados','11-15':'Proclamação da República',
+  '11-20':'Dia Nacional de Zumbi e da Consciência Negra','12-25':'Natal'
+};
+const NOMES_STATUS = {A:'Aula normal',F:'Feriado',N:'Sem aula',P:'Ponto facultativo',S:'Sábado',D:'Domingo'};
+let infreqDados = {};
+let infreqAno = 2026;
+let infreqMes = 11;
+let diaEdicao = 4;
+let houveErroDeArmazenamento = false;
+
+function criarBase(mes,ano) {
+  const base = {matriculas:TURMAS.map(t=>t.mat),status:{},faltas:{}};
+  // Transcrição apenas dos números visíveis no quadro enviado: 03/11/2026.
+  if (mes===11 && ano===2026) {
+    const dia3 = [5,4,1,4,9,2,2,2,1,3,0,4,2,3,0,7];
+    base.faltas['3'] = dia3;
+  }
+  return base;
+}
+function chaveMes() {return infreqAno+'-'+String(infreqMes).padStart(2,'0');}
+function diasNoMes() {return new Date(infreqAno,infreqMes,0).getDate();}
+function textoDia(dia) {return String(dia).padStart(2,'0')+'/'+String(infreqMes).padStart(2,'0')+'/'+infreqAno;}
+function registrarStatus(texto,erro=false) {
+  const alvo=document.getElementById('status-salvamento');
+  alvo.textContent=texto; alvo.style.color=erro?'#a12a2a':'#507a60';
+}
+function lerArmazenamento() {
+  try {
+    const raw=localStorage.getItem(INFREQ_STORAGE);
+    const parsed=raw?JSON.parse(raw):{};
+    if (parsed && typeof parsed==='object' && !Array.isArray(parsed)) infreqDados=parsed;
+  } catch(e) {houveErroDeArmazenamento=true; registrarStatus('Armazenamento indisponível: faça backup dos dados',true);}
+}
+function gravarArmazenamento() {
+  try {
+    localStorage.setItem(INFREQ_STORAGE,JSON.stringify(infreqDados));
+    houveErroDeArmazenamento=false;
+    registrarStatus('✓ Salvo neste navegador • '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));
+  } catch(e) {houveErroDeArmazenamento=true; registrarStatus('Não foi possível salvar. Exporte um backup!',true);}
+}
+function dadosMes() {
+  const key=chaveMes();
+  if (!infreqDados[key] || !Array.isArray(infreqDados[key].matriculas) || infreqDados[key].matriculas.length!==TURMAS.length) {
+    infreqDados[key]=criarBase(infreqMes,infreqAno);
+    gravarArmazenamento();
+  }
+  return infreqDados[key];
+}
+function statusAutomatico(dia) {
+  const data=new Date(infreqAno,infreqMes-1,dia);
+  const semana=data.getDay();
+  if (semana===0) return 'D';
+  if (semana===6) return 'S';
+  if (FERIADOS_FIXOS[String(infreqMes).padStart(2,'0')+'-'+String(dia).padStart(2,'0')]) return 'F';
+  return 'A';
+}
+function obterStatus(dia,registro=dadosMes()) {
+  const escolha=(registro.status||{})[String(dia)];
+  return escolha && NOMES_STATUS[escolha]?escolha:statusAutomatico(dia);
+}
+function quantidade(registro,dia,indice) {
+  const lista=(registro.faltas||{})[String(dia)];
+  if (!Array.isArray(lista)) return null;
+  const valor=lista[indice];
+  return Number.isInteger(valor) && valor>=0?valor:null;
+}
+function somarDia(registro,dia,inicio=0,fim=TURMAS.length) {
+  if(obterStatus(dia,registro)!=='A') return null;
+  let total=0,registrados=0;
+  for(let i=inicio;i<fim;i++) {
+    const n=quantidade(registro,dia,i);
+    if(n!==null){total+=n;registrados++;}
+  }
+  return registrados?{total,registrados,esperados:fim-inicio}:null;
+}
+function somarMatriculas(registro,inicio=0,fim=TURMAS.length) {
+  return registro.matriculas.slice(inicio,fim).reduce((s,n)=>s+(Number.isInteger(n)&&n>=0?n:0),0);
+}
+function el(tag,attrs={},texto) {
+  const novo=document.createElement(tag);
+  Object.entries(attrs).forEach(([chave,valor])=>{
+    if(chave==='className') novo.className=valor;
+    else if(chave==='title') novo.title=valor;
+    else novo.setAttribute(chave,valor);
+  });
+  if(texto!==undefined) novo.textContent=texto;
+  return novo;
+}
+function preencherTabela() {
+  const t=document.getElementById('tabela-infrequencia'),reg=dadosMes(),limite=diasNoMes();
+  t.replaceChildren();
+  const cols=el('colgroup');
+  for(const cls of ['col-serie','col-turma','col-turno',...Array(limite).fill('col-dia'),'col-matriculas'])cols.append(el('col',{className:cls}));
+  t.append(cols);
+  const thead=el('thead'),trH=el('tr');
+  for(const [txt,cls] of [['Série','sticky1'],['Turma','sticky2'],['Turno','sticky3']]) trH.append(el('th',{className:cls,scope:'col'},txt));
+  const hoje=new Date();
+  for(let dia=1;dia<=limite;dia++){
+    const status=obterStatus(dia,reg);
+    let cls='cab-dia'+(status!=='A'?' dia-especial':'')+(hoje.getDate()===dia && hoje.getMonth()+1===infreqMes && hoje.getFullYear()===infreqAno?' dia-hoje':'');
+    const th=el('th',{className:cls,scope:'col','data-dia':dia,title:textoDia(dia)+' • '+NOMES_STATUS[status]+' • Clique para lançar'},String(dia));
+    trH.append(th);
+  }
+  trH.append(el('th',{'scope':'col'},'Matríc.'));
+  thead.append(trH);t.append(thead);
+  const tbody=el('tbody');
+  TURMAS.forEach((turma,indice)=>{
+    const tr=el('tr',{className:'linha-turma '+turma.turno.toLowerCase()});
+    tr.append(el('td',{className:'info-turma sticky1'},turma.serie));
+    tr.append(el('td',{className:'info-turma sticky2'},turma.turma));
+    tr.append(el('td',{className:'info-turma sticky3'},turma.turno==='Vespertino'?'VESP.':'MAT.'));
+    for(let dia=1;dia<=limite;dia++) {
+      const status=obterStatus(dia,reg);
+      const valor=quantidade(reg,dia,indice);
+      const thHoje=hoje.getDate()===dia && hoje.getMonth()+1===infreqMes && hoje.getFullYear()===infreqAno;
+      let cls=(status==='A'?'celula-numero':'status-dia')+(thHoje?' dia-hoje':'');
+      let conteudo=status!=='A'?({F:'F',N:'—',P:'P',S:'S',D:'D'}[status]||'—'):(valor===null?'':String(valor));
+      const cel=el('td',{className:cls,'data-dia':dia,title:turma.serie+' '+turma.turma+' • '+textoDia(dia)+' • '+(status==='A'?(valor===null?'Não lançado':valor+' falta(s)'):NOMES_STATUS[status])},conteudo);
+      if(status==='A' && valor===null)cel.classList.add('futuro');
+      tr.append(cel);
+    }
+    tr.append(el('td',{className:'total-matriculas',title:'Clique para ajustar as matrículas'},String(reg.matriculas[indice]??'—')));
+    tbody.append(tr);
+    if(indice===8) tbody.append(criarLinhaTotal('VESPERTINO',0,9,reg,limite,'linha-total'));
+  });
+  tbody.append(criarLinhaTotal('MATUTINO',9,16,reg,limite,'linha-total matutino'));
+  tbody.append(criarLinhaTotal('TOTAL GERAL',0,16,reg,limite,'linha-geral'));
+  t.append(tbody);
+  atualizarKPIs(reg,limite);
+  document.getElementById('ano-letivo-indicador').textContent=infreqAno;
+}
+function criarLinhaTotal(rotulo,inicio,fim,reg,limite,classe) {
+  const tr=el('tr',{className:classe});
+  tr.append(el('td',{className:'sticky1'},''));tr.append(el('td',{className:'sticky2'},'TOTAL'));
+  tr.append(el('td',{className:'sticky3'},rotulo));
+  for(let dia=1;dia<=limite;dia++){
+    const status=obterStatus(dia,reg),soma=somarDia(reg,dia,inicio,fim);
+    const texto=status!=='A'?'':soma?String(soma.total):'';
+    tr.append(el('td',{className:status==='A'?'':'status-dia',title:soma?`${soma.registrados}/${soma.esperados} turmas registradas`:NOMES_STATUS[status]},texto));
+  }
+  tr.append(el('td',{},String(somarMatriculas(reg,inicio,fim))));
+  return tr;
+}
+function atualizarKPIs(reg,limite) {
+  document.getElementById('kpi-matriculas').textContent=String(somarMatriculas(reg));
+  let dias=0,completos=0,totalMes=0,ultimoDia=0,ultimaSoma=0,ultimoQtd=0;
+  for(let d=1;d<=limite;d++) {
+    const soma=somarDia(reg,d);
+    if(!soma)continue;
+    totalMes+=soma.total;dias++;
+    if(soma.registrados===TURMAS.length)completos++;
+    if(d>=ultimoDia){ultimoDia=d;ultimaSoma=soma.total;ultimoQtd=soma.registrados;}
+  }
+  document.getElementById('kpi-mes').textContent=dias?String(totalMes):'—';
+  document.getElementById('kpi-dia').textContent=ultimoDia?String(ultimaSoma):'—';
+  document.getElementById('kpi-dia-legenda').textContent=ultimoDia?
+    (String(ultimoDia).padStart(2,'0')+'/'+String(infreqMes).padStart(2,'0')+' • '+ultimoQtd+'/'+TURMAS.length+' turmas'):'Sem lançamento';
+  document.getElementById('kpi-registros').textContent=String(dias);
+  document.getElementById('kpi-registros-legenda').textContent=completos+' dia(s) completo(s)';
+}
+function trocarPeriodo() {
+  const mes=Number(document.getElementById('mes-selecionado').value);
+  const ano=Number(document.getElementById('ano-selecionado').value);
+  if(!Number.isInteger(ano)||ano<2020||ano>2100||!Number.isInteger(mes)||mes<1||mes>12){return;}
+  infreqMes=mes;infreqAno=ano;
+  preencherTabela();
+}
+function abrirDia(dia) {
+  diaEdicao=Math.min(diasNoMes(),Math.max(1,Number(dia)||1));
+  const combo=document.getElementById('editor-dia');combo.replaceChildren();
+  for(let d=1;d<=diasNoMes();d++)combo.append(el('option',{value:d},textoDia(d)));
+  combo.value=String(diaEdicao);
+  preencherEditorDia();
+  document.getElementById('modal-dia').showModal();
+}
+function preencherEditorDia() {
+  const reg=dadosMes(),dia=diaEdicao,situacao=reg.status?.[String(dia)]||'auto';
+  document.getElementById('editor-situacao').value=situacao;
+  document.getElementById('erro-editor').textContent='';
+  const div=document.getElementById('editor-lista');div.replaceChildren();
+  for(const [turno,inicio,fim] of [['Vespertino',0,9],['Matutino',9,16]]) {
+    div.append(el('div',{className:'grupo-turno'},'TURNO '+turno.toUpperCase()));
+    const cab=el('div',{className:'editor-cab'});
+    for(const rot of ['Turma','Matrículas','Faltas'])cab.append(el('span',{},rot));div.append(cab);
+    for(let i=inicio;i<fim;i++){
+      const linha=el('div',{className:'editor-linha'});
+      linha.append(el('strong',{},TURMAS[i].serie+' • '+TURMAS[i].turma));
+      linha.append(el('span',{className:'qtd-turma'},String(reg.matriculas[i]??'')));
+      const val=quantidade(reg,dia,i);
+      const campo=el('input',{type:'number',inputmode:'numeric',min:'0',max:String(reg.matriculas[i]||0),step:'1','data-registro':i,'aria-label':'Faltas da turma '+TURMAS[i].serie+' '+TURMAS[i].turma});
+      if(val!==null)campo.value=String(val);
+      linha.append(campo);div.append(linha);
+    }
+  }
+  aplicarStatusEditor();
+}
+function aplicarStatusEditor() {
+  const e=document.getElementById('editor-situacao');
+  const valor=e.value==='auto'?statusAutomatico(diaEdicao):e.value;
+  const permitido=valor==='A';
+  document.querySelectorAll('#editor-lista input[data-registro]').forEach(input=>input.disabled=!permitido);
+  document.getElementById('btn-zerar').disabled=!permitido;
+  const aviso=document.getElementById('aviso-situacao');
+  aviso.textContent=permitido?'Preencha o número de ausentes (0 quando ninguém faltou). Campos vazios significam “ainda não informado”.':'Dia marcado como '+NOMES_STATUS[valor]+'. Os campos de faltas ficam desabilitados; registros anteriores, se houver, não serão considerados nos totais.';
+  calcularTotalEditor();
+}
+function calcularTotalEditor(){
+  let soma=0,preenchidos=0;
+  document.querySelectorAll('#editor-lista input[data-registro]').forEach(input=>{
+    if(!input.disabled && input.value.trim()!=='' && Number.isFinite(Number(input.value))){soma+=Number(input.value);preenchidos++;}
+  });
+  document.getElementById('editor-total').replaceChildren(el('span',{},preenchidos+'/'+TURMAS.length+' turmas preenchidas'),el('strong',{},soma+' falta(s) registradas'));
+}
+function salvarDia() {
+  const reg=dadosMes(),statusSelect=document.getElementById('editor-situacao').value;
+  const status=statusSelect==='auto'?statusAutomatico(diaEdicao):statusSelect;
+  const valores=Array(TURMAS.length).fill(null);
+  if(status==='A'){
+    for(const input of document.querySelectorAll('#editor-lista input[data-registro]')){
+      const i=Number(input.dataset.registro),texto=input.value.trim();
+      if(texto==='')continue;
+      const n=Number(texto),mat=Number(reg.matriculas[i]);
+      if(!Number.isInteger(n)||n<0||n>mat){
+        document.getElementById('erro-editor').textContent='Valor inválido em '+TURMAS[i].serie+' '+TURMAS[i].turma+'. Use um número entre 0 e '+mat+'.';
+        input.focus();return;
+      }
+      valores[i]=n;
+    }
+  }
+  if(!reg.status)reg.status={};
+  if(statusSelect==='auto')delete reg.status[String(diaEdicao)];
+  else reg.status[String(diaEdicao)]=statusSelect;
+  if(!reg.faltas)reg.faltas={};
+  if(status==='A') {
+    if(valores.some(n=>n!==null))reg.faltas[String(diaEdicao)]=valores;
+    else delete reg.faltas[String(diaEdicao)];
+  }
+  gravarArmazenamento();preencherTabela();document.getElementById('modal-dia').close();
+}
+function abrirMatriculas(){
+  const reg=dadosMes(),div=document.getElementById('matriculas-lista');div.replaceChildren();
+  document.getElementById('erro-matriculas').textContent='';
+  for(const [turno,inicio,fim] of [['Vespertino',0,9],['Matutino',9,16]]){
+    div.append(el('div',{className:'grupo-turno'},'TURNO '+turno.toUpperCase()));
+    for(let i=inicio;i<fim;i++){
+      const linha=el('div',{className:'editor-linha'});
+      linha.style.gridTemplateColumns='minmax(0,1fr) 110px';
+      linha.append(el('strong',{},TURMAS[i].serie+' • '+TURMAS[i].turma));
+      const input=el('input',{type:'number',min:'0',max:'999',step:'1','data-matricula':i,'aria-label':'Matrículas '+TURMAS[i].serie+' '+TURMAS[i].turma});
+      input.value=String(reg.matriculas[i]||0);linha.append(input);div.append(linha);
+    }
+  }
+  document.getElementById('modal-matriculas').showModal();
+}
+function salvarMatriculas(){
+  const reg=dadosMes(),novas=[];
+  for(const input of document.querySelectorAll('#matriculas-lista input[data-matricula]')){
+    const n=Number(input.value),i=Number(input.dataset.matricula);
+    if(input.value.trim()===''||!Number.isInteger(n)||n<0||n>999){
+      document.getElementById('erro-matriculas').textContent='Informe uma quantidade válida de matrículas na turma '+TURMAS[i].serie+' '+TURMAS[i].turma+'.';
+      input.focus();return;
+    }
+    novas[i]=n;
+  }
+  // Evita inconsistências entre matrículas atuais e faltas já informadas.
+  for(const [dia,lista] of Object.entries(reg.faltas||{})){
+    if(!Array.isArray(lista))continue;
+    for(let i=0;i<TURMAS.length;i++)if(Number.isInteger(lista[i])&&lista[i]>novas[i]){
+      document.getElementById('erro-matriculas').textContent='A turma '+TURMAS[i].serie+' '+TURMAS[i].turma+' tem '+lista[i]+' faltas no dia '+dia+'. A matrícula não pode ficar abaixo desse valor.';
+      return;
+    }
+  }
+  reg.matriculas=novas;gravarArmazenamento();preencherTabela();document.getElementById('modal-matriculas').close();
+}
+function descarregarArquivo(nome,conteudo,tipo){
+  const url=URL.createObjectURL(new Blob([conteudo],{type:tipo}));
+  const a=document.createElement('a');a.href=url;a.download=nome;
+  document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
+}
+function exportarBackup(){
+  const dados={versao:1,escola:'EMEF Ezequiel Ruiz II',exportadoEm:new Date().toISOString(),periodos:infreqDados};
+  const hoje=new Date();
+  const carimbo=hoje.getFullYear()+'-'+String(hoje.getMonth()+1).padStart(2,'0')+'-'+String(hoje.getDate()).padStart(2,'0');
+  descarregarArquivo('Backup_Infrequencia_Ezequiel_Ruiz_'+carimbo+'.json',JSON.stringify(dados,null,2),'application/json;charset=utf-8');
+}
+async function importarBackup(e){
+  const arquivo=e.target.files[0];if(!arquivo)return;
+  try {
+    const dados=JSON.parse(await arquivo.text());
+    if(!dados||dados.versao!==1||!dados.periodos||typeof dados.periodos!=='object'||Array.isArray(dados.periodos))throw Error('Formato de backup não reconhecido.');
+    for(const [chave,mes] of Object.entries(dados.periodos)){
+      if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(chave)||!mes||!Array.isArray(mes.matriculas)||mes.matriculas.length!==TURMAS.length)throw Error('O backup contém registros incompatíveis.');
+      if(!mes.matriculas.every(n=>Number.isInteger(n)&&n>=0&&n<=999))throw Error('Matrículas inválidas no arquivo.');
+      for(const lista of Object.values(mes.faltas||{})){
+        if(!Array.isArray(lista)||lista.length!==TURMAS.length||lista.some((n,i)=>n!==null&&(!Number.isInteger(n)||n<0||n>mes.matriculas[i])))throw Error('O backup contém faltas incompatíveis.');
+      }
+    }
+    if(!confirm('Restaurar este backup? Todos os registros locais serão substituídos pelos dados do arquivo.'))return;
+    infreqDados=dados.periodos;gravarArmazenamento();preencherTabela();
+    alert('Backup restaurado com sucesso.');
+  } catch(erro) {alert('Não foi possível restaurar o arquivo: '+erro.message);}
+  finally {e.target.value='';}
+}
+function iniciarInfrequencia(){
+  const selecao=document.getElementById('mes-selecionado');
+  MESES.forEach((mes,i)=>selecao.append(el('option',{value:i+1},mes)));
+  const agora=new Date();infreqMes=agora.getMonth()+1;infreqAno=agora.getFullYear();
+  selecao.value=String(infreqMes);
+  document.getElementById('ano-selecionado').value=String(infreqAno);
+  lerArmazenamento();dadosMes();preencherTabela();
+  if(houveErroDeArmazenamento)registrarStatus('Armazenamento indisponível. Exporte backups!',true);
+  selecao.addEventListener('change',trocarPeriodo);
+  document.getElementById('ano-selecionado').addEventListener('change',trocarPeriodo);
+  document.getElementById('btn-registrar').addEventListener('click',()=>abrirDia(Math.min(diasNoMes(),new Date().getMonth()+1===infreqMes&&new Date().getFullYear()===infreqAno?new Date().getDate():1)));
+  document.getElementById('btn-matriculas').addEventListener('click',abrirMatriculas);
+  document.getElementById('btn-exportar').addEventListener('click',exportarBackup);
+  document.getElementById('btn-importar').addEventListener('click',()=>document.getElementById('arquivo-importacao').click());
+  document.getElementById('arquivo-importacao').addEventListener('change',importarBackup);
+  document.getElementById('tabela-infrequencia').addEventListener('click',e=>{
+    const cel=e.target.closest('[data-dia]');
+    if(cel){abrirDia(Number(cel.dataset.dia));return;}
+    if(e.target.closest('.total-matriculas'))abrirMatriculas();
+  });
+  document.getElementById('editor-dia').addEventListener('change',e=>{diaEdicao=Number(e.target.value);preencherEditorDia();});
+  document.getElementById('editor-situacao').addEventListener('change',aplicarStatusEditor);
+  document.getElementById('editor-lista').addEventListener('input',calcularTotalEditor);
+  document.getElementById('btn-zerar').addEventListener('click',()=>{
+    document.querySelectorAll('#editor-lista input[data-registro]:not(:disabled)').forEach(i=>{if(i.value==='')i.value='0';});
+    calcularTotalEditor();
+  });
+  document.getElementById('btn-salvar-dia').addEventListener('click',salvarDia);
+  document.getElementById('btn-salvar-matriculas').addEventListener('click',salvarMatriculas);
+  document.querySelectorAll('[data-fechar]').forEach(bt=>bt.addEventListener('click',()=>document.getElementById(bt.dataset.fechar).close()));
+}
+iniciarInfrequencia();
+
 </script>
 </body>
 </html>
