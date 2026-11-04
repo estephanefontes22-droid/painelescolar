@@ -403,6 +403,128 @@
  .infreq-modal .editor-linha strong {font-size:10px;}
 }
 
+
+
+/* =========================================================
+   TV / TELÃO — versão 2.1, tudo visível sem rolagem manual.
+   Mantém os dados, formulário e salvamento da versão anterior.
+   ========================================================= */
+@media (min-width: 901px) {
+  :root { --tv-row-h: 22px; --tv-font: 9px; }
+  .overlay { padding: clamp(5px,.48vw,9px); gap: clamp(6px,.45vw,9px); }
+  header {
+    padding: 8px clamp(12px,1vw,20px);
+    border-radius: 15px;
+  }
+  .header-topline { margin-bottom: 3px; }
+  .header-badge { padding: 3px 9px; font-size: clamp(9px,.62vw,11px); }
+  .header-slogan { font-size: clamp(9px,.64vw,12px); }
+  .header-kicker { font-size: clamp(8px,.59vw,10px); line-height: 1.15; }
+  .header-title-wrap h1 { font-size: clamp(18px,1.54vw,30px); line-height: 1.07; margin: 1px 0 1px; }
+  .header-title-wrap p { font-size: clamp(9px,.68vw,12px); line-height: 1.15; }
+  .header-info-chips { gap: 5px; }
+  .info-chip { font-size: clamp(9px,.64vw,11px); padding: 5px 8px; border-radius: 8px; }
+  .layout { gap: clamp(7px,.55vw,11px); }
+  .side-panel,.right-panel { gap: clamp(7px,.53vw,10px); }
+  .card { border-radius: 15px; }
+  .card-cabecalho, .right-panel h2 {
+    padding: clamp(7px,.52vw,10px) clamp(8px,.72vw,13px);
+    font-size: clamp(11px,.77vw,14px);
+  }
+  .icone-titulo { width: 25px; height: 25px; border-radius: 8px; }
+  .card-cabecalho::after, .right-panel h2::after { width: 22px; height: 3px; }
+  .card-corpo { padding: clamp(7px,.6vw,11px); }
+  .hora { font-size: clamp(25px,1.9vw,35px); }
+  #data { margin-top: 5px; padding: 4px 9px; font-size: clamp(10px,.7vw,12px); }
+  .clima-localidade { margin-bottom: 5px; }
+  .clima-icone { width: clamp(42px,3.1vw,55px); height: clamp(42px,3.1vw,55px); border-radius: 12px; font-size: 28px; }
+  #temperatura { font-size: clamp(24px,1.72vw,31px); }
+  .agenda-lista { padding: 7px; }
+  .agenda-item { grid-template-columns: 51px minmax(0,1fr); gap: 6px; padding: 7px; margin-bottom: 6px; border-radius: 11px; }
+  .agenda-dia { padding: 7px 3px; border-radius: 8px; font-size: clamp(10px,.7vw,12px); }
+  .agenda-texto { font-size: clamp(10px,.69vw,12px); line-height: 1.3; }
+  .slideshow { padding: clamp(7px,.61vw,11px); gap: 8px; }
+  .foto-moldura { border-radius: 12px; }
+  .dados-aniversariante h3 { font-size: clamp(11px,.82vw,15px); }
+  .dados-aniversariante .data-aniversario { padding: 4px 7px; }
+  .infreq-hero { padding: 8px 12px 9px; gap: 8px; }
+  .hero-tag { margin-bottom: 3px; padding: 3px 7px; font-size: clamp(8px,.58vw,10px); }
+  .infreq-hero h1 { font-size: clamp(14px,1.02vw,19px); }
+  .infreq-hero p { font-size: clamp(9px,.62vw,11px); line-height: 1.2; margin-top: 2px; }
+  .hero-mini-card { padding: 5px 8px; min-width: 70px; border-radius: 10px; }
+  .hero-mini-card span { font-size: 8px; }
+  .hero-mini-card strong { font-size: 14px; margin-top: 0; }
+  .infreq-toolbar { padding: 5px 10px; gap: 4px; }
+  .infreq-toolbar select, .infreq-toolbar input, .infreq-toolbar button, .infreq-toolbar .botao-arquivo {
+    height: 29px; border-radius: 8px; font-size: clamp(8px,.58vw,10px); padding: 0 7px;
+  }
+  .infreq-controles,.infreq-acoes { gap: 5px; }
+  .infreq-resumo { padding: 6px 10px; gap: 6px; }
+  .infreq-kpi { border-radius: 11px; padding: 5px 8px; }
+  .infreq-kpi .kpi-rotulo { font-size: clamp(8px,.55vw,10px); }
+  .infreq-kpi strong { font-size: clamp(17px,1.1vw,21px); line-height: 1.14; }
+  .infreq-kpi small { font-size: clamp(8px,.53vw,10px); line-height: 1.12; }
+  .infreq-dica { padding: 0px 10px 4px; font-size: clamp(8px,.55vw,10px); }
+  .infreq-tabela-area {
+    margin: 0 8px; overflow: hidden; /* a tabela inteira precisa caber */
+    border-radius: 10px;
+    flex: 1 1 auto;
+  }
+  .infreq-tabela {
+    min-width: 0 !important;
+    width: 100%; height: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: var(--tv-font);
+  }
+  .infreq-tabela col.col-serie { width: clamp(40px,2.9vw,51px); }
+  .infreq-tabela col.col-turma { width: clamp(43px,3.2vw,58px); }
+  .infreq-tabela col.col-turno { width: clamp(47px,3.3vw,59px); }
+  .infreq-tabela col.col-dia { width: auto; }
+  .infreq-tabela col.col-matriculas { width: clamp(46px,3vw,56px); }
+  .infreq-tabela td, .infreq-tabela th {
+    padding: 0 1px;
+    height: var(--tv-row-h);
+    font-size: var(--tv-font);
+    line-height: 1.04;
+    letter-spacing: -.015em;
+  }
+  .infreq-tabela thead th { height: var(--tv-row-h); }
+  .infreq-tabela th.sticky2, .infreq-tabela td.sticky2 { left: clamp(40px,2.9vw,51px); }
+  .infreq-tabela th.sticky3, .infreq-tabela td.sticky3 { left: calc(clamp(40px,2.9vw,51px) + clamp(43px,3.2vw,58px)); }
+  .infreq-tabela .linha-turma td.info-turma { padding-left: 3px; font-size: var(--tv-font); }
+  .infreq-tabela .linha-total td, .infreq-tabela .linha-geral td { height: var(--tv-row-h); }
+  .infreq-tabela .linha-turma td.status-dia { font-size: var(--tv-font); }
+  .infreq-rodape { padding: 4px 9px 6px; gap: 6px; font-size: clamp(8px,.56vw,10px); }
+  .infreq-legenda { gap: 7px; }
+  .infreq-legenda i { width: 8px; height: 8px; }
+  .infreq-hero::before { pointer-events: none; }
+}
+/* A agenda é a única área que passeia sozinha; não interfere na tabela. */
+.agenda-progress { position: absolute; left: 0; bottom: 0; right: 0; height: 3px; background: #dcecff; z-index: 3; }
+.agenda-progress span { display: block; width: 0%; height: 100%; border-radius: 0 3px 3px 0; background: linear-gradient(90deg,#37b36d,#f2be38); transition: width .16s linear; }
+@media (min-width: 901px) and (max-height: 790px) {
+  header { padding-top: 6px; padding-bottom: 6px; }
+  .header-title-wrap h1 { font-size: 19px; }
+  .header-badge { padding: 2px 7px; }
+  .card-cabecalho, .right-panel h2 { padding: 6px 9px; }
+  .card-corpo { padding: 6px 9px; }
+  .hora { font-size: 25px; }
+  #data { padding: 3px 6px; margin-top: 3px; }
+  .clima-icone { width: 39px; height: 39px; }
+  .infreq-hero { padding: 5px 9px 6px; }
+  .infreq-toolbar { padding: 4px 7px; }
+  .infreq-resumo { padding: 4px 7px; }
+  .infreq-kpi { padding: 4px 6px; }
+  .infreq-dica { padding-bottom: 2px; }
+  .infreq-rodape { padding: 3px 7px 4px; }
+}
+/* Fora do televisor, a tabela continua podendo rolar para preservar leitura. */
+@media (max-width: 900px) {
+  .agenda-progress { display: none; }
+  .infreq-tabela-area { overflow: auto; }
+}
+
 </style>
 </head>
 <body>
@@ -421,7 +543,7 @@
                 <p>Monitoramento escolar • comunicados • aniversariantes • infrequência</p>
             </div>
             <div class="header-info-chips" aria-label="Informações do painel">
-                <span class="info-chip">✨ Visual 2.0</span>
+                <span class="info-chip">📺 Modo televisão</span>
                 <span class="info-chip">📍 Bela Vista • Manacapuru-AM</span>
             </div>
         </div>
@@ -462,6 +584,7 @@
                     <div class="agenda-item" data-dia="20/11"><span class="agenda-dia">20/11</span><span class="agenda-texto">Dia Nacional de Zumbi e da Consciência Negra — combate ao racismo e valorização da diversidade cultural. Feriado nacional.</span></div>
                     <div class="agenda-item" data-dia="25/11"><span class="agenda-dia">25/11</span><span class="agenda-texto">Dia Internacional pela Eliminação da Violência contra as Mulheres — conscientização e respeito.</span></div>
                 </div>
+                <div class="agenda-progress" aria-hidden="true"><span id="agenda-progresso"></span></div>
             </section>
         </aside>
 
@@ -475,7 +598,7 @@
                     </div>
                     <div class="hero-painel-meta">
                         <div class="hero-mini-card"><span>Ano letivo</span><strong id="ano-letivo-indicador">2026</strong></div>
-                        <div class="hero-mini-card"><span>Status</span><strong>Online</strong></div>
+                        <div class="hero-mini-card"><span>Registros</span><strong>Locais</strong></div>
                     </div>
                 </div>
                 <div class="infreq-toolbar">
@@ -499,8 +622,8 @@
                     <div class="infreq-kpi"><span class="kpi-rotulo">FALTAS ACUMULADAS</span><strong id="kpi-mes">—</strong><small>No mês selecionado</small></div>
                     <div class="infreq-kpi"><span class="kpi-rotulo">DIAS REGISTRADOS</span><strong id="kpi-registros">—</strong><small id="kpi-registros-legenda">Aguardando dados</small></div>
                 </div>
-                <div class="infreq-dica">Clique em um número ou na data da tabela para lançar ou corrigir as faltas daquele dia.</div>
-                <div class="infreq-tabela-area" role="region" tabindex="0" aria-label="Tabela mensal de infrequência, rolável horizontalmente">
+                <div class="infreq-dica">Clique em um dia ou número para registrar ou corrigir faltas. A tabela mostra o mês inteiro.</div>
+                <div class="infreq-tabela-area" role="region" tabindex="0" aria-label="Tabela mensal de infrequência completa, com todos os dias do mês">
                     <table class="infreq-tabela" id="tabela-infrequencia"><caption style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">Registros de faltas por turma, dia e turno</caption></table>
                 </div>
                 <div class="infreq-rodape">
@@ -887,6 +1010,7 @@ function preencherTabela() {
   t.append(tbody);
   atualizarKPIs(reg,limite);
   document.getElementById('ano-letivo-indicador').textContent=infreqAno;
+  requestAnimationFrame(ajustarTabelaParaTV);
 }
 function criarLinhaTotal(rotulo,inicio,fim,reg,limite,classe) {
   const tr=el('tr',{className:classe});
@@ -1060,6 +1184,63 @@ async function importarBackup(e){
   } catch(erro) {alert('Não foi possível restaurar o arquivo: '+erro.message);}
   finally {e.target.value='';}
 }
+
+// Ajusta o quadro mensal ao espaço disponível na televisão em paisagem.
+// Nunca reduz o número de dias ou turmas; o tamanho da linha é calculado pelo espaço real.
+function ajustarTabelaParaTV() {
+  const painel = document.querySelector('.infreq-tabela-area');
+  const tabela = document.getElementById('tabela-infrequencia');
+  if (!painel || !tabela) return;
+  if (window.innerWidth <= 900) {
+    tabela.style.removeProperty('--tv-row-h');
+    tabela.style.removeProperty('--tv-font');
+    return;
+  }
+  const linhas = tabela.rows.length;
+  if (!linhas) return;
+  const altura = painel.clientHeight - 2;
+  const linha = Math.max(13, Math.floor(altura / linhas));
+  const largura = painel.clientWidth;
+  const fonte = largura < 810 ? 7.2 : largura < 945 ? 7.9 : largura < 1080 ? 8.5 : 9.4;
+  tabela.style.setProperty('--tv-row-h', linha+'px');
+  tabela.style.setProperty('--tv-font', fonte+'px');
+}
+
+// Leitura automática das datas: desce, faz uma pausa, e sobe suavemente.
+// Suspende a rolagem durante interação com a lista (mouse/teclado).
+function iniciarAgendaAutomatica() {
+  const lista = document.querySelector('.agenda-lista');
+  const barra = document.getElementById('agenda-progresso');
+  if (!lista) return;
+  let parado = false, direcao = 1, ultimo = 0, pausadoAte = performance.now()+3500;
+  const atualizar = agora => {
+    const maximo = Math.max(0, lista.scrollHeight-lista.clientHeight);
+    const fra = maximo ? (lista.scrollTop/maximo) : 1;
+    if (barra) barra.style.width = (fra*100).toFixed(1)+'%';
+    if (maximo > 2 && !parado && !document.hidden && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (agora >= pausadoAte && ultimo) {
+        const delta = Math.min(50, agora-ultimo);
+        lista.scrollTop += direcao * delta * .035; // aproximadamente 35 px/s
+        if (lista.scrollTop >= maximo-1 && direcao === 1) {
+          lista.scrollTop = maximo; direcao = -1; pausadoAte=agora+2400;
+        } else if (lista.scrollTop <= 1 && direcao === -1) {
+          lista.scrollTop=0; direcao=1; pausadoAte=agora+2600;
+        }
+      }
+    }
+    ultimo=agora;
+    requestAnimationFrame(atualizar);
+  };
+  lista.addEventListener('mouseenter',()=>parado=true);
+  lista.addEventListener('mouseleave',()=>{parado=false;pausadoAte=performance.now()+1700;});
+  lista.addEventListener('focusin',()=>parado=true);
+  lista.addEventListener('focusout',()=>{parado=false;pausadoAte=performance.now()+1700;});
+  requestAnimationFrame(atualizar);
+}
+window.addEventListener('resize', ()=>requestAnimationFrame(ajustarTabelaParaTV));
+window.addEventListener('load', ()=>requestAnimationFrame(ajustarTabelaParaTV));
+iniciarAgendaAutomatica();
+
 function iniciarInfrequencia(){
   const selecao=document.getElementById('mes-selecionado');
   MESES.forEach((mes,i)=>selecao.append(el('option',{value:i+1},mes)));
