@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 
-    /* PAINEL 2026 — versão visual 2.0, mais elegante e elaborada */
+    /* PAINEL 2026 — versão 2.4: correções de tabela e formulário, sem alterar registros */
     :root {
         --azul: #0b4b91;
         --azul-escuro: #08284f;
@@ -453,7 +453,7 @@
    Mantém os dados, formulário e salvamento da versão anterior.
    ========================================================= */
 @media (min-width: 901px) {
-  :root { --tv-row-h: 22px; --tv-font: 9px; }
+  :root { --tv-row-h: 22px; --tv-font: 10px; }
   .overlay { padding: clamp(5px,.48vw,9px); gap: clamp(6px,.45vw,9px); }
   header {
     padding: 8px clamp(12px,1vw,20px);
@@ -518,24 +518,33 @@
     width: 100%; height: 100%;
     table-layout: fixed;
     border-collapse: collapse;
+    font-family: Arial, 'Segoe UI', sans-serif;
     font-size: var(--tv-font);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-  .infreq-tabela col.col-serie { width: clamp(40px,2.9vw,51px); }
-  .infreq-tabela col.col-turma { width: clamp(43px,3.2vw,58px); }
-  .infreq-tabela col.col-turno { width: clamp(47px,3.3vw,59px); }
+  .infreq-tabela col.col-serie { width: clamp(42px,2.9vw,51px); }
+  .infreq-tabela col.col-turma { width: clamp(67px,5.05vw,85px); }
+  .infreq-tabela col.col-turno { width: clamp(48px,3.45vw,62px); }
   .infreq-tabela col.col-dia { width: auto; }
-  .infreq-tabela col.col-matriculas { width: clamp(46px,3vw,56px); }
+  .infreq-tabela col.col-matriculas { width: clamp(43px,3vw,54px); }
   .infreq-tabela td, .infreq-tabela th {
     padding: 0 1px;
     height: var(--tv-row-h);
     font-size: var(--tv-font);
     line-height: 1.04;
-    letter-spacing: -.015em;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+    font-weight: 700;
   }
   .infreq-tabela thead th { height: var(--tv-row-h); }
-  .infreq-tabela th.sticky2, .infreq-tabela td.sticky2 { left: clamp(40px,2.9vw,51px); }
-  .infreq-tabela th.sticky3, .infreq-tabela td.sticky3 { left: calc(clamp(40px,2.9vw,51px) + clamp(43px,3.2vw,58px)); }
-  .infreq-tabela .linha-turma td.info-turma { padding-left: 3px; font-size: var(--tv-font); }
+  .infreq-tabela th.sticky2, .infreq-tabela td.sticky2 { left: clamp(42px,2.9vw,51px); }
+  .infreq-tabela th.sticky3, .infreq-tabela td.sticky3 { left: calc(clamp(42px,2.9vw,51px) + clamp(67px,5.05vw,85px)); }
+  .infreq-tabela .linha-turma td.info-turma { padding-left: 3px; font-size: var(--tv-font); text-overflow: clip; }
+  .infreq-tabela td.rotulo-total { text-align: left; padding-left: 9px; letter-spacing: 0; font-weight: 700; }
   .infreq-tabela .linha-total td, .infreq-tabela .linha-geral td { height: var(--tv-row-h); }
   .infreq-tabela .linha-turma td.status-dia { font-size: var(--tv-font); }
   .infreq-rodape { padding: 4px 9px 6px; gap: 6px; font-size: clamp(8px,.56vw,10px); }
@@ -566,6 +575,36 @@
 @media (max-width: 900px) {
   .agenda-progress { display: none; }
   .infreq-tabela-area { overflow: auto; }
+}
+
+
+/* Correção 2.4 — janela de lançamento permanece utilizável na TV. */
+.infreq-modal[open] {
+  display: flex;
+  flex-direction: column;
+  height: min(780px, calc(100dvh - 28px));
+  max-height: calc(100dvh - 28px);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.infreq-modal .modal-barra,
+.infreq-modal .modal-rodape {flex: 0 0 auto;}
+.infreq-modal .modal-conteudo {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+#modal-dia .modal-rodape {position: relative; z-index: 2;}
+#editor-lista .editor-linha {grid-template-columns: minmax(0,1fr) 70px 174px;}
+#editor-lista .editor-cab {grid-template-columns: minmax(0,1fr) 70px 174px;}
+#editor-lista .contador-faltas .contador-btn {touch-action: manipulation;}
+@media (max-width:600px) {
+  #editor-lista .editor-linha,
+  #editor-lista .editor-cab {grid-template-columns: minmax(0,1fr) 35px 155px; gap: 4px;}
 }
 
 </style>
@@ -1039,13 +1078,13 @@ function preencherTabela() {
   tbody.append(criarLinhaTotal('TOTAL GERAL',0,16,reg,limite,'linha-geral'));
   t.append(tbody);
   atualizarKPIs(reg,limite);
-  document.getElementById('ano-letivo-indicador').textContent=infreqAno;
+  const anoLetivoIndicador=document.getElementById('ano-letivo-indicador');
+  if(anoLetivoIndicador)anoLetivoIndicador.textContent=infreqAno;
   requestAnimationFrame(ajustarTabelaParaTV);
 }
 function criarLinhaTotal(rotulo,inicio,fim,reg,limite,classe) {
   const tr=el('tr',{className:classe});
-  tr.append(el('td',{className:'sticky1'},''));tr.append(el('td',{className:'sticky2'},'TOTAL'));
-  tr.append(el('td',{className:'sticky3'},rotulo));
+  tr.append(el('td',{className:'sticky1 rotulo-total',colspan:3},rotulo==='TOTAL GERAL'?'TOTAL GERAL':'TOTAL '+rotulo));
   for(let dia=1;dia<=limite;dia++){
     const status=obterStatus(dia,reg),soma=somarDia(reg,dia,inicio,fim);
     const texto=status!=='A'?'':soma?String(soma.total):'';
@@ -1275,7 +1314,7 @@ function ajustarTabelaParaTV() {
   const altura = painel.clientHeight - 2;
   const linha = Math.max(13, Math.floor(altura / linhas));
   const largura = painel.clientWidth;
-  const fonte = largura < 810 ? 7.2 : largura < 945 ? 7.9 : largura < 1080 ? 8.5 : 9.4;
+  const fonte = largura < 720 ? 8.6 : largura < 800 ? 9.2 : largura < 900 ? 9.6 : largura < 1050 ? 10.2 : largura < 1200 ? 10.5 : 11;
   tabela.style.setProperty('--tv-row-h', linha+'px');
   tabela.style.setProperty('--tv-font', fonte+'px');
 }
