@@ -222,7 +222,7 @@
         content: ''; position: absolute; inset: auto 0 0 0; height: 30%;
         background: linear-gradient(180deg, transparent, rgba(6,47,93,.17)); z-index: 0;
     }
-    .foto-moldura img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 28%; border-radius: 15px; opacity: 0; transition: opacity .35s ease; }
+    .foto-moldura img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 28%; border-radius: 15px; opacity: 0; transition: opacity .35s ease; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; filter: contrast(1.04) saturate(1.03); backface-visibility: hidden; transform: translateZ(0); }
     .foto-moldura img.visivel { opacity: 1; }
     .foto-moldura .sem-foto { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 7px; gap: 5px; color: #6784a0; text-align: center; font-size: clamp(9px, .7vw, 12px); z-index: 1; }
     .foto-moldura .sem-foto svg { width: clamp(24px, 2.2vw, 39px); height: auto; }
@@ -354,7 +354,12 @@
 .infreq-legenda {display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
 .infreq-legenda i {display:inline-block; width:10px; height:10px; vertical-align:-1px; border-radius:2px; margin-right:3px;}
 .infreq-salvamento {font-weight:600; color:#507a60;}
-.infreq-dica {color:#597895; font-size:clamp(9px,.61vw,11px); padding:2px 14px 8px; line-height:1.3;}
+.infreq-dica {color:#597895; font-size:clamp(9px,.61vw,11px); padding:6px 14px 8px; line-height:1.3;}
+.header-title-wrap p:empty{display:none;}
+.infreq-hero-limpo{padding:14px 18px 12px;}
+.infreq-hero-limpo .hero-left h1{margin:0;}
+.infreq-dica{padding-top:8px;}
+
 .infreq-modal {border:0; border-radius:16px; padding:0; width:min(720px,96vw); max-height:90vh; box-shadow:0 22px 90px #071e3f55; overflow:hidden; color:#15365a;}
 .infreq-modal::backdrop {background:#051e41a6; backdrop-filter:blur(3px);}
 .infreq-modal .modal-barra {background:linear-gradient(95deg,#073773,#1161a7); color:#fff; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; gap:12px;}
@@ -376,6 +381,44 @@
 .infreq-modal .editor-linha .qtd-turma {font-size:11px; color:#6a829c; text-align:center;}
 .infreq-modal .editor-linha input {width:100%; height:32px; text-align:center; font-size:14px; font-variant-numeric:tabular-nums;}
 .infreq-modal .editor-linha input:disabled {background:#e4ecf2; opacity:.6;}
+/* Controle de faltas por cliques, sem abrir teclado virtual na TV */
+#editor-lista .editor-linha, #editor-lista .editor-cab {
+  grid-template-columns:minmax(0,1fr) 73px 174px;
+  gap:8px;
+}
+#editor-lista .editor-linha {min-height:46px;}
+.contador-faltas {
+  display:flex; align-items:center; justify-content:flex-end; gap:4px;
+  white-space:nowrap; touch-action:manipulation;
+}
+.contador-faltas .contador-btn {
+  appearance:none; width:35px; height:36px; flex:0 0 35px;
+  border:1px solid #bcd4ea; background:#eaf4fe; color:#0b4d8c;
+  font-family:inherit; font-size:21px; font-weight:700; line-height:1;
+  border-radius:10px; cursor:pointer;
+  touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+.contador-faltas .contador-btn:active:not(:disabled) {transform:scale(.95); background:#cde6ff;}
+.contador-faltas .contador-mais {background:linear-gradient(180deg,#1071c3,#0b5497); color:#fff; border-color:#0c5b9d;}
+.contador-faltas .contador-limpar {width:25px; flex-basis:25px; font-size:17px; background:#f1f5f9; color:#61758a; border-color:#e0e7ef;}
+.contador-faltas .contador-valor {
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:36px; height:36px; text-align:center;
+  border:1px solid #d9e9f8; background:#fff;
+  color:#0c3c72; font-size:16px; font-weight:700; font-variant-numeric:tabular-nums;
+  border-radius:9px;
+}
+.contador-faltas .contador-valor.nao-informado {color:#9aa9b9;}
+.contador-faltas .contador-btn:disabled {opacity:.38; cursor:not-allowed; transform:none;}
+@media (max-width:600px) {
+  #editor-lista .editor-linha, #editor-lista .editor-cab {grid-template-columns:minmax(0,1fr) 36px 156px; gap:3px;}
+  #editor-lista .editor-linha {padding-left:3px; padding-right:3px;}
+  .contador-faltas {gap:2px;}
+  .contador-faltas .contador-btn {width:31px; flex-basis:31px; height:35px;}
+  .contador-faltas .contador-limpar {width:25px; flex-basis:25px;}
+  .contador-faltas .contador-valor {min-width:32px; height:35px;}
+}
 .infreq-modal .modal-rodape {display:flex; align-items:center; justify-content:space-between; gap:9px; padding:11px 18px; background:white; border-top:1px solid #dce8f4;}
 .infreq-modal button.modal-btn {cursor:pointer; font:700 11px 'Poppins',Arial,sans-serif; padding:10px 14px; border-radius:8px; border:1px solid #bdd0e5; color:#164a78; background:#f4f9ff;}
 .infreq-modal button.modal-btn.primario {background:#0a5599; color:white; border-color:#0a5599;}
@@ -540,10 +583,9 @@
             <div class="header-title-wrap">
                 <div class="header-kicker">Painel institucional 2026</div>
                 <h1>PAINEL DE NOTÍCIAS</h1>
-                <p>Monitoramento escolar • comunicados • aniversariantes • infrequência</p>
+                
             </div>
             <div class="header-info-chips" aria-label="Informações do painel">
-                <span class="info-chip">📺 Modo televisão</span>
                 <span class="info-chip">📍 Bela Vista • Manacapuru-AM</span>
             </div>
         </div>
@@ -590,15 +632,9 @@
 
         <main class="main-panel">
             <section class="card infrequencia" aria-label="Monitoramento digital da infrequência escolar">
-                <div class="infreq-hero">
+                <div class="infreq-hero infreq-hero-limpo">
                     <div class="hero-left">
-                        <span class="hero-tag">Monitoramento Escolar</span>
                         <h1>ACOMPANHAMENTO DA INFREQUÊNCIA</h1>
-                        <p>Quadro digital integrado ao painel • lançamentos diretamente na tela • acompanhamento diário por turma</p>
-                    </div>
-                    <div class="hero-painel-meta">
-                        <div class="hero-mini-card"><span>Ano letivo</span><strong id="ano-letivo-indicador">2026</strong></div>
-                        <div class="hero-mini-card"><span>Registros</span><strong>Locais</strong></div>
                     </div>
                 </div>
                 <div class="infreq-toolbar">
@@ -610,19 +646,11 @@
                     </div>
                     <div class="infreq-acoes">
                         <button type="button" class="acao-primaria" id="btn-registrar">+ Registrar faltas</button>
-                        <button type="button" id="btn-matriculas">Matrículas</button>
-                        <button type="button" class="acao-backup" id="btn-exportar">↓ Backup</button>
-                        <button type="button" id="btn-importar">↑ Restaurar</button>
+                        <button type="button" id="btn-matriculas">Ajustar matrículas</button>
                         <input type="file" id="arquivo-importacao" accept=".json,application/json" hidden>
                     </div>
                 </div>
-                <div class="infreq-resumo" aria-label="Resumo automático da infrequência">
-                    <div class="infreq-kpi"><span class="kpi-rotulo">MATRÍCULAS</span><strong id="kpi-matriculas">—</strong><small>Total das turmas</small></div>
-                    <div class="infreq-kpi"><span class="kpi-rotulo">FALTAS DO ÚLTIMO DIA</span><strong id="kpi-dia">—</strong><small id="kpi-dia-legenda">Sem lançamento</small></div>
-                    <div class="infreq-kpi"><span class="kpi-rotulo">FALTAS ACUMULADAS</span><strong id="kpi-mes">—</strong><small>No mês selecionado</small></div>
-                    <div class="infreq-kpi"><span class="kpi-rotulo">DIAS REGISTRADOS</span><strong id="kpi-registros">—</strong><small id="kpi-registros-legenda">Aguardando dados</small></div>
-                </div>
-                <div class="infreq-dica">Clique em um dia ou número para registrar ou corrigir faltas. A tabela mostra o mês inteiro.</div>
+                <div class="infreq-dica">Clique em um dia da tabela para registrar ou corrigir faltas.</div>
                 <div class="infreq-tabela-area" role="region" tabindex="0" aria-label="Tabela mensal de infrequência completa, com todos os dias do mês">
                     <table class="infreq-tabela" id="tabela-infrequencia"><caption style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">Registros de faltas por turma, dia e turno</caption></table>
                 </div>
@@ -678,19 +706,20 @@
 </div>
 
 
+<!-- Versão TV 2.2 — botões +/- para registrar faltas sem teclado; mantém armazenamento da TV 2.1. -->
 <!-- Edição por dia: os dados só são alterados ao clicar em Salvar. -->
 <dialog class="infreq-modal" id="modal-dia" aria-labelledby="modal-dia-titulo">
-  <div class="modal-barra"><div><h2 id="modal-dia-titulo">Registrar infrequência</h2><div class="modal-subtitulo">Preencha o número de alunos ausentes em cada turma.</div></div><button type="button" class="fechar-modal" data-fechar="modal-dia" aria-label="Fechar">×</button></div>
+  <div class="modal-barra"><div><h2 id="modal-dia-titulo">Registrar infrequência</h2><div class="modal-subtitulo">Ajuste as faltas com os botões − e +, sem precisar digitar.</div></div><button type="button" class="fechar-modal" data-fechar="modal-dia" aria-label="Fechar">×</button></div>
   <div class="modal-conteudo">
      <div class="form-linha"><label>Dia<select id="editor-dia" class="campo-pequeno"></select></label><label class="campo-status">Situação da escola<select id="editor-situacao"><option value="auto">Automática (conforme o calendário)</option><option value="A">Aula normal</option><option value="F">Feriado</option><option value="N">Sem aula</option><option value="P">Ponto facultativo</option><option value="S">Sábado (sem aula)</option><option value="D">Domingo (sem aula)</option></select></label></div>
-     <div class="editor-hint" id="aviso-situacao">Deixe um campo vazio quando a turma ainda não tiver informado. Preencha 0 quando não houver faltas.</div>
+     <div class="editor-hint" id="aviso-situacao">Toque em <strong>+</strong> para acrescentar 1 falta; em <strong>−</strong> para diminuir ou começar em 0; em <strong>×</strong> para marcar como não informado. Depois clique em <strong>Salvar dia</strong>.</div>
      <div id="editor-lista"></div><div class="editor-totais" id="editor-total"></div><div class="mensagem-erro" id="erro-editor" role="alert"></div>
   </div>
   <div class="modal-rodape"><button class="modal-btn secundario" type="button" id="btn-zerar">Preencher vazios com 0</button><div class="rodape-direita"><button class="modal-btn" type="button" data-fechar="modal-dia">Cancelar</button><button class="modal-btn primario" type="button" id="btn-salvar-dia">Salvar dia</button></div></div>
 </dialog>
 <!-- Ajuste das matrículas por turma. -->
 <dialog class="infreq-modal" id="modal-matriculas" aria-labelledby="modal-matriculas-titulo">
-  <div class="modal-barra"><div><h2 id="modal-matriculas-titulo">Matrículas por turma</h2><div class="modal-subtitulo">Quantidade de alunos por turma no mês selecionado.</div></div><button type="button" class="fechar-modal" data-fechar="modal-matriculas" aria-label="Fechar">×</button></div>
+  <div class="modal-barra"><div><h2 id="modal-matriculas-titulo">Matrículas por turma</h2><div class="modal-subtitulo">Ajuste a quantidade de alunos por turma no mês selecionado.</div></div><button type="button" class="fechar-modal" data-fechar="modal-matriculas" aria-label="Fechar">×</button></div>
   <div class="modal-conteudo"><div class="editor-hint">Os totais do painel são atualizados automaticamente após salvar. Matrículas não são faltas.</div><div id="matriculas-lista"></div><div class="mensagem-erro" id="erro-matriculas" role="alert"></div></div>
   <div class="modal-rodape"><span style="font-size:11px;color:#58708a">Salvamento local neste navegador.</span><div class="rodape-direita"><button class="modal-btn" type="button" data-fechar="modal-matriculas">Cancelar</button><button class="modal-btn primario" type="button" id="btn-salvar-matriculas">Salvar matrículas</button></div></div>
 </dialog>
@@ -801,7 +830,7 @@
 
     // DADOS DOS ANIVERSARIANTES — preservados do arquivo enviado.
     const aniversariantesFunc = [
-    { nome:"Xandi - 18/11", foto:"foto100.jpg" },
+    { nome:"Xandi - 18/11", foto:"xandi.jpg" },
     { nome:"Alcenir Alves - 25/11", foto:"foto200.jpg" }  
 ];
 
@@ -918,7 +947,8 @@ function gravarArmazenamento() {
     localStorage.setItem(INFREQ_STORAGE,JSON.stringify(infreqDados));
     houveErroDeArmazenamento=false;
     registrarStatus('✓ Salvo neste navegador • '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));
-  } catch(e) {houveErroDeArmazenamento=true; registrarStatus('Não foi possível salvar. Exporte um backup!',true);}
+    return true;
+  } catch(e) {houveErroDeArmazenamento=true; registrarStatus('Não foi possível salvar. Exporte um backup!',true); return false;}
 }
 function dadosMes() {
   const key=chaveMes();
@@ -1025,7 +1055,7 @@ function criarLinhaTotal(rotulo,inicio,fim,reg,limite,classe) {
   return tr;
 }
 function atualizarKPIs(reg,limite) {
-  document.getElementById('kpi-matriculas').textContent=String(somarMatriculas(reg));
+  const elMat=document.getElementById('kpi-matriculas'); if(elMat)elMat.textContent=String(somarMatriculas(reg));
   let dias=0,completos=0,totalMes=0,ultimoDia=0,ultimaSoma=0,ultimoQtd=0;
   for(let d=1;d<=limite;d++) {
     const soma=somarDia(reg,d);
@@ -1034,12 +1064,17 @@ function atualizarKPIs(reg,limite) {
     if(soma.registrados===TURMAS.length)completos++;
     if(d>=ultimoDia){ultimoDia=d;ultimaSoma=soma.total;ultimoQtd=soma.registrados;}
   }
-  document.getElementById('kpi-mes').textContent=dias?String(totalMes):'—';
-  document.getElementById('kpi-dia').textContent=ultimoDia?String(ultimaSoma):'—';
-  document.getElementById('kpi-dia-legenda').textContent=ultimoDia?
+  const elMes=document.getElementById('kpi-mes');
+  const elDia=document.getElementById('kpi-dia');
+  const elDiaLeg=document.getElementById('kpi-dia-legenda');
+  const elReg=document.getElementById('kpi-registros');
+  const elRegLeg=document.getElementById('kpi-registros-legenda');
+  if(elMes)elMes.textContent=dias?String(totalMes):'—';
+  if(elDia)elDia.textContent=ultimoDia?String(ultimaSoma):'—';
+  if(elDiaLeg)elDiaLeg.textContent=ultimoDia?
     (String(ultimoDia).padStart(2,'0')+'/'+String(infreqMes).padStart(2,'0')+' • '+ultimoQtd+'/'+TURMAS.length+' turmas'):'Sem lançamento';
-  document.getElementById('kpi-registros').textContent=String(dias);
-  document.getElementById('kpi-registros-legenda').textContent=completos+' dia(s) completo(s)';
+  if(elReg)elReg.textContent=String(dias);
+  if(elRegLeg)elRegLeg.textContent=completos+' dia(s) completo(s)';
 }
 function trocarPeriodo() {
   const mes=Number(document.getElementById('mes-selecionado').value);
@@ -1070,27 +1105,62 @@ function preencherEditorDia() {
       linha.append(el('strong',{},TURMAS[i].serie+' • '+TURMAS[i].turma));
       linha.append(el('span',{className:'qtd-turma'},String(reg.matriculas[i]??'')));
       const val=quantidade(reg,dia,i);
-      const campo=el('input',{type:'number',inputmode:'numeric',min:'0',max:String(reg.matriculas[i]||0),step:'1','data-registro':i,'aria-label':'Faltas da turma '+TURMAS[i].serie+' '+TURMAS[i].turma});
-      if(val!==null)campo.value=String(val);
-      linha.append(campo);div.append(linha);
+      const turmaNome=TURMAS[i].serie+' '+TURMAS[i].turma;
+      const contador=el('div',{className:'contador-faltas','data-registro':i,'data-max':String(reg.matriculas[i]||0),'data-valor':val===null?'':String(val),'aria-label':'Faltas da turma '+turmaNome});
+      contador.append(el('button',{type:'button',className:'contador-btn contador-menos','data-acao':'menos','aria-label':'Diminuir faltas de '+turmaNome,title:'Diminuir 1 falta'},'−'));
+      contador.append(el('strong',{className:'contador-valor',role:'status','aria-live':'polite'},'—'));
+      contador.append(el('button',{type:'button',className:'contador-btn contador-mais','data-acao':'mais','aria-label':'Aumentar faltas de '+turmaNome,title:'Adicionar 1 falta'},'+'));
+      contador.append(el('button',{type:'button',className:'contador-btn contador-limpar','data-acao':'limpar','aria-label':'Marcar como não informado '+turmaNome,title:'Deixar como não informado'},'×'));
+      linha.append(contador);div.append(linha);
+      atualizarVisorContador(contador);
     }
   }
   aplicarStatusEditor();
+}
+function atualizarVisorContador(contador) {
+  const valor=contador.dataset.valor;
+  const max=Number(contador.dataset.max);
+  const visor=contador.querySelector('.contador-valor');
+  visor.textContent=valor===''?'—':valor;
+  visor.classList.toggle('nao-informado',valor==='');
+  const bloqueado=contador.dataset.bloqueado==='1';
+  const menos=contador.querySelector('[data-acao="menos"]');
+  const mais=contador.querySelector('[data-acao="mais"]');
+  const limpar=contador.querySelector('[data-acao="limpar"]');
+  menos.disabled=bloqueado||(valor!==''&&Number(valor)===0);
+  mais.disabled=bloqueado||(valor!==''&&Number(valor)>=max)||(valor===''&&max===0);
+  limpar.disabled=bloqueado||valor==='';
+}
+function alterarContador(contador,acao) {
+  if(contador.dataset.bloqueado==='1')return;
+  const atual=contador.dataset.valor;
+  const max=Number(contador.dataset.max);
+  let novo=atual;
+  if(acao==='limpar')novo='';
+  if(acao==='menos')novo=atual===''?'0':String(Math.max(0,Number(atual)-1));
+  if(acao==='mais')novo=atual===''?'1':String(Math.min(max,Number(atual)+1));
+  contador.dataset.valor=novo;
+  atualizarVisorContador(contador);
+  calcularTotalEditor();
 }
 function aplicarStatusEditor() {
   const e=document.getElementById('editor-situacao');
   const valor=e.value==='auto'?statusAutomatico(diaEdicao):e.value;
   const permitido=valor==='A';
-  document.querySelectorAll('#editor-lista input[data-registro]').forEach(input=>input.disabled=!permitido);
+  document.querySelectorAll('#editor-lista .contador-faltas').forEach(contador=>{
+    contador.dataset.bloqueado=permitido?'0':'1';
+    atualizarVisorContador(contador);
+  });
   document.getElementById('btn-zerar').disabled=!permitido;
   const aviso=document.getElementById('aviso-situacao');
-  aviso.textContent=permitido?'Preencha o número de ausentes (0 quando ninguém faltou). Campos vazios significam “ainda não informado”.':'Dia marcado como '+NOMES_STATUS[valor]+'. Os campos de faltas ficam desabilitados; registros anteriores, se houver, não serão considerados nos totais.';
+  aviso.textContent=permitido?'Use − e + para ajustar as faltas sem digitar. O botão × deixa a turma como não informada. Para registrar zero, toque em − quando aparecer —. Depois clique em Salvar dia.':'Dia marcado como '+NOMES_STATUS[valor]+'. Os botões de faltas ficam desabilitados; registros anteriores, se houver, não serão considerados nos totais.';
   calcularTotalEditor();
 }
 function calcularTotalEditor(){
   let soma=0,preenchidos=0;
-  document.querySelectorAll('#editor-lista input[data-registro]').forEach(input=>{
-    if(!input.disabled && input.value.trim()!=='' && Number.isFinite(Number(input.value))){soma+=Number(input.value);preenchidos++;}
+  document.querySelectorAll('#editor-lista .contador-faltas').forEach(contador=>{
+    const valor=contador.dataset.valor;
+    if(contador.dataset.bloqueado!=='1' && valor!=='' && Number.isFinite(Number(valor))){soma+=Number(valor);preenchidos++;}
   });
   document.getElementById('editor-total').replaceChildren(el('span',{},preenchidos+'/'+TURMAS.length+' turmas preenchidas'),el('strong',{},soma+' falta(s) registradas'));
 }
@@ -1099,13 +1169,13 @@ function salvarDia() {
   const status=statusSelect==='auto'?statusAutomatico(diaEdicao):statusSelect;
   const valores=Array(TURMAS.length).fill(null);
   if(status==='A'){
-    for(const input of document.querySelectorAll('#editor-lista input[data-registro]')){
-      const i=Number(input.dataset.registro),texto=input.value.trim();
+    for(const contador of document.querySelectorAll('#editor-lista .contador-faltas')){
+      const i=Number(contador.dataset.registro),texto=contador.dataset.valor;
       if(texto==='')continue;
       const n=Number(texto),mat=Number(reg.matriculas[i]);
       if(!Number.isInteger(n)||n<0||n>mat){
         document.getElementById('erro-editor').textContent='Valor inválido em '+TURMAS[i].serie+' '+TURMAS[i].turma+'. Use um número entre 0 e '+mat+'.';
-        input.focus();return;
+        contador.querySelector('button:not(:disabled)')?.focus();return;
       }
       valores[i]=n;
     }
@@ -1118,7 +1188,11 @@ function salvarDia() {
     if(valores.some(n=>n!==null))reg.faltas[String(diaEdicao)]=valores;
     else delete reg.faltas[String(diaEdicao)];
   }
-  gravarArmazenamento();preencherTabela();document.getElementById('modal-dia').close();
+  if (!gravarArmazenamento()) {
+    document.getElementById('erro-editor').textContent='Não foi possível salvar neste navegador. Não desligue a tela; faça backup e verifique o armazenamento.';
+    return;
+  }
+  preencherTabela();document.getElementById('modal-dia').close();
 }
 function abrirMatriculas(){
   const reg=dadosMes(),div=document.getElementById('matriculas-lista');div.replaceChildren();
@@ -1252,10 +1326,10 @@ function iniciarInfrequencia(){
   selecao.addEventListener('change',trocarPeriodo);
   document.getElementById('ano-selecionado').addEventListener('change',trocarPeriodo);
   document.getElementById('btn-registrar').addEventListener('click',()=>abrirDia(Math.min(diasNoMes(),new Date().getMonth()+1===infreqMes&&new Date().getFullYear()===infreqAno?new Date().getDate():1)));
-  document.getElementById('btn-matriculas').addEventListener('click',abrirMatriculas);
-  document.getElementById('btn-exportar').addEventListener('click',exportarBackup);
-  document.getElementById('btn-importar').addEventListener('click',()=>document.getElementById('arquivo-importacao').click());
-  document.getElementById('arquivo-importacao').addEventListener('change',importarBackup);
+  const btnMatriculas=document.getElementById('btn-matriculas'); if(btnMatriculas)btnMatriculas.addEventListener('click',abrirMatriculas);
+  const btnExportar=document.getElementById('btn-exportar'); if(btnExportar)btnExportar.addEventListener('click',exportarBackup);
+  const btnImportar=document.getElementById('btn-importar'); if(btnImportar)btnImportar.addEventListener('click',()=>document.getElementById('arquivo-importacao').click());
+  const arquivoImportacao=document.getElementById('arquivo-importacao'); if(arquivoImportacao)arquivoImportacao.addEventListener('change',importarBackup);
   document.getElementById('tabela-infrequencia').addEventListener('click',e=>{
     const cel=e.target.closest('[data-dia]');
     if(cel){abrirDia(Number(cel.dataset.dia));return;}
@@ -1263,9 +1337,18 @@ function iniciarInfrequencia(){
   });
   document.getElementById('editor-dia').addEventListener('change',e=>{diaEdicao=Number(e.target.value);preencherEditorDia();});
   document.getElementById('editor-situacao').addEventListener('change',aplicarStatusEditor);
-  document.getElementById('editor-lista').addEventListener('input',calcularTotalEditor);
+  document.getElementById('editor-lista').addEventListener('click',e=>{
+    const botao=e.target.closest('button[data-acao]');
+    if(!botao||botao.disabled)return;
+    const contador=botao.closest('.contador-faltas');
+    if(contador)alterarContador(contador,botao.dataset.acao);
+  });
   document.getElementById('btn-zerar').addEventListener('click',()=>{
-    document.querySelectorAll('#editor-lista input[data-registro]:not(:disabled)').forEach(i=>{if(i.value==='')i.value='0';});
+    document.querySelectorAll('#editor-lista .contador-faltas').forEach(contador=>{
+      if(contador.dataset.bloqueado!=='1'&&contador.dataset.valor===''){
+        contador.dataset.valor='0';atualizarVisorContador(contador);
+      }
+    });
     calcularTotalEditor();
   });
   document.getElementById('btn-salvar-dia').addEventListener('click',salvarDia);
